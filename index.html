@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Blog</title>
+  <meta name="description" content="A simple static blog built with plain HTML and GitHub Pages">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="/">My Blog</a>
+    <nav class="nav">
+      <a href="/">Home</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Posts</h1>
+    <ul class="post-list">
+      <li>
+        <a class="post-title" href="posts/2025-08-30-hello-world.html">Hello World</a>
+        <span class="post-date">Aug 30, 2025</span>
+      </li>
+    </ul>
+
+    <!-- Add new posts here by appending another <li> with a link to your HTML file -->
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Your Name</p>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
