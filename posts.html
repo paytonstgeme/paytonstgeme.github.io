@@ -4,7 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Posts · Payton St Geme</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="/assets/style.css?v=2">
+  <style>
+    /* keep it black & white Times New Roman even if CSS fails to load */
+    body { font-family: "Times New Roman", Times, serif; color:#000; background:#fff; }
+  </style>
 </head>
 <body>
   <header>
@@ -17,24 +21,94 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="container posts-list">
     <h1>Posts</h1>
-    <ul class="list posts-list">
-      <li class="item">
-        <a class="item-title" href="/posts/2025-08-30-hello-world.html">Introduction</a>
-        <p class="item-desc">Loading....</p>
-      </li>
-      <!-- Add more posts here -->
-    </ul>
+    <ul id="posts-list" class="list"></ul>
+    <noscript>This page needs JavaScript enabled to load the post list.</noscript>
   </main>
 
   <footer>
-    <div class="container">
-      © <span id="year"></span> Payton St Geme
-    </div>
+    <div class="container">© <span id="year"></span> Payton St Geme</div>
   </footer>
+
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Helper: format YYYY-MM-DD → "Aug 30, 2025"
+    function fmtDate(s) {
+      if (!s) return "";
+      const d = new Date(s);
+      if (isNaN(d)) return s;
+      return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+    }
+
+    async function fetchTitleAndDesc(url) {
+      const html = await fetch(url).then(r => r.text());
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      // Prefer the article's H1; fallback to <title>
+      const h1 = doc.querySelector("main h1, h1");
+      const title = (h1 ? h1.textContent : doc.title || url).trim();
+
+      // Prefer meta description; fallback to first paragraph
+      const meta = doc.querySelector('meta[name="description"]');
+      const firstP = doc.querySelector("main p, p");
+      const desc = (meta?.getAttribute("content") || firstP?.textContent || "").trim();
+
+      return { title, desc };
+    }
+
+    (async function render() {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const ul = document.getElementById("posts-list");
+
+      // Load index
+      const posts = await fetch("/posts_index.json?v=1").then(r => r.json());
+
+      // Sort newest → oldest if dates exist
+      posts.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+
+      for (const item of posts) {
+        try {
+          const { title, desc } = await fetchTitleAndDesc(item.url);
+
+          // Build list item safely (no innerHTML injection)
+          const li = document.createElement("li");
+          li.className = "item";
+
+          const a = document.createElement("a");
+          a.className = "item-title";
+          a.href = item.url;
+          a.textContent = title || item.url;
+
+          li.appendChild(a);
+
+          const p = document.createElement("p");
+          p.className = "item-desc";
+          p.textContent = item.desc || desc || "";
+          if (p.textContent) li.appendChild(p);
+
+          if (item.date) {
+            const small = document.createElement("small");
+            small.className = "item-date";
+            small.style.display = "block";
+            small.style.color = "rgba(0,0,0,.7)";
+            small.textContent = fmtDate(item.date);
+            li.appendChild(small);
+          }
+
+          ul.appendChild(li);
+        } catch (e) {
+          // Fallback: show URL filename if fetch/parse fails
+          const li = document.createElement("li");
+          li.className = "item";
+          const a = document.createElement("a");
+          a.className = "item-title";
+          a.href = item.url;
+          a.textContent = item.url.split("/").pop().replace(".html", "").replace(/-/g, " ");
+          li.appendChild(a);
+          ul.appendChild(li);
+        }
+      }
+    })();
   </script>
 </body>
 </html>
