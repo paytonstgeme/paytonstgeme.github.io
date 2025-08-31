@@ -3,46 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Payton St Geme · Posts</title>
-  <meta name="description" content="Payton St Geme — blog and notes" />
+  <title>Payton St Geme</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <!-- Top bar -->
-  <header class="site-header">
-    <div class="wrap">
+  <header class="header">
+    <div class="container bar">
       <a class="brand" href="/">Payton St Geme</a>
       <nav class="nav">
-        <a class="nav-link active" href="/">Home</a>
-        <a class="nav-link" href="#posts">Posts</a>
-        <a class="nav-link" href="#">More</a>
+        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="posts.html">Posts</a>
       </nav>
     </div>
   </header>
 
-  <!-- Main -->
-  <main class="wrap">
-    <section id="posts" class="posts">
-      <h1 class="h1">Posts</h1>
-      <ul class="post-list">
-        <li class="post-item">
-          <a class="post-title" href="posts/2025-08-30-hello-world.html">Hello World</a>
-          <time class="post-date" datetime="2025-08-30">Aug 30, 2025</time>
-        </li>
-        <!-- Add more <li> entries above this comment as you publish -->
-      </ul>
-    </section>
+  <main class="container intro">
+    <h1>Welcome</h1>
+    <p>This is my personal blog. All writing is listed under <a href="posts.html">Posts</a>.</p>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="wrap">
+  <footer class="footer">
+    <div class="container">
       <p>© <span id="year"></span> Payton St Geme</p>
     </div>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
