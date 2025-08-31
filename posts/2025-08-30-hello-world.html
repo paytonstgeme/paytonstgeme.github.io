@@ -1,32 +1,29 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Loading....</title>
-  <link rel="stylesheet" href="../assets/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hello World</title>
+  <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="container bar">
-      <a class="brand" href="/">Payton St Geme</a>
+  <header>
+    <div class="container">
+      <a class="brand" href="../index.html">Payton St Geme</a>
       <nav class="nav">
         <a class="nav-link" href="../index.html">Home</a>
         <a class="nav-link" href="../posts.html">Posts</a>
       </nav>
     </div>
   </header>
-
-  <main class="container article">
-    <h1>First Post</h1>
-    <div class="meta"><time datetime="2025-08-30">Aug 30, 2025</time></div>
-
-    <p>Loading.....</p>
+  <main class="container">
+    <h1>Hello World</h1>
+    <div class="meta" style="color: rgba(0,0,0,0.6); font-size: 0.9rem;">Aug 30, 2025</div>
+    <p>Welcome</p>
   </main>
-
-  <footer class="footer">
+  <footer>
     <div class="container">
-      <p>© <span id="year"></span> Payton St Geme</p>
+      © <span id="year"></span> Payton St Geme
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
