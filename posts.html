@@ -9,22 +9,32 @@
 <body>
   <header>
     <div class="container">
-      <a class="brand" href="index.html">Payton St Geme</a>
+      <a class="brand" href="/">Payton St Geme</a>
       <nav class="nav">
-        <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link active" href="posts.html">Posts</a>
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link active" href="/posts.html">Posts</a>
       </nav>
     </div>
   </header>
+
   <main class="container">
     <h1>Posts</h1>
     <ul class="list posts-list">
       <li class="item">
-        <a class="item-title" href="posts/2025-08-30-hello-world.html">Hello World</a>
+        <a class="item-title" href="/posts/2025-08-30-hello-world.html">Hello World</a>
         <p class="item-desc">A short welcome to my blog.</p>
       </li>
-      <!-- more posts -->
+      <!-- Add more posts here -->
     </ul>
   </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Payton St Geme
+    </div>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
