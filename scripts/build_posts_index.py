@@ -20,8 +20,10 @@ def read_post_info(path):
         title = extract(s, r"<title[^>]*?>(.*?)</title>", re.S|re.I)
     title = html.unescape(re.sub(r"\s+", " ", title))
 
-    # Description: prefer meta[name=description], else first paragraph
+    # Description: prefer <meta[name=description]>, then <h2>, then first <p>
     desc = extract(s, r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']', re.I)
+    if not desc:
+        desc = extract(s, r"<h2[^>]*?>(.*?)</h2>", re.S|re.I)
     if not desc:
         desc = extract(s, r"<main[^>]*?>.*?<p[^>]*?>(.*?)</p>", re.S|re.I) or extract(s, r"<p[^>]*?>(.*?)</p>", re.S|re.I)
     desc = html.unescape(re.sub(r"\s+", " ", desc))
@@ -29,7 +31,6 @@ def read_post_info(path):
     # Date: prefer <time datetime="YYYY-MM-DD">, else parse from filename prefix
     date = extract(s, r'<time[^>]+datetime=["\'](\d{4}-\d{2}-\d{2})["\']', re.I)
     if not date:
-        # try filename like YYYY-MM-DD-*.html
         fn = os.path.basename(path)
         m = re.match(r"(\d{4}-\d{2}-\d{2})-", fn)
         if m:
