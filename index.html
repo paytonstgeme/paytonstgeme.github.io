@@ -1,23 +1,34 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payton St Geme</title>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a class="brand" href="index.html">Payton St Geme</a>
+  <header class="header">
+    <div class="container bar">
+      <a class="brand" href="index.html">PAYTON ST GEME</a>
       <nav class="nav">
         <a class="nav-link active" href="index.html">Home</a>
         <a class="nav-link" href="posts.html">Posts</a>
+        <a class="nav-link" href="views.html">Views</a>
       </nav>
     </div>
   </header>
-  <main class="container">
+
+  <main class="container intro">
     <h1>Welcome</h1>
+    <p class="lede">This is my landing page.</p>
+    <img src="assets/landing.jpg" alt="Landing page image" class="hero" />
   </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Payton St Geme</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
