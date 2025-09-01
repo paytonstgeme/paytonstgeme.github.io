@@ -3,43 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Man, the Unknown</title>
-  <meta name="description" content="Alexis Carrel." />
-    <link rel="stylesheet" href="assets/style.css?v=3" />
+  <title>Introduction</title>
+  <link rel="stylesheet" href="/assets/style.css" />
 </head>
 <body>
   <header class="header">
     <div class="container bar">
-      <a class="brand" href="index.html">PAYTON ST GEME</a>
+      <a class="brand" href="/">PAYTON ST GEME</a>
       <nav class="nav">
-        <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link active" href="posts.html">Posts</a>
-        <a class="nav-link" href="views.html">Views</a>
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/posts.html">Posts</a>
+        <a class="nav-link" href="/views.html">Views</a>
       </nav>
     </div>
   </header>
 
   <main class="container article">
     <h1>Man, the Unknown</h1>
-    <div class="meta">
-      <time datetime="2025-09-02">Sep 2, 2025</time>
-    </div>
+    <div class="meta"><time datetime="2025-09-02">Sep 2, 2025</time></div>
 
     <p>For the value of ideas, as of all things, is relative. It augments or decreases according to our state of mind.</p>
 
     <blockquote>
       MAN, THE UNKNOWN – Alexis Carrel
     </blockquote>
-
   </main>
-
-  <footer>
+ <footer class="footer">
     <div class="container">
-      © <span id="year"></span> Payton St Geme
+      <p>© <span id="year"></span> Payton St Geme</p>
     </div>
   </footer>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
