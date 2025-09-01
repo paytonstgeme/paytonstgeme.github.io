@@ -1,70 +1,45 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Posts · Payton St Geme</title>
-  <link rel="stylesheet" href="/assets/style.css?v=3">
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
- <header class="header">
-  <div class="container bar">
-    <a class="brand" href="index.html">PAYTON ST GEME</a>
-    <nav class="nav">
-      <a class="nav-link" href="index.html">Home</a>
-      <a class="nav-link" href="posts.html">Posts</a>
-      <a class="nav-link" href="views.html">Views</a>
-    </nav>
-  </div>
-</header>
+  <!-- Consistent header -->
+  <header class="header">
+    <div class="container bar">
+      <a class="brand" href="index.html">PAYTON ST GEME</a>
+      <nav class="nav">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link active" href="posts.html">Posts</a>
+        <a class="nav-link" href="views.html">Views</a>
+      </nav>
+    </div>
+  </header>
 
   <main class="container posts-list">
     <h1>Posts</h1>
-    <ul id="posts-list" class="list"></ul>
-    <noscript>This page needs JavaScript enabled.</noscript>
+    <ul class="list">
+      <li class="item">
+        <a class="item-title" href="posts/man-the-unknown.html">Man, the Unknown</a>
+        <p class="item-desc">Alexis Carrel.</p>
+        <time class="item-date" datetime="2025-09-01">Sep 1, 2025</time>
+      </li>
+
+      <li class="item">
+        <a class="item-title" href="posts/test.html">Test</a>
+        <p class="item-desc">Loading….</p>
+        <time class="item-date" datetime="2025-08-29">Aug 29, 2025</time>
+      </li>
+    </ul>
   </main>
 
-  <footer>
-    <div class="container">© <span id="year"></span> Payton St Geme</div>
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Payton St Geme</p>
+    </div>
   </footer>
-
   <script>
-    function fmtDate(s){
-      if(!s) return "";
-      const d = new Date(s);
-      if(isNaN(d)) return s;
-      return d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
-    }
-    (async function(){
-      document.getElementById("year").textContent = new Date().getFullYear();
-      const ul = document.getElementById("posts-list");
-      const data = await fetch("/posts_index.json?v=" + Date.now()).then(r => r.json());
-      for(const post of data){
-        const li = document.createElement("li");
-        li.className = "item";
-
-        const a = document.createElement("a");
-        a.className = "item-title";
-        a.href = post.url;
-        a.textContent = post.title || post.url;
-        li.appendChild(a);
-
-        if (post.desc){
-          const p = document.createElement("p");
-          p.className = "item-desc";
-          p.textContent = post.desc;
-          li.appendChild(p);
-        }
-        if (post.date){
-          const small = document.createElement("small");
-          small.style.display = "block";
-          small.style.color = "rgba(0,0,0,.7)";
-          small.textContent = fmtDate(post.date);
-          li.appendChild(small);
-        }
-        ul.appendChild(li);
-      }
-    })();
-  </script>
-</body>
-</html>
+    document.getElementById('year').textContent = new Date().getFullYear(
