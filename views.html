@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
+  <!-- Consistent header -->
   <header class="header">
     <div class="container bar">
       <a class="brand" href="index.html">PAYTON ST GEME</a>
       <nav class="nav">
-        <a class="nav-link" href="index.html">HOME</a>
-        <a class="nav-link" href="posts.html">POSTS</a>
-        <a class="nav-link active" href="views.html">VIEWS</a>
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="posts.html">Posts</a>
+        <a class="nav-link active" href="views.html">Views</a>
       </nav>
     </div>
   </header>
@@ -26,8 +27,7 @@
         <img src="assets/example1.jpg" alt="Example" />
         <figcaption>A sample commentary under the image.</figcaption>
       </figure>
-
-      <!-- Add more <figure> elements as you upload images -->
+      <!-- Add more <figure> elements here for each new image -->
     </div>
   </main>
 
@@ -36,6 +36,8 @@
       <p>© <span id="year"></span> Payton St Geme</p>
     </div>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
