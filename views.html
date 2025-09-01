@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Views · Payton St Geme</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container bar">
+      <a class="brand" href="index.html">PAYTON ST GEME</a>
+      <nav class="nav">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="posts.html">Posts</a>
+        <a class="nav-link active" href="views.html">Views</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container gallery">
+    <h1>Views</h1>
+    <div class="grid">
+      <!-- Example image block -->
+      <figure>
+        <img src="assets/example1.jpg" alt="Example" />
+        <figcaption>A sample commentary under the image.</figcaption>
+      </figure>
+
+      <!-- Add more <figure> elements as you upload images -->
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Payton St Geme</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
