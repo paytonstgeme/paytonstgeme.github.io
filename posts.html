@@ -7,18 +7,10 @@
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <!-- Consistent header -->
+  <!-- Shared header placeholder -->
   <header class="header" id="site-header"></header>
-    <div class="container bar">
-      <a class="brand" href="index.html">PAYTON ST GEME</a>
-      <nav class="nav">
-        <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link active" href="posts.html">Posts</a>
-        <a class="nav-link" href="views.html">Views</a>
-      </nav>
-    </div>
-  </header>
 
+  <!-- Main content -->
   <main class="container posts-list">
     <h1>Posts</h1>
     <ul class="list">
@@ -36,20 +28,24 @@
     </ul>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <p>© <span id="year"></span> Payton St Geme</p>
     </div>
   </footer>
+
+  <!-- Scripts -->
   <script>
+    // Update footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Fetch and inject shared header.html
+    fetch("/header.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("site-header").innerHTML = data;
+      });
   </script>
-<script>
-  fetch("/header.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("site-header").innerHTML = data;
-    });
-</script>
 </body>
 </html>
