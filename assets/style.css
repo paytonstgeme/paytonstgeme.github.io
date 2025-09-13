@@ -128,6 +128,13 @@ a:hover { text-decoration: underline; }
 /* Hide backdrop by default; show when menu is open */
 .backdrop[hidden] { display: none; }
 
+/* Give room so the brand isn't under the menu button */
+.sidebar { padding-top: 56px; }
+
+/* (Optional) Move the button right when menu is open so it doesn't sit on the edge */
+.menu-open .menu-button { left: 260px; transition: left .25s ease; }
+
+
 /* Optional: nudge main/footer when menu is open on wide screens */
 /* body.menu-open main, body.menu-open .footer { margin-left: 240px; } */
 
