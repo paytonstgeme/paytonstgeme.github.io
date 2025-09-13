@@ -1,3 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payton St Geme</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <!-- Shared header placeholder -->
+  <header class="header" id="site-header"></header>
+
+  <!-- Main content -->
+  <main class="container intro">
+    <h1>Home</h1>
+    <p class="lede"></p>
+    <img src="assets/landing.jpg" alt="Landing page image" class="hero" />
+  </main>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -7,32 +26,36 @@
 
   <!-- Scripts -->
   <script>
+    // 1) Footer year
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
-    fetch("header.html")   <!-- ✅ note: no leading "/" -->
+    // 2) Fetch and inject shared header, then highlight active link
+    fetch("header.html")
       .then(r => r.text())
       .then(html => {
         const host = document.getElementById("site-header");
         host.innerHTML = html;
 
-        // highlight active link
-        const path = location.pathname.replace(/index\.html$/, "/");
-        const isHome  = path === "/" || path === "";
-        const isPosts = path.endsWith("posts.html") || path.includes("/posts/");
-        const isViews = path.endsWith("views.html");
+        // Determine current page
+        const file = location.pathname.split("/").pop() || "index.html";
+        const isHome  = file === "index.html";
+        const isPosts = file === "posts.html";
+        const isViews = file === "views.html" ;
+
+        // Highlight active nav link
         host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
         if (isHome)  host.querySelector('.nav a[href="index.html"]')?.classList.add("active");
         if (isPosts) host.querySelector('.nav a[href="posts.html"]')?.classList.add("active");
         if (isViews) host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
 
-        // menu wiring
+        // If your header.html contains the sidebar menu button, wire it up (safe if absent)
         const btn = host.querySelector(".menu-button");
         const sidebar = host.querySelector(".sidebar");
         const backdrop = host.querySelector(".backdrop");
-        function openMenu(){ sidebar.classList.add("open"); document.body.classList.add("menu-open"); btn.setAttribute("aria-expanded","true"); sidebar.setAttribute("aria-hidden","false"); backdrop.hidden = false; }
-        function closeMenu(){ sidebar.classList.remove("open"); document.body.classList.remove("menu-open"); btn.setAttribute("aria-expanded","false"); sidebar.setAttribute("aria-hidden","true"); backdrop.hidden = true; }
-        btn?.addEventListener("click", () => sidebar.classList.contains("open") ? closeMenu() : openMenu());
+        function openMenu(){ sidebar?.classList.add("open"); document.body.classList.add("menu-open"); btn?.setAttribute("aria-expanded","true"); sidebar?.setAttribute("aria-hidden","false"); if (backdrop) backdrop.hidden = false; }
+        function closeMenu(){ sidebar?.classList.remove("open"); document.body.classList.remove("menu-open"); btn?.setAttribute("aria-expanded","false"); sidebar?.setAttribute("aria-hidden","true"); if (backdrop) backdrop.hidden = true; }
+        btn?.addEventListener("click", () => sidebar?.classList.contains("open") ? closeMenu() : openMenu());
         backdrop?.addEventListener("click", closeMenu);
         document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
       });
