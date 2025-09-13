@@ -36,15 +36,18 @@
 
   <!-- Scripts -->
   <script>
+    // Footer year
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
+    // Load shared header, set active link, wire sidebar menu
     fetch("header.html")
       .then(r => r.text())
       .then(html => {
         const host = document.getElementById("site-header");
         host.innerHTML = html;
 
+        // --- Active nav (treat page + any /posts/... as Posts) ---
         const file = location.pathname.split("/").pop() || "index.html";
         const isHome  = file === "index.html";
         const isPosts = file === "posts.html" || location.pathname.includes("/posts/");
@@ -55,12 +58,29 @@
         if (isPosts) host.querySelector('.nav a[href="posts.html"]')?.classList.add("active");
         if (isViews) host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
 
+        // --- Sidebar menu wiring (adds/removes body.menu-open) ---
         const btn = host.querySelector(".menu-button");
         const sidebar = host.querySelector(".sidebar");
         const backdrop = host.querySelector(".backdrop");
-        function openMenu(){ sidebar?.classList.add("open"); document.body.classList.add("menu-open"); btn?.setAttribute("aria-expanded","true"); sidebar?.setAttribute("aria-hidden","false"); if (backdrop) backdrop.hidden = false; }
-        function closeMenu(){ sidebar?.classList.remove("open"); document.body.classList.remove("menu-open"); btn?.setAttribute("aria-expanded","false"); sidebar?.setAttribute("aria-hidden","true"); if (backdrop) backdrop.hidden = true; }
-        btn?.addEventListener("click", () => sidebar?.classList.contains("open") ? closeMenu() : openMenu());
+
+        function openMenu() {
+          sidebar?.classList.add("open");
+          document.body.classList.add("menu-open");   // <-- shifts brand via CSS
+          btn?.setAttribute("aria-expanded","true");
+          sidebar?.setAttribute("aria-hidden","false");
+          if (backdrop) backdrop.hidden = false;
+        }
+        function closeMenu() {
+          sidebar?.classList.remove("open");
+          document.body.classList.remove("menu-open"); // <-- resets brand
+          btn?.setAttribute("aria-expanded","false");
+          sidebar?.setAttribute("aria-hidden","true");
+          if (backdrop) backdrop.hidden = true;
+        }
+
+        btn?.addEventListener("click", () =>
+          sidebar?.classList.contains("open") ? closeMenu() : openMenu()
+        );
         backdrop?.addEventListener("click", closeMenu);
         document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
       });
