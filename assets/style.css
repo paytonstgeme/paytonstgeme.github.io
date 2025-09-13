@@ -138,3 +138,10 @@ a:hover { text-decoration: underline; }
 /* Optional: nudge main/footer when menu is open on wide screens */
 /* body.menu-open main, body.menu-open .footer { margin-left: 240px; } */
 
+/* Move brand when sidebar is open */
+body.menu-open .brand {
+  margin-left: 240px;   /* same width as sidebar */
+  transition: margin-left 0.25s ease;
+}
+
+
