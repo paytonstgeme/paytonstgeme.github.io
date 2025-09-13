@@ -59,6 +59,23 @@
         backdrop?.addEventListener("click", closeMenu);
         document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
       });
+
+    function openMenu(){
+  sidebar?.classList.add("open");
+  document.body.classList.add("menu-open");  // <-- this part shifts brand
+  btn?.setAttribute("aria-expanded","true");
+  sidebar?.setAttribute("aria-hidden","false");
+  if (backdrop) backdrop.hidden = false;
+}
+
+function closeMenu(){
+  sidebar?.classList.remove("open");
+  document.body.classList.remove("menu-open");  // <-- resets brand position
+  btn?.setAttribute("aria-expanded","false");
+  sidebar?.setAttribute("aria-hidden","true");
+  if (backdrop) backdrop.hidden = true;
+}
+
   </script>
 </body>
 </html>
