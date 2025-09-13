@@ -9,17 +9,16 @@
 <body>
   <!-- Shared header placeholder -->
   <header class="header" id="site-header"></header>
-  
+
   <!-- Main content -->
   <main class="container gallery">
     <h1>Views</h1>
     <div class="grid">
-      <!-- Example image block -->
       <figure>
         <img src="assets/pers.jpg" alt="Example image" />
         <figcaption>Testing.</figcaption>
       </figure>
-      <!-- Add more <figure> elements for new images -->
+      <!-- Add more <figure> blocks as needed -->
     </div>
   </main>
 
@@ -32,14 +31,33 @@
 
   <!-- Scripts -->
   <script>
-    // Update footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
 
-    // Fetch and inject shared header.html
-    fetch("/header.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("site-header").innerHTML = data;
+    fetch("header.html")
+      .then(r => r.text())
+      .then(html => {
+        const host = document.getElementById("site-header");
+        host.innerHTML = html;
+
+        const file = location.pathname.split("/").pop() || "index.html";
+        const isHome  = file === "index.html";
+        const isPosts = file === "posts.html" || location.pathname.includes("/posts/");
+        const isViews = file === "views.html";
+
+        host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
+        if (isHome)  host.querySelector('.nav a[href="index.html"]')?.classList.add("active");
+        if (isPosts) host.querySelector('.nav a[href="posts.html"]')?.classList.add("active");
+        if (isViews) host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
+
+        const btn = host.querySelector(".menu-button");
+        const sidebar = host.querySelector(".sidebar");
+        const backdrop = host.querySelector(".backdrop");
+        function openMenu(){ sidebar?.classList.add("open"); document.body.classList.add("menu-open"); btn?.setAttribute("aria-expanded","true"); sidebar?.setAttribute("aria-hidden","false"); if (backdrop) backdrop.hidden = false; }
+        function closeMenu(){ sidebar?.classList.remove("open"); document.body.classList.remove("menu-open"); btn?.setAttribute("aria-expanded","false"); sidebar?.setAttribute("aria-hidden","true"); if (backdrop) backdrop.hidden = true; }
+        btn?.addEventListener("click", () => sidebar?.classList.contains("open") ? closeMenu() : openMenu());
+        backdrop?.addEventListener("click", closeMenu);
+        document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
       });
   </script>
 </body>
