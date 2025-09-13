@@ -10,25 +10,13 @@
   <!-- Shared header placeholder -->
   <header class="header" id="site-header"></header>
 
-  <!-- Main content --><!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Posts · Payton St Geme</title>
-  <link rel="stylesheet" href="assets/style.css" />
-</head>
-<body>
-  <!-- Shared header placeholder -->
-  <header class="header" id="site-header"></header>
-
   <!-- Main content -->
   <main class="container posts-list">
     <h1>Posts</h1>
     <ul class="list">
       <li class="item">
-        <a class="item-title" href="posts/2025-09-02-man-the-unknown.html">Man, the Unknown</a>
-        <p class="item-desc">Alexis Carrel.</p>
+        <a class="item-title" href="posts/2025-09-02-man-the-unknown.html">Post 2</a>
+        <p class="item-desc">Post 2.</p>
         <time class="item-date" datetime="2025-09-01">Sep 1, 2025</time>
       </li>
       <li class="item">
@@ -75,45 +63,6 @@
         btn?.addEventListener("click", () => sidebar?.classList.contains("open") ? closeMenu() : openMenu());
         backdrop?.addEventListener("click", closeMenu);
         document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
-      });
-  </script>
-</body>
-</html>
-  
-  <main class="container posts-list">
-    <h1>Posts</h1>
-    <ul class="list">
-      <li class="item">
-        <a class="item-title" href="posts/2025-09-02-man-the-unknown.html">#2</a>
-        <p class="item-desc">Loading.....</p>
-        <time class="item-date" datetime="2025-09-01">Sep 1, 2025</time>
-      </li>
-
-      <li class="item">
-        <a class="item-title" href="posts/firstpost.html">Test</a>
-        <p class="item-desc">Loading….</p>
-        <time class="item-date" datetime="2025-08-29">Aug 29, 2025</time>
-      </li>
-    </ul>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>© <span id="year"></span> Payton St Geme</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    // Update footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Fetch and inject shared header.html
-    fetch("/header.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("site-header").innerHTML = data;
       });
   </script>
 </body>
