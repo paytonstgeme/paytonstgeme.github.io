@@ -16,35 +16,29 @@ body {
   background: #fff;
 }
 
+/* =========================
+   MASTHEAD LOGO
+   ========================= */
+.masthead {
+  text-align: center;
+  padding: 12px 0 8px;
+}
+.masthead .logo {
+  height: 60px;   /* adjust size as needed */
+  width: auto;
+  display: inline-block;
+}
+
+/* Thin grey line still applied to header */
 .bar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 18px 0;
 }
 
-/* Brand (top bar + sidebar each have a .brand) */
-.brand {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #000;
-}
-
-/* Prevent brand in the top bar from wrapping */
-.bar .brand { white-space: nowrap; }
-
-/* Sidebar brand: keep own spacing and no wrapping */
-.sidebar .brand {
-  display: block;
-  font-weight: 700;
-  text-decoration: none;
-  color: #000;
-  margin: 0 0 22px 0;
-  white-space: nowrap;
-}
-
+/* =========================
+   NAVIGATION LINKS
+   ========================= */
 .nav { font-family: Arial, Helvetica, sans-serif; display: flex; gap: 20px; }
 .nav-link { text-decoration: none; color: rgba(0,0,0,.6); }
 .nav-link:hover, .nav-link.active { color: #000; }
@@ -135,7 +129,7 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
 }
 
-/* Move the button a bit right when menu is open (optional) */
+/* Move the button right when menu is open */
 .menu-open .menu-button { left: 260px; transition: left .25s ease; }
 
 .sidebar {
@@ -144,7 +138,7 @@ a:hover { text-decoration: underline; }
   width: 240px; height: 100vh;
   background: #fff;
   border-right: 1px solid rgba(0,0,0,.15);
-  padding: 56px 20px 20px; /* top padding gives room under the button */
+  padding: 56px 20px 20px; /* space under button */
   box-sizing: border-box;
   transform: translateX(-100%);
   transition: transform .25s ease;
@@ -164,13 +158,9 @@ a:hover { text-decoration: underline; }
 }
 .backdrop[hidden] { display: none; }
 
-/* Shift ONLY the top-bar brand when menu is open (not the sidebar brand) */
-body.menu-open .bar .brand {
-  margin-left: 240px;                 /* same as sidebar width */
-  transition: margin-left .25s ease;
-}
-
-/* Optional: push main/footer on wide screens when menu is open */
+/* =========================
+   RESPONSIVE
+   ========================= */
 @media (min-width: 900px) {
   body.menu-open main,
   body.menu-open .footer {
@@ -179,7 +169,6 @@ body.menu-open .bar .brand {
   }
 }
 
-/* Keep content clear of fixed menu button on small screens */
 @media (max-width: 600px) {
   main { padding-top: 48px; }
 }
