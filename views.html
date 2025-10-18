@@ -17,34 +17,53 @@
       <!-- Bridge from headlands -->
       <figure>
         <img src="assets/Bridgeheadlands.png" alt="Bridge view from the headlands" loading="lazy" />
-        <figcaption> </figcaption>
+        <figcaption></figcaption>
       </figure>
 
       <!-- Bridge close-up -->
       <figure>
         <img src="assets/bridgecloseup.png" alt="Close-up of bridge structure" loading="lazy" />
-        <figcaption> </figcaption>
+        <figcaption></figcaption>
       </figure>
 
+      <!-- The Bay -->
       <figure>
         <img src="assets/MrsBrooke-4.PNG" alt="San Francisco" loading="lazy" />
-        <figcaption> the bay.</figcaption>
+        <figcaption>the bay.</figcaption>
       </figure>
       
+      <!-- Speed -->
       <figure>
         <img src="assets/IMG_1057.JPG" alt="IMG_1057" loading="lazy" />
-        <figcaption> speed. </figcaption>
+        <figcaption>speed.</figcaption>
       </figure>
 
+      <!-- Eternal wander -->
       <figure>
         <img src="assets/IMG_3291.JPG" alt="IMG_3291" loading="lazy" />
         <figcaption>eternal wander.</figcaption>
       </figure>
-      
-      <!-- Arch/columns (pers) -->
+
+      <!-- Perseus -->
       <figure>
         <img src="assets/pers.jpg" alt="perseus" loading="lazy" />
         <figcaption>perseus.</figcaption>
+      </figure>
+
+      <!-- New images -->
+      <figure>
+        <img src="assets/IMG_1941.JPG" alt="IMG_1941" loading="lazy" />
+        <figcaption></figcaption>
+      </figure>
+
+      <figure>
+        <img src="assets/IMG_1970.JPG" alt="IMG_1970" loading="lazy" />
+        <figcaption></figcaption>
+      </figure>
+
+      <figure>
+        <img src="assets/IMG_2747.JPG" alt="IMG_2747" loading="lazy" />
+        <figcaption></figcaption>
       </figure>
     </div>
   </main>
@@ -77,11 +96,27 @@
         const btn = host.querySelector(".menu-button");
         const sidebar = host.querySelector(".sidebar");
         const backdrop = host.querySelector(".backdrop");
-        function openMenu(){ sidebar?.classList.add("open"); document.body.classList.add("menu-open"); if (btn) btn.setAttribute("aria-expanded","true"); if (sidebar) sidebar.setAttribute("aria-hidden","false"); if (backdrop) backdrop.hidden = false; }
-        function closeMenu(){ sidebar?.classList.remove("open"); document.body.classList.remove("menu-open"); if (btn) btn.setAttribute("aria-expanded","false"); if (sidebar) sidebar.setAttribute("aria-hidden","true"); if (backdrop) backdrop.hidden = true; }
-        btn?.addEventListener("click", () => sidebar?.classList.contains("open") ? closeMenu() : openMenu());
+        function openMenu() {
+          sidebar?.classList.add("open");
+          document.body.classList.add("menu-open");
+          if (btn) btn.setAttribute("aria-expanded", "true");
+          if (sidebar) sidebar.setAttribute("aria-hidden", "false");
+          if (backdrop) backdrop.hidden = false;
+        }
+        function closeMenu() {
+          sidebar?.classList.remove("open");
+          document.body.classList.remove("menu-open");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+          if (sidebar) sidebar.setAttribute("aria-hidden", "true");
+          if (backdrop) backdrop.hidden = true;
+        }
+        btn?.addEventListener("click", () =>
+          sidebar?.classList.contains("open") ? closeMenu() : openMenu()
+        );
         backdrop?.addEventListener("click", closeMenu);
-        document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+        document.addEventListener("keydown", e => {
+          if (e.key === "Escape") closeMenu();
+        });
       });
   </script>
 </body>
