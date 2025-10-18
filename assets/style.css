@@ -172,22 +172,36 @@ p { margin: 0 0 1rem; }
 /* =========================
    GALLERY (Views)
    ========================= */
-.gallery h1 { margin: 30px 0; }
+.gallery h1 {
+  margin: 30px 0;
+  text-align: center;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
+  justify-content: center;      /* centers all columns */
+  justify-items: center;        /* centers each figure inside its cell */
 }
-figure { margin: 0; }
+
+figure {
+  margin: 0;
+  text-align: center;
+}
+
 figure img {
   width: 100%;
+  max-width: 300px;             /* optional: limit width for better balance */
+  height: auto;
   display: block;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(0,0,0,.1);
   border-radius: 4px;
 }
+
 figcaption {
-  font-size: .95rem;
-  color: var(--muted);
+  font-size: 0.9rem;
+  color: rgba(0,0,0,.7);
   margin-top: 6px;
   line-height: 1.45;
 }
