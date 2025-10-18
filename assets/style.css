@@ -1,79 +1,201 @@
+/* ======================================
+   TYPOGRAPHY SYSTEM
+   - Body: Georgia (serif)
+   - Headlines/Nav/Menu: Helvetica Neue / Arial (sans)
+   ====================================== */
+
+/* Root scale and sensible defaults */
+:root {
+  --text: #000;
+  --muted: rgba(0,0,0,.7);
+  --muted-2: rgba(0,0,0,.6);
+  --hairline: rgba(0,0,0,.12);
+  --line: rgba(0,0,0,.10);
+  --bg: #fff;
+
+  /* Type scale */
+  --fs-base: 16px;
+  --lh-base: 1.6;
+
+  --fs-h1: 2.25rem; /* 36px */
+  --fs-h2: 1.625rem; /* 26px */
+  --fs-h3: 1.25rem;  /* 20px */
+
+  --fs-small: .95rem;
+}
+
+/* Reduce motion if user prefers */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
 /* =========================
    BASE
    ========================= */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
 body {
   margin: 0;
-  font-family: "Times New Roman", Times, serif;
-  background: #fff;
-  color: #000;
-  line-height: 1.6;
+  font-family: Georgia, serif;
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.container { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+img, svg { max-width: 100%; height: auto; display: block; }
+main { display: block; }
 
-.header {
-  border-bottom: 1px solid rgba(0,0,0,.1);
-  background: #fff;
+/* Headlines, navigation, and menu elements (sans) */
+h1, h2, h3, h4, h5, h6,
+.header,
+.brand,
+.nav,
+.nav-link,
+.menu-button,
+.sidebar,
+.footer {
+  font-family: "Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Headings */
+h1, h2, h3 {
+  margin: 0 0 .6rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: .2px;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+/* Paragraphs */
+p { margin: 0 0 1rem; }
+
+/* Containers */
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* =========================
-   MASTHEAD LOGO
+   HEADER
    ========================= */
+.header {
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+/* Masthead logo */
 .masthead {
   text-align: center;
   padding: 12px 0 8px;
 }
 .masthead .logo {
-  height: 60px;   /* adjust size as needed */
+  height: 60px;
   width: auto;
   display: inline-block;
 }
 
-/* Thin grey line still applied to header */
+/* Thin grey bar with brand and nav */
 .bar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 18px 0;
+  gap: 16px;
+}
+
+/* Brand */
+.brand {
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
 }
 
 /* =========================
-   NAVIGATION LINKS
+   NAVIGATION
    ========================= */
-.nav { font-family: Arial, Helvetica, sans-serif; display: flex; gap: 20px; }
-.nav-link { text-decoration: none; color: rgba(0,0,0,.6); }
-.nav-link:hover, .nav-link.active { color: #000; }
+.nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--muted-2);
+  font-weight: 600;
+  letter-spacing: .2px;
+  transition: color .15s ease-in-out;
+}
+.nav-link:hover,
+.nav-link.active { color: var(--text); }
 
 /* =========================
    HOME INTRO
    ========================= */
-.intro { text-align: center; padding: 50px 0; }
-.intro h1 { font-size: 2.5rem; margin-bottom: 8px; }
-.lede { color: rgba(0,0,0,.7); margin-bottom: 20px; }
-.hero { max-width: 100%; height: auto; border: 1px solid rgba(0,0,0,.1); }
+.intro {
+  text-align: center;
+  padding: 48px 0;
+}
+.intro h1 { margin-bottom: 8px; }
+.lede {
+  color: var(--muted);
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+.hero {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
 
 /* =========================
    FOOTER
    ========================= */
 .footer {
-  border-top: 1px solid rgba(0,0,0,.1);
+  border-top: 1px solid var(--line);
   text-align: center;
   padding: 20px;
-  color: rgba(0,0,0,.6);
+  color: var(--muted-2);
+  font-size: var(--fs-small);
 }
 
 /* =========================
    GALLERY (Views)
    ========================= */
 .gallery h1 { margin: 30px 0; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
 figure { margin: 0; }
-figure img { width: 100%; display: block; border: 1px solid rgba(0,0,0,.1); }
-figcaption { font-size: 0.9rem; color: rgba(0,0,0,.7); margin-top: 6px; }
+figure img {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+figcaption {
+  font-size: .95rem;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.45;
+}
 
 /* =========================
    GLOBAL LINKS
    ========================= */
-a { color: #000; text-decoration: none; }
+a { color: var(--text); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* =========================
@@ -91,25 +213,26 @@ a:hover { text-decoration: underline; }
 
 .item {
   padding: 14px 0;
-  border-bottom: 1px solid rgba(0,0,0,.12);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .item-title {
   font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.3;
+  letter-spacing: .2px;
 }
 
 .item-desc {
   margin: 4px 0 2px;
-  color: rgba(0,0,0,.7);
+  color: var(--muted);
 }
 
 .item-date {
   display: inline-block;
   margin-top: 2px;
   font-size: .95rem;
-  color: rgba(0,0,0,.6);
+  color: var(--muted-2);
 }
 
 /* =========================
@@ -122,35 +245,50 @@ a:hover { text-decoration: underline; }
   z-index: 1001;
   border: 1px solid rgba(0,0,0,.2);
   background: #fff;
-  color: #000;
-  font: 18px/1 "Times New Roman", Times, serif;
-  padding: 6px 10px;
-  border-radius: 6px;
+  color: var(--text);
+  font: 600 16px/1 "Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding: 7px 12px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: left .25s ease, box-shadow .15s ease-in-out;
 }
+.menu-button:hover { box-shadow: 0 1px 6px rgba(0,0,0,.08); }
 
 /* Move the button right when menu is open */
-.menu-open .menu-button { left: 260px; transition: left .25s ease; }
+.menu-open .menu-button { left: 260px; }
 
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0; left: 0;
   width: 240px; height: 100vh;
   background: #fff;
   border-right: 1px solid rgba(0,0,0,.15);
-  padding: 56px 20px 20px; /* space under button */
+  padding: 56px 20px 20px;
   box-sizing: border-box;
   transform: translateX(-100%);
   transition: transform .25s ease;
   z-index: 1000;
 }
-
 .sidebar.open { transform: translateX(0); }
 
-.sidebar .nav { display: flex; flex-direction: column; gap: 10px; }
-.sidebar .nav-link { color: rgba(0,0,0,.7); text-decoration: none; }
-.sidebar .nav-link:hover, .sidebar .nav-link.active { color: #000; text-decoration: underline; }
+.sidebar .nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sidebar .nav-link {
+  color: var(--muted-2);
+  text-decoration: none;
+  font-weight: 600;
+}
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  color: var(--text);
+  text-decoration: underline;
+}
 
+/* Backdrop for sidebar */
 .backdrop {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.08);
@@ -161,14 +299,18 @@ a:hover { text-decoration: underline; }
 /* =========================
    RESPONSIVE
    ========================= */
+@media (max-width: 700px) {
+  :root { --fs-h1: 1.875rem; } /* tighten H1 on small screens */
+  .bar { flex-wrap: wrap; gap: 10px; }
+  .brand { font-size: 1.1rem; }
+  .nav { gap: 14px; }
+  main { padding-top: 48px; }
+}
+
 @media (min-width: 900px) {
   body.menu-open main,
   body.menu-open .footer {
     margin-left: 240px;
     transition: margin .25s ease;
   }
-}
-
-@media (max-width: 600px) {
-  main { padding-top: 48px; }
 }
