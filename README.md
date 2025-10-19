@@ -24,8 +24,7 @@
       <img src="assets/Kanji and Hexagram of Harmony.png" alt="Harmony" style="max-width:100%;height:auto;" />
   </main>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+
+  
 </body>
 </html>
