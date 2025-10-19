@@ -1,34 +1,80 @@
-# Static HTML Blog Starter
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payton St Geme</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <!-- Shared header placeholder -->
+  <header class="header" id="site-header"></header>
 
-A minimal, total-control static blog for GitHub Pages. No frameworks, no generators.
+  <!-- Main content -->
+  <main class="container intro">
+    <h1>Home</h1>
+    <p class="lede"></p>
+    <img src="assets/Kanji and Hexagram of Harmony.png" alt="Landing page image" class="hero" />
+  </main>
 
-## Structure
-```
-/
-  index.html
-  posts/
-    YYYY-MM-DD-title.html
-  assets/
-    style.css
-  404.html
-  .nojekyll
-```
-Do not use folders starting with an underscore while Jekyll is on. The `.nojekyll` file disables Jekyll so your files are served as-is.
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Payton St Geme</p>
+    </div>
+  </footer>
 
-## How to use
-1. Create a new public repo named `yourusername.github.io`.
-2. Upload these files to the repo root and commit.
-3. In the repo, open Settings → Pages and set Source to Deploy from a branch and select the `main` branch.
-4. Visit `https://yourusername.github.io`.
+  <!-- Scripts -->
+  <script>
+    // 1) Footer year
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
 
-## Create a new post
-1. Copy `posts/2025-08-30-hello-world.html` to a new file named `YYYY-MM-DD-your-title.html`.
-2. Edit the HTML content and the `<time>` tag.
-3. Open `index.html` and add a new list item linking to your post.
+    // 2) Fetch and inject shared header, then highlight active link
+    fetch("header.html")
+      .then(r => r.text())
+      .then(html => {
+        const host = document.getElementById("site-header");
+        host.innerHTML = html;
 
-## Custom domain
-- Add a file named `CNAME` in the repo root that contains only your domain, for example `www.example.com`.
-- In your domain registrar DNS, create a CNAME for `www` that points to `yourusername.github.io`.
-- For the root domain, use your registrar's ALIAS/ANAME or follow GitHub's Pages DNS instructions.
-- In Settings → Pages, add your custom domain and enforce HTTPS.
+        // Determine current page
+        const file = location.pathname.split("/").pop() || "index.html";
+        const isHome  = file === "index.html";
+        const isPosts = file === "posts.html";
+        const isViews = file === "views.html" ;
 
+        // Highlight active nav link
+        host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
+        if (isHome)  host.querySelector('.nav a[href="index.html"]')?.classList.add("active");
+        if (isPosts) host.querySelector('.nav a[href="posts.html"]')?.classList.add("active");
+        if (isViews) host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
+
+        // If your header.html contains the sidebar menu button, wire it up (safe if absent)
+        const btn = host.querySelector(".menu-button");
+        const sidebar = host.querySelector(".sidebar");
+        const backdrop = host.querySelector(".backdrop");
+        function openMenu(){ sidebar?.classList.add("open"); document.body.classList.add("menu-open"); btn?.setAttribute("aria-expanded","true"); sidebar?.setAttribute("aria-hidden","false"); if (backdrop) backdrop.hidden = false; }
+        function closeMenu(){ sidebar?.classList.remove("open"); document.body.classList.remove("menu-open"); btn?.setAttribute("aria-expanded","false"); sidebar?.setAttribute("aria-hidden","true"); if (backdrop) backdrop.hidden = true; }
+        btn?.addEventListener("click", () => sidebar?.classList.contains("open") ? closeMenu() : openMenu());
+        backdrop?.addEventListener("click", closeMenu);
+        document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+      });
+
+    function openMenu(){
+  sidebar?.classList.add("open");
+  document.body.classList.add("menu-open");  // <-- this part shifts brand
+  btn?.setAttribute("aria-expanded","true");
+  sidebar?.setAttribute("aria-hidden","false");
+  if (backdrop) backdrop.hidden = false;
+}
+
+function closeMenu(){
+  sidebar?.classList.remove("open");
+  document.body.classList.remove("menu-open");  // <-- resets brand position
+  btn?.setAttribute("aria-expanded","false");
+  sidebar?.setAttribute("aria-hidden","true");
+  if (backdrop) backdrop.hidden = true;
+}
+  </script>
+</body>
+</html>
