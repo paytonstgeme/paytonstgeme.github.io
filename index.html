@@ -14,7 +14,13 @@
   <main class="container intro">
     <h1>Home</h1>
     <p class="lede"></p>
-    <img src="assets/Kanji and Hexagram of Harmony.png" alt="Landing page image" class="hero" />
+
+    <!-- Hero image -->
+    <img
+      src="assets/Kanji and Hexagram of Harmony.png"
+      alt="Kanji and Hexagram of Harmony"
+      class="hero-img"
+    />
   </main>
 
   <!-- Footer -->
@@ -41,7 +47,7 @@
         const file = location.pathname.split("/").pop() || "index.html";
         const isHome  = file === "index.html";
         const isPosts = file === "posts.html";
-        const isViews = file === "views.html" ;
+        const isViews = file === "views.html";
 
         // Highlight active nav link
         host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
@@ -49,32 +55,35 @@
         if (isPosts) host.querySelector('.nav a[href="posts.html"]')?.classList.add("active");
         if (isViews) host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
 
-        // If your header.html contains the sidebar menu button, wire it up (safe if absent)
+        // Optional menu button logic
         const btn = host.querySelector(".menu-button");
         const sidebar = host.querySelector(".sidebar");
         const backdrop = host.querySelector(".backdrop");
-        function openMenu(){ sidebar?.classList.add("open"); document.body.classList.add("menu-open"); btn?.setAttribute("aria-expanded","true"); sidebar?.setAttribute("aria-hidden","false"); if (backdrop) backdrop.hidden = false; }
-        function closeMenu(){ sidebar?.classList.remove("open"); document.body.classList.remove("menu-open"); btn?.setAttribute("aria-expanded","false"); sidebar?.setAttribute("aria-hidden","true"); if (backdrop) backdrop.hidden = true; }
-        btn?.addEventListener("click", () => sidebar?.classList.contains("open") ? closeMenu() : openMenu());
+
+        function openMenu() {
+          sidebar?.classList.add("open");
+          document.body.classList.add("menu-open");
+          btn?.setAttribute("aria-expanded", "true");
+          sidebar?.setAttribute("aria-hidden", "false");
+          if (backdrop) backdrop.hidden = false;
+        }
+
+        function closeMenu() {
+          sidebar?.classList.remove("open");
+          document.body.classList.remove("menu-open");
+          btn?.setAttribute("aria-expanded", "false");
+          sidebar?.setAttribute("aria-hidden", "true");
+          if (backdrop) backdrop.hidden = true;
+        }
+
+        btn?.addEventListener("click", () =>
+          sidebar?.classList.contains("open") ? closeMenu() : openMenu()
+        );
         backdrop?.addEventListener("click", closeMenu);
-        document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+        document.addEventListener("keydown", e => {
+          if (e.key === "Escape") closeMenu();
+        });
       });
-
-    function openMenu(){
-  sidebar?.classList.add("open");
-  document.body.classList.add("menu-open");  // <-- this part shifts brand
-  btn?.setAttribute("aria-expanded","true");
-  sidebar?.setAttribute("aria-hidden","false");
-  if (backdrop) backdrop.hidden = false;
-}
-
-function closeMenu(){
-  sidebar?.classList.remove("open");
-  document.body.classList.remove("menu-open");  // <-- resets brand position
-  btn?.setAttribute("aria-expanded","false");
-  sidebar?.setAttribute("aria-hidden","true");
-  if (backdrop) backdrop.hidden = true;
-}
   </script>
 </body>
 </html>
