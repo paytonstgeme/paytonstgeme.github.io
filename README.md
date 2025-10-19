@@ -3,78 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Payton St Geme</title>
+  <title>Home · Payton St Geme</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <!-- Shared header placeholder -->
-  <header class="header" id="site-header"></header>
+  <header class="header">
+    <div class="container bar">
+      <a class="brand" href="index.html">PAYTON ST GEME</a>
+      <nav class="nav">
+        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="posts.html">Posts</a>
+        <a class="nav-link" href="views.html">Views</a>
+      </nav>
+    </div>
+  </header>
 
-  <!-- Main content -->
-  <main class="container intro">
+  <main class="container">
     <h1>Home</h1>
-    <p class="lede"></p>
-    <img src="assets/Kanji and Hexagram of Harmony.png" alt="Landing page image" class="hero" />
+    <figure>
+      <img src="assets/Kanji and Hexagram of Harmony.png" alt="Harmony" style="max-width:100%;height:auto;" />
+      <figcaption>© Payton St Geme</figcaption>
+    </figure>
+    <p class="lede">Welcome to my site.</p>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <p>© <span id="year"></span> Payton St Geme</p>
-    </div>
+    <div class="container">© <span id="year"></span> Payton St Geme</div>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // 1) Footer year
-    const y = document.getElementById('year');
-    if (y) y.textContent = new Date().getFullYear();
-
-    // 2) Fetch and inject shared header, then highlight active link
-    fetch("header.html")
-      .then(r => r.text())
-      .then(html => {
-        const host = document.getElementById("site-header");
-        host.innerHTML = html;
-
-        // Determine current page
-        const file = location.pathname.split("/").pop() || "index.html";
-        const isHome  = file === "index.html";
-        const isPosts = file === "posts.html";
-        const isViews = file === "views.html" ;
-
-        // Highlight active nav link
-        host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
-        if (isHome)  host.querySelector('.nav a[href="index.html"]')?.classList.add("active");
-        if (isPosts) host.querySelector('.nav a[href="posts.html"]')?.classList.add("active");
-        if (isViews) host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
-
-        // If your header.html contains the sidebar menu button, wire it up (safe if absent)
-        const btn = host.querySelector(".menu-button");
-        const sidebar = host.querySelector(".sidebar");
-        const backdrop = host.querySelector(".backdrop");
-        function openMenu(){ sidebar?.classList.add("open"); document.body.classList.add("menu-open"); btn?.setAttribute("aria-expanded","true"); sidebar?.setAttribute("aria-hidden","false"); if (backdrop) backdrop.hidden = false; }
-        function closeMenu(){ sidebar?.classList.remove("open"); document.body.classList.remove("menu-open"); btn?.setAttribute("aria-expanded","false"); sidebar?.setAttribute("aria-hidden","true"); if (backdrop) backdrop.hidden = true; }
-        btn?.addEventListener("click", () => sidebar?.classList.contains("open") ? closeMenu() : openMenu());
-        backdrop?.addEventListener("click", closeMenu);
-        document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
-      });
-
-    function openMenu(){
-  sidebar?.classList.add("open");
-  document.body.classList.add("menu-open");  // <-- this part shifts brand
-  btn?.setAttribute("aria-expanded","true");
-  sidebar?.setAttribute("aria-hidden","false");
-  if (backdrop) backdrop.hidden = false;
-}
-
-function closeMenu(){
-  sidebar?.classList.remove("open");
-  document.body.classList.remove("menu-open");  // <-- resets brand position
-  btn?.setAttribute("aria-expanded","false");
-  sidebar?.setAttribute("aria-hidden","true");
-  if (backdrop) backdrop.hidden = true;
-}
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
