@@ -22,14 +22,7 @@
     <h1>Home</h1>
     <figure>
       <img src="assets/Kanji and Hexagram of Harmony.png" alt="Harmony" style="max-width:100%;height:auto;" />
-      <figcaption>© Payton St Geme</figcaption>
-    </figure>
-    <p class="lede">Welcome to my site.</p>
   </main>
-
-  <footer class="footer">
-    <div class="container">© <span id="year"></span> Payton St Geme</div>
-  </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
