@@ -184,6 +184,18 @@ p { margin: 0 0 1rem; }
   border-radius: 4px;
 }
 
+/* Hero image styling (Option 2) */
+.hero-img {
+  display: block;
+  max-width: 400px;   /* maximum rendered width */
+  width: 80%;         /* responsive scaling on smaller screens */
+  height: auto;       /* maintain aspect ratio */
+  margin: 2rem auto;  /* center horizontally and add spacing */
+  border: 1px solid var(--line);
+  border-radius: 4px; /* optional, soft corners */
+}
+
+
 /* =========================
    FOOTER
    ========================= */
