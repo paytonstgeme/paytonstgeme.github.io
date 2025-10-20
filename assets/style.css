@@ -290,30 +290,27 @@ a:hover { text-decoration: underline; }
 /* =========================
    SINGLE POST PAGE
    ========================= */
-.post {
-  padding-top: 3rem; /* Adds more space between header and post title */
+.article {
+  padding-top: 3rem;        /* space between grey header line and title */
   padding-bottom: 3rem;
 }
 
-.post-title {
-  margin-top: 2.5rem; /* Adds space below the grey header line */
-  margin-bottom: 1rem; /* Space between title and date */
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 1.3;
+.article h1 {
+  margin-top: 2.5rem;       /* extra gap below the grey line */
+  margin-bottom: 1rem;      /* space between title and date */
 }
 
-.post-date {
-  display: block;
-  margin-bottom: 1.5rem; /* Adds space between date and post body */
+.article .meta {
+  margin-bottom: 1.5rem;    /* space between date and body text */
   color: var(--muted-2);
   font-size: .95rem;
 }
 
-.post-body {
+.article p {
   line-height: 1.7;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
+
 
 /* =========================
    LEFT SLIDE-OUT MENU
