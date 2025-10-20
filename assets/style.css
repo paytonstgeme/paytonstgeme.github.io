@@ -85,10 +85,22 @@ p { margin: 0 0 1rem; }
 /* =========================
    HEADER
    ========================= */
+
 .header {
   border-bottom: 1px solid var(--line);
   background: #fff;
+  text-align: center;   /* centers the archer logo */
+  padding: 12px 0;      /* keeps compact height */
 }
+
+/* Centered archer logo */
+.header img {
+  height: 60px;         /* same size as before */
+  width: auto;
+  display: inline-block;
+  margin: 0 auto;
+}
+
 
 /* Masthead logo */
 .masthead {
@@ -96,7 +108,7 @@ p { margin: 0 0 1rem; }
   padding: 12px 0 8px;
 }
 .masthead .logo {
-  height: 60px;
+  height: 40px;
   width: auto;
   display: inline-block;
 }
@@ -107,14 +119,14 @@ p { margin: 0 0 1rem; }
   align-items: center;
   justify-content: space-between;
   padding: 18px 0;
-  gap: 16px;
+  gap: 20px;
 }
 
 /* Brand */
 .brand {
   font-weight: 800;
   font-size: 1.2rem;
-  letter-spacing: .6px;
+  letter-spacing: .75px;
   text-transform: uppercase;
   color: var(--text);
   text-decoration: none;
@@ -126,7 +138,7 @@ p { margin: 0 0 1rem; }
 .nav {
   display: flex;
   gap: 20px;
-  align-items: center;
+  align-items: right;
 }
 
 .nav-link {
