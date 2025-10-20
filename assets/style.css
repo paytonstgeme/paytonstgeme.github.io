@@ -387,3 +387,21 @@ a:hover { text-decoration: underline; }
     overflow: hidden;
   }
 }
+/* Center main content (Home title + image) even when sidebar is open */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: calc(100vh - 160px); /* fills viewport minus header/footer */
+  padding: 48px 0;
+}
+
+/* Ensure centering remains when sidebar is open */
+body.menu-open .intro {
+  margin-left: 0 !important;
+  transform: none !important;
+  justify-content: center;
+  align-items: center;
+}
