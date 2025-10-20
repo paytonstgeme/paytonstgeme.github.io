@@ -288,31 +288,6 @@ a:hover { text-decoration: underline; }
 }
 
 /* =========================
-   SINGLE POST PAGE
-   ========================= */
-.article {
-  padding-top: 3rem;        /* space between grey header line and title */
-  padding-bottom: 3rem;
-}
-
-.article h1 {
-  margin-top: 2.5rem;       /* extra gap below the grey line */
-  margin-bottom: 1rem;      /* space between title and date */
-}
-
-.article .meta {
-  margin-bottom: 1.5rem;    /* space between date and body text */
-  color: var(--muted-2);
-  font-size: .95rem;
-}
-
-.article p {
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-
-
-/* =========================
    LEFT SLIDE-OUT MENU
    ========================= */
 .menu-button {
