@@ -6,31 +6,28 @@
   <title>The Will to Have Nice Things</title>
   <link rel="stylesheet" href="/assets/style.css" />
 </head>
+
 <body>
   <!-- Shared header placeholder -->
   <header class="header" id="site-header"></header>
 
-  <body>
+  <!-- Return Button -->
   <a href="https://paytonstgeme.com/posts.html" class="return-btn">← Return to List</a>
 
   <!-- Main content -->
   <main class="container article">
-    
+
+    <!-- Add spacing here -->
+    <div style="height: 40px;"></div>
+
     <h1>The Will to Have Nice Things</h1>
-    
     <div class="meta"><time datetime="2025-10-20">October 20, 2025</time></div>
 
     <div style="height: 60px;"></div>
+    <p> </p>
+    <div style="height: 40px;"></div>
+    <p> </p> 
 
-<p> </p>
-
-
-<div style="height: 40px;"></div>
-
-<p> </p> 
-
-  
-  
   </main>
 
   <!-- Footer -->
@@ -46,7 +43,7 @@
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
-    // Fetch header, highlight active link, and wire sidebar
+    // Fetch header and highlight active link
     fetch("/header.html")
       .then(r => r.text())
       .then(html => {
