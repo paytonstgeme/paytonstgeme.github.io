@@ -44,6 +44,7 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* never let sidebar cause horizontal scroll */
 }
 
 img, svg { max-width: 100%; height: auto; display: block; }
@@ -75,40 +76,25 @@ h3 { font-size: var(--fs-h3); }
 /* Paragraphs */
 p { margin: 0 0 1rem; }
 
-/* Containers */
+/* Containers: globally center the page content */
 .container {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 0 20px;
+  width: min(880px, 100%);
+  margin-inline: auto;      /* keeps content centered at all times */
+  padding-inline: 20px;
 }
 
 /* =========================
    HEADER
    ========================= */
-
 .header {
   border-bottom: 1px solid var(--line);
   background: #fff;
-  text-align: center;   /* centers the archer logo */
-  padding: 12px 0;      /* keeps compact height */
-}
-
-/* Centered archer logo */
-.header img {
-  height: 60px;         /* same size as before */
-  width: auto;
-  display: inline-block;
-  margin: 0 auto;
-}
-
-
-/* Masthead logo */
-.masthead {
   text-align: center;
-  padding: 12px 0 8px;
+  padding: 12px 0;
 }
-.masthead .logo {
-  height: 40px;
+
+.header img {
+  height: 60px;
   width: auto;
   display: inline-block;
 }
@@ -138,7 +124,7 @@ p { margin: 0 0 1rem; }
 .nav {
   display: flex;
   gap: 20px;
-  align-items: right;
+  align-items: center;
 }
 
 .nav-link {
@@ -154,38 +140,24 @@ p { margin: 0 0 1rem; }
 /* =========================
    HOME INTRO
    ========================= */
-
 .intro {
-  /* Center title + image horizontally and vertically within the viewport */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: center;      /* horizontal center */
+  justify-content: center;  /* vertical center within min-height */
   text-align: center;
-  min-height: calc(100vh - 160px); /* viewport minus header/footer */
-  padding: 48px 0;
+  min-height: calc(100dvh - 160px); /* viewport minus header/footer */
+  padding: 48px 20px;
 }
+
 .intro h1 { margin-bottom: 8px; }
+
 .lede {
   color: var(--muted);
   margin-bottom: 20px;
   font-size: 1.05rem;
 }
-.hero {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid var(--line);
-}
 
-/* Keep centered even when sidebar is open */
-body.menu-open .intro {
-  margin-left: 0 !important;
-  transform: none !important;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Hero image styling */
 .hero-img {
   display: block;
   max-width: 400px;
@@ -195,32 +167,6 @@ body.menu-open .intro {
   border: 1px solid var(--line);
   border-radius: 4px;
 }
-
-/* =========================
-   HOME PAGE CENTERING
-   ========================= */
-.home-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: calc(100vh - 160px); /* fills viewport minus header/footer */
-}
-
-.home-page h1 {
-  margin-bottom: 20px;
-  font-weight: 700;
-}
-
-.home-page img {
-  max-width: 400px;
-  width: 100%;
-  height: auto;
-  border: 1px solid rgba(0,0,0,.1);
-  border-radius: 4px;
-}
-
 
 /* =========================
    FOOTER
@@ -245,8 +191,8 @@ body.menu-open .intro {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
-  justify-content: center;      /* centers all columns */
-  justify-items: center;        /* centers each figure inside its cell */
+  justify-content: center;
+  justify-items: center;
 }
 
 figure {
@@ -256,7 +202,7 @@ figure {
 
 figure img {
   width: 100%;
-  max-width: 300px;             /* optional: limit width for better balance */
+  max-width: 300px;
   height: auto;
   display: block;
   border: 1px solid rgba(0,0,0,.1);
@@ -314,7 +260,7 @@ a:hover { text-decoration: underline; }
 }
 
 /* =========================
-   LEFT SLIDE-OUT MENU
+   LEFT SLIDE-OUT MENU (overlay, does NOT push content)
    ========================= */
 .menu-button {
   position: fixed;
@@ -324,26 +270,24 @@ a:hover { text-decoration: underline; }
   border: 1px solid rgba(0,0,0,.2);
   background: #fff;
   color: var(--text);
-  font: 600 16px/1 "Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font: 600 16px/1 "Helvetica Neue", Arial, system-ui, -apple-system, "Tacoma", sans-serif;
   padding: 7px 12px;
   border-radius: 8px;
   cursor: pointer;
-  transition: left .25s ease, box-shadow .15s ease-in-out;
+  transition: box-shadow .15s ease-in-out, transform .2s ease;
 }
 .menu-button:hover { box-shadow: 0 1px 6px rgba(0,0,0,.08); }
 
-/* Move the button right when menu is open */
-.menu-open .menu-button { left: 260px; }
-
-/* Sidebar */
+/* Sidebar overlays the page; it never changes page margins */
 .sidebar {
   position: fixed;
-  top: 0; left: 0;
-  width: 240px; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100dvh;
   background: #fff;
   border-right: 1px solid rgba(0,0,0,.15);
   padding: 56px 20px 20px;
-  box-sizing: border-box;
   transform: translateX(-100%);
   transition: transform .25s ease;
   z-index: 1000;
@@ -366,54 +310,56 @@ a:hover { text-decoration: underline; }
   text-decoration: underline;
 }
 
-/* =========================
-   BACKDROP FOR SIDEBAR
-   ========================= */
+/* Backdrop for sidebar (click to close) */
 .backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.25);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.25s ease, visibility 0.25s ease;
+  transition: opacity .25s ease, visibility .25s ease;
   z-index: 999;
 }
-
 .sidebar.open + .backdrop {
   opacity: 1;
   visibility: visible;
 }
 
 /* =========================
+   GLOBAL "DO NOT SHIFT WHEN MENU OPENS"
+   ========================= */
+
+/* Explicitly prevent any sideways push on open */
+body.menu-open .header,
+body.menu-open main,
+body.menu-open .footer {
+  margin-left: 0 !important;
+  transform: none !important;
+  left: auto !important;
+}
+
+/* Keep containers centered during menu open */
+body.menu-open .container {
+  margin-inline: auto !important;
+}
+
+/* Lock scroll to avoid background shift while menu is open */
+body.menu-open { overflow: hidden; }
+
+/* =========================
    RESPONSIVE
    ========================= */
 @media (max-width: 700px) {
-  :root { --fs-h1: 1.875rem; } /* tighten H1 on small screens */
+  :root { --fs-h1: 1.875rem; }
   .bar { flex-wrap: wrap; gap: 10px; }
   .brand { font-size: 1.1rem; }
   .nav { gap: 14px; }
   main { padding-top: 48px; }
 }
 
-@media (min-width: 900px) {
-  /* Prevent layout shifting when sidebar opens */
-  body.menu-open main,
-  body.menu-open .footer {
-    margin-left: 0 !important;
-    transition: none;
-  }
-
-  /* Optional: still move the button for context */
-  .menu-open .menu-button {
-    left: 260px;
-  }
-
-  /* Prevent scroll while menu open */
-  body.menu-open {
-    overflow: hidden;
-  }
-}
-
+/* =========================
+   RETURN BUTTON (for post pages)
+   ========================= */
 .return-btn {
   position: fixed;
   top: 1rem;
@@ -429,7 +375,6 @@ a:hover { text-decoration: underline; }
   transition: background 0.2s ease;
   z-index: 1000;
 }
-
 .return-btn:hover {
   background: #000;
   color: #fff;
