@@ -87,3 +87,15 @@
   </script>
 </body>
 </html>
+
+<script>
+  const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const map = { 'index.html':'home', 'posts.html':'posts', 'views.html':'views' };
+  const key = map[file];
+  if (key) {
+    document.querySelectorAll(`.center-nav [data-nav="${key}"]`).forEach(a=>{
+      a.classList.add('active');
+    });
+  }
+</script>
+
