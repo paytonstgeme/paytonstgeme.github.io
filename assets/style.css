@@ -64,7 +64,7 @@ a:hover{text-decoration:underline}
 }
 
 .masthead .logo{
-  height:56px;     /* archer logo size */
+  height:45px;     /* archer logo size */
   width:auto;
   margin-inline:auto;
 }
@@ -95,7 +95,7 @@ a:hover{text-decoration:underline}
   border-bottom:1px solid var(--line);
   text-transform:uppercase;
   font-family:"Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-weight:700;
+  font-weight:600;
   letter-spacing:.06em;
 }
 
