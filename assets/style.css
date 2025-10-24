@@ -1,381 +1,225 @@
 /* ======================================
-   TYPOGRAPHY SYSTEM
-   - Body: Georgia (serif)
-   - Headlines/Nav/Menu: Helvetica Neue / Arial (sans)
+   PAYTONSTGEME.COM — Minimal Centered Theme
    ====================================== */
 
-/* Root scale and sensible defaults */
-:root {
-  --text: #000;
-  --muted: rgba(0,0,0,.7);
-  --muted-2: rgba(0,0,0,.6);
-  --hairline: rgba(0,0,0,.12);
-  --line: rgba(0,0,0,.10);
-  --bg: #fff;
+/* ---------- Root & Base ---------- */
+:root{
+  --text:#000;
+  --muted:rgba(0,0,0,.7);
+  --muted-2:rgba(0,0,0,.6);
+  --hairline:rgba(0,0,0,.12);
+  --line:rgba(0,0,0,.10);
+  --bg:#fff;
 
-  /* Type scale */
-  --fs-base: 16px;
-  --lh-base: 1.6;
+  --fs-base:16px;
+  --lh-base:1.6;
 
-  --fs-h1: 2.25rem; /* 36px */
-  --fs-h2: 1.625rem; /* 26px */
-  --fs-h3: 1.25rem;  /* 20px */
+  --fs-h1:2rem;
+  --fs-h2:1.25rem;
+  --fs-small:.95rem;
 
-  --fs-small: .95rem;
+  --maxw:880px;
 }
 
-/* Reduce motion if user prefers */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important}
 }
 
-/* =========================
-   BASE
-   ========================= */
-html { box-sizing: border-box; }
-*, *::before, *::after { box-sizing: inherit; }
+html{box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
 
-body {
-  margin: 0;
-  font-family: Georgia, serif;
-  font-size: var(--fs-base);
-  line-height: var(--lh-base);
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; /* never let sidebar cause horizontal scroll */
+body{
+  margin:0;
+  font-family: Georgia, "Times New Roman", serif;  /* classic serif body */
+  font-size:var(--fs-base);
+  line-height:var(--lh-base);
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden; /* never let sidebar cause horizontal scroll */
 }
 
-img, svg { max-width: 100%; height: auto; display: block; }
-main { display: block; }
+img,svg{max-width:100%;height:auto;display:block}
+main{display:block}
 
-/* Headlines, navigation, and menu elements (sans) */
-h1, h2, h3, h4, h5, h6,
-.header,
-.brand,
-.nav,
-.nav-link,
-.menu-button,
-.sidebar,
-.footer {
-  font-family: "Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+a{color:var(--text);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.container{
+  width:min(var(--maxw), 100%);
+  margin-inline:auto;
+  padding-inline:20px;
 }
 
-/* Headings */
-h1, h2, h3 {
-  margin: 0 0 .6rem;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: .2px;
-}
-h1 { font-size: var(--fs-h1); }
-h2 { font-size: var(--fs-h2); }
-h3 { font-size: var(--fs-h3); }
-
-/* Paragraphs */
-p { margin: 0 0 1rem; }
-
-/* Containers: globally center the page content */
-.container {
-  width: min(880px, 100%);
-  margin-inline: auto;      /* keeps content centered at all times */
-  padding-inline: 20px;
+/* ---------- Masthead (logo + brand) ---------- */
+.header{
+  background:#fff;
+  border-bottom:1px solid var(--line);
 }
 
-/* =========================
-   HEADER
-   ========================= */
-.header {
-  border-bottom: 1px solid var(--line);
-  background: #fff;
-  text-align: center;
-  padding: 12px 0;
+.masthead{
+  text-align:center;
+  padding:18px 0 8px;
 }
 
-.header img {
-  height: 40px;
-  width: auto;
-  display: inline-block;
+.masthead .logo{
+  height:56px;     /* archer logo size */
+  width:auto;
+  margin-inline:auto;
 }
 
-/* Thin grey bar with brand and nav */
-.bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 0;
-  gap: 20px;
+.brandline{
+  text-align:center;
+  font-family: "Times New Roman", Georgia, serif; /* classic look for the brand */
+  font-variant: small-caps;
+  letter-spacing:.12em;
+  font-size:1.05rem;
+  font-weight:700;
+  margin:6px 0 10px;
 }
 
-/* Brand */
-.brand {
-  font-weight: 800;
-  font-size: 1.2rem;
-  letter-spacing: .75px;
-  text-transform: uppercase;
-  color: var(--text);
-  text-decoration: none;
+/* thin rule below masthead */
+.rule{
+  height:1px;
+  background:var(--hairline);
 }
 
-/* =========================
-   NAVIGATION
-   ========================= */
-.nav {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+/* ---------- Centered Nav Bar ---------- */
+.center-nav{
+  display:flex;
+  gap:40px;
+  align-items:center;
+  justify-content:center;
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+  text-transform:uppercase;
+  font-family:"Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight:700;
+  letter-spacing:.06em;
 }
 
-.nav-link {
-  text-decoration: none;
-  color: var(--muted-2);
-  font-weight: 600;
-  letter-spacing: .2px;
-  transition: color .15s ease-in-out;
+.center-nav a{
+  color:var(--text);
+  text-decoration:none;
+  padding:6px 2px;
 }
-.nav-link:hover,
-.nav-link.active { color: var(--text); }
-
-/* =========================
-   HOME INTRO
-   ========================= */
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;      /* horizontal center */
-  justify-content: center;  /* vertical center within min-height */
-  text-align: center;
-  min-height: calc(100dvh - 160px); /* viewport minus header/footer */
-  padding: 48px 20px;
+.center-nav a:hover,
+.center-nav a.active{
+  text-decoration:underline;
 }
 
-.intro h1 { margin-bottom: 8px; }
-
-.lede {
-  color: var(--muted);
-  margin-bottom: 20px;
-  font-size: 1.05rem;
+/* ---------- Home / generic intro ---------- */
+.intro{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  text-align:center;
+  padding:36px 20px 60px;
+  min-height:calc(100dvh - 200px); /* viewport minus header + nav */
 }
 
-.hero-img {
-  display: block;
-  max-width: 400px;
-  width: 80%;
-  height: auto;
-  margin: 2rem auto;
-  border: 1px solid var(--line);
-  border-radius: 4px;
+.intro h1{
+  margin:0 0 14px;
+  font-size:var(--fs-h1);
+  font-weight:800;
+  font-family:"Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* =========================
-   FOOTER
-   ========================= */
-.footer {
-  border-top: 1px solid var(--line);
-  text-align: center;
-  padding: 20px;
-  color: var(--muted-2);
-  font-size: var(--fs-small);
+.lede{
+  color:var(--muted);
+  margin-bottom:18px;
 }
 
-/* =========================
-   GALLERY (Views)
-   ========================= */
-.gallery h1 {
-  margin: 30px 0;
-  text-align: center;
+.hero-img{
+  display:block;
+  width: min(520px, 90%);
+  margin: 22px auto 0;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:#fff;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  justify-content: center;
-  justify-items: center;
+/* ---------- Posts list ---------- */
+.posts-list h1{margin:28px 0 18px;text-align:center}
+.list{
+  list-style:none;margin:0;padding:0;display:grid;gap:18px
+}
+.item{padding:14px 0;border-bottom:1px solid var(--hairline)}
+.item-title{font-weight:700;font-size:1.25rem;line-height:1.3}
+.item-desc{margin:4px 0 2px;color:var(--muted)}
+.item-date{display:inline-block;margin-top:2px;font-size:.95rem;color:var(--muted-2)}
+
+/* ---------- Footer ---------- */
+.footer{
+  text-align:center;
+  padding:18px 0 26px;
+  color:var(--muted-2);
+  font-size:var(--fs-small);
+  border-top:1px solid var(--line);
 }
 
-figure {
-  margin: 0;
-  text-align: center;
+/* ---------- Left Sidebar (overlay, never pushes page) ---------- */
+.menu-button{
+  position:fixed;
+  top:14px; left:14px;
+  z-index:1001;
+  border:1px solid rgba(0,0,0,.25);
+  background:#fff;
+  color:var(--text);
+  font:600 16px/1 "Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding:7px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:box-shadow .15s ease-in-out;
 }
+.menu-button:hover{box-shadow:0 1px 6px rgba(0,0,0,.08)}
 
-figure img {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  display: block;
-  border: 1px solid rgba(0,0,0,.1);
-  border-radius: 4px;
+.sidebar{
+  position:fixed;
+  top:0; left:0;
+  width:240px; height:100dvh;
+  background:#fff;
+  border-right:1px solid rgba(0,0,0,.15);
+  padding:56px 20px 20px;
+  transform:translateX(-100%);
+  transition:transform .25s ease;
+  z-index:1000;
 }
+.sidebar.open{transform:translateX(0)}
 
-figcaption {
-  font-size: 0.9rem;
-  color: rgba(0,0,0,.7);
-  margin-top: 6px;
-  line-height: 1.45;
+.sidebar .nav{
+  display:flex; flex-direction:column; gap:14px;
+  font-family:"Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight:600;
 }
+.sidebar .nav a{color:var(--muted-2);text-decoration:none}
+.sidebar .nav a:hover,
+.sidebar .nav a.active{color:var(--text);text-decoration:underline}
 
-/* =========================
-   GLOBAL LINKS
-   ========================= */
-a { color: var(--text); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-/* =========================
-   POSTS LIST
-   ========================= */
-.posts-list h1 { margin: 28px 0 12px; }
-
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 18px;
+.backdrop{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.25);
+  opacity:0; visibility:hidden;
+  transition:opacity .25s ease, visibility .25s ease;
+  z-index:999;
 }
+.sidebar.open + .backdrop{opacity:1; visibility:visible}
 
-.item {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--hairline);
-}
-
-.item-title {
-  font-weight: 700;
-  font-size: 1.25rem;
-  line-height: 1.3;
-  letter-spacing: .2px;
-}
-
-.item-desc {
-  margin: 4px 0 2px;
-  color: var(--muted);
-}
-
-.item-date {
-  display: inline-block;
-  margin-top: 2px;
-  font-size: .95rem;
-  color: var(--muted-2);
-}
-
-/* =========================
-   LEFT SLIDE-OUT MENU (overlay, does NOT push content)
-   ========================= */
-.menu-button {
-  position: fixed;
-  top: 14px;
-  left: 14px;
-  z-index: 1001;
-  border: 1px solid rgba(0,0,0,.2);
-  background: #fff;
-  color: var(--text);
-  font: 600 16px/1 "Helvetica Neue", Arial, system-ui, -apple-system, "Tacoma", sans-serif;
-  padding: 7px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: box-shadow .15s ease-in-out, transform .2s ease;
-}
-.menu-button:hover { box-shadow: 0 1px 6px rgba(0,0,0,.08); }
-
-/* Sidebar overlays the page; it never changes page margins */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 260px;
-  height: 100dvh;
-  background: #fff;
-  border-right: 1px solid rgba(0,0,0,.15);
-  padding: 56px 20px 20px;
-  transform: translateX(-100%);
-  transition: transform .25s ease;
-  z-index: 1000;
-}
-.sidebar.open { transform: translateX(0); }
-
-.sidebar .nav {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.sidebar .nav-link {
-  color: var(--muted-2);
-  text-decoration: none;
-  font-weight: 600;
-}
-.sidebar .nav-link:hover,
-.sidebar .nav-link.active {
-  color: var(--text);
-  text-decoration: underline;
-}
-
-/* Backdrop for sidebar (click to close) */
-.backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .25s ease, visibility .25s ease;
-  z-index: 999;
-}
-.sidebar.open + .backdrop {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* =========================
-   GLOBAL "DO NOT SHIFT WHEN MENU OPENS"
-   ========================= */
-
-/* Explicitly prevent any sideways push on open */
-body.menu-open .header,
+/* keep everything centered even while menu is open */
+body.menu-open .container,
 body.menu-open main,
-body.menu-open .footer {
-  margin-left: 0 !important;
-  transform: none !important;
-  left: auto !important;
+body.menu-open .footer{
+  margin-left:auto !important;
+  margin-right:auto !important;
+  transform:none !important;
+  left:auto !important;
 }
 
-/* Keep containers centered during menu open */
-body.menu-open .container {
-  margin-inline: auto !important;
-}
-
-/* Lock scroll to avoid background shift while menu is open */
-body.menu-open { overflow: hidden; }
-
-/* =========================
-   RESPONSIVE
-   ========================= */
-@media (max-width: 700px) {
-  :root { --fs-h1: 1.875rem; }
-  .bar { flex-wrap: wrap; gap: 10px; }
-  .brand { font-size: 1.1rem; }
-  .nav { gap: 14px; }
-  main { padding-top: 48px; }
-}
-
-/* =========================
-   RETURN BUTTON (for post pages)
-   ========================= */
-.return-btn {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  background: none;
-  border: 1px solid #000;
-  color: #000;
-  text-decoration: none;
-  padding: 0.4rem 0.8rem;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  transition: background 0.2s ease;
-  z-index: 1000;
-}
-.return-btn:hover {
-  background: #000;
-  color: #fff;
+/* ---------- Responsive tweaks ---------- */
+@media (max-width:700px){
+  :root{--fs-h1:1.75rem}
+  .center-nav{gap:24px}
+  .masthead .logo{height:48px}
 }
