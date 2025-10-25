@@ -1,25 +1,17 @@
 <div class="container">
   <div class="masthead">
-    <img class="logo" src="assets/archer.svg" alt="Archer logo">
+    <img class="logo" src="/assets/logo.png" alt="Archer logo">
     <div class="brandline">PAYTON ST. GEME</div>
   </div>
 </div>
+
 <div class="rule"></div>
 
 <div class="container">
   <nav class="center-nav">
-    <a href="index.html" class="nav-link" data-nav="home">Home</a>
-    <a href="posts.html" class="nav-link" data-nav="posts">Posts</a>
-    <a href="views.html" class="nav-link" data-nav="views">Views</a>
+    <a href="/index.html" class="nav-link" data-nav="home">Home</a>
+    <a href="/posts.html" class="nav-link" data-nav="posts">Posts</a>
+    <a href="/views.html" class="nav-link" data-nav="views">Views</a>
   </nav>
 </div>
-<script>
-  const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  const map = { 'index.html':'home', 'posts.html':'posts', 'views.html':'views' };
-  const key = map[file];
-  if (key) {
-    document.querySelectorAll(`.center-nav [data-nav="${key}"]`).forEach(a=>{
-      a.classList.add('active');
-    });
-  }
-</script>
+
