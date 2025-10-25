@@ -4,116 +4,114 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Views · Payton St Geme</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <style>
+    /* Center title */
+    .gallery h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    /* Horizontal scroll gallery */
+    .gallery .grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 20px;
+      padding-bottom: 10px;
+      justify-content: flex-start;
+    }
+
+    .gallery figure {
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+      text-align: center;
+      margin: 0;
+    }
+
+    .gallery img {
+      width: 260px; /* smaller size */
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,.1);
+      transition: transform 0.2s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.04);
+    }
+
+    .gallery figcaption {
+      font-size: 0.9rem;
+      color: rgba(0,0,0,.7);
+      margin-top: 6px;
+    }
+
+    /* Hide scrollbar for cleaner look (optional) */
+    .gallery .grid::-webkit-scrollbar {
+      display: none;
+    }
+    .gallery .grid {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 </head>
 <body>
-  <!-- Shared header placeholder -->
   <header class="header" id="site-header"></header>
 
-  <!-- Main content -->
-  <main class="container posts-list">
+  <main class="container gallery">
     <h1>Views</h1>
-    <ul class="list">
-      <!-- Bridge from headlands -->
-
-    <figure>
-        <img src="assets/image2.jpg" alt="Ancient" loading="lazy" />
-        <figcaption></figcaption>
-      </figure>
-    
-      <figure>
-        <img src="assets/Bridgeheadlands.png" alt="Bridge view from the headlands" loading="lazy" />
-        <figcaption></figcaption>
-      </figure>
-
-      <!-- Bridge close-up -->
-      <figure>
-        <img src="assets/bridgecloseup.png" alt="Close-up of bridge structure" loading="lazy" />
-        <figcaption></figcaption>
-      </figure>
-
-      <!-- The Bay -->
-      <figure>
-        <img src="assets/bridgered.PNG" alt="San Francisco" loading="lazy" />
-        <figcaption>the bay.</figcaption>
-      </figure>
-      
-      <!-- Speed -->
-      <figure>
-        <img src="assets/IMG_1057.JPG" alt="IMG_1057" loading="lazy" />
-        <figcaption>speed.</figcaption>
-      </figure>
-
-      <!-- Eternal wander -->
-      <figure>
-        <img src="assets/IMG_3291.JPG" alt="IMG_3291" loading="lazy" />
-        <figcaption>eternal wander.</figcaption>
-      </figure>
-
-      <!-- Perseus -->
-      <figure>
-        <img src="assets/pers.jpg" alt="perseus" loading="lazy" />
-        <figcaption>perseus.</figcaption>
-      </figure>
-
-      <!-- New images -->
-      <figure>
-        <img src="assets/IMG_1941.JPG" alt="IMG_1941" loading="lazy" />
-        <figcaption></figcaption>
-      </figure>
-
-      <figure>
-        <img src="assets/IMG_1970.JPG" alt="IMG_1970" loading="lazy" />
-        <figcaption></figcaption>
-      </figure>
-
-      <figure>
-        <img src="assets/IMG_2747.JPG" alt="IMG_2747" loading="lazy" />
-        <figcaption></figcaption>
-      </figure>
+    <div class="grid">
+      <figure><img src="/assets/image2.jpg" alt="ancient" loading="lazy" /><figcaption></figcaption></figure>
+      <figure><img src="/assets/Bridgeheadlands.png" alt="Bridge view from the headlands" loading="lazy" /><figcaption></figcaption></figure>
+      <figure><img src="/assets/bridgecloseup.png" alt="Close-up of bridge structure" loading="lazy" /><figcaption></figcaption></figure>
+      <figure><img src="/assets/bridgered.PNG" alt="San Francisco" loading="lazy" /><figcaption>the bay.</figcaption></figure>
+      <figure><img src="/assets/IMG_1057.JPG" alt="IMG_1057" loading="lazy" /><figcaption>speed.</figcaption></figure>
+      <figure><img src="/assets/IMG_3291.JPG" alt="IMG_3291" loading="lazy" /><figcaption>eternal wander.</figcaption></figure>
+      <figure><img src="/assets/pers.jpg" alt="perseus" loading="lazy" /><figcaption>perseus.</figcaption></figure>
+      <figure><img src="/assets/IMG_1941.JPG" alt="IMG_1941" loading="lazy" /><figcaption></figcaption></figure>
+      <figure><img src="/assets/IMG_1970.JPG" alt="IMG_1970" loading="lazy" /><figcaption></figcaption></figure>
+      <figure><img src="/assets/IMG_2747.JPG" alt="IMG_2747" loading="lazy" /><figcaption></figcaption></figure>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <p>© <span id="year"></span> Payton St Geme</p>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // Footer year
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
-    // Load shared header + wire menu + set active link
-    fetch("header.html")
+    fetch("/header.html")
       .then(r => r.text())
       .then(html => {
         const host = document.getElementById("site-header");
         host.innerHTML = html;
 
-        // Highlight "Views"
         host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
-        host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
+        host.querySelector('[data-nav="views"]')?.classList.add("active");
 
-        // Sidebar wiring (safe if elements aren't present)
         const btn = host.querySelector(".menu-button");
         const sidebar = host.querySelector(".sidebar");
         const backdrop = host.querySelector(".backdrop");
         function openMenu() {
           sidebar?.classList.add("open");
           document.body.classList.add("menu-open");
-          if (btn) btn.setAttribute("aria-expanded", "true");
-          if (sidebar) sidebar.setAttribute("aria-hidden", "false");
+          btn?.setAttribute("aria-expanded", "true");
+          sidebar?.setAttribute("aria-hidden", "false");
           if (backdrop) backdrop.hidden = false;
         }
         function closeMenu() {
           sidebar?.classList.remove("open");
           document.body.classList.remove("menu-open");
-          if (btn) btn.setAttribute("aria-expanded", "false");
-          if (sidebar) sidebar.setAttribute("aria-hidden", "true");
+          btn?.setAttribute("aria-expanded", "false");
+          sidebar?.setAttribute("aria-hidden", "true");
           if (backdrop) backdrop.hidden = true;
         }
         btn?.addEventListener("click", () =>
