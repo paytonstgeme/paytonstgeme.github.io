@@ -1,6 +1,6 @@
 <div class="container">
   <div class="masthead">
-    <img class="logo" src="assets/logo.jpg" alt="Archer logo">
+    <img class="logo" src="assets/archer.svg" alt="Archer logo">
     <div class="brandline">PAYTON ST. GEME</div>
   </div>
 </div>
@@ -13,3 +13,13 @@
     <a href="views.html" class="nav-link" data-nav="views">Views</a>
   </nav>
 </div>
+<script>
+  const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const map = { 'index.html':'home', 'posts.html':'posts', 'views.html':'views' };
+  const key = map[file];
+  if (key) {
+    document.querySelectorAll(`.center-nav [data-nav="${key}"]`).forEach(a=>{
+      a.classList.add('active');
+    });
+  }
+</script>
