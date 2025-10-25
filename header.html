@@ -1,73 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="assets/style.css" />
-  <title>Payton St. Geme</title>
-</head>
-<body>
-
-<!-- ====================== ORIGINAL MASTHEAD + NAV (WITH HIDE) ====================== -->
-<header id="site-header" class="header">
-  <div class="container">
-    <div class="masthead">
-      <img class="logo" src="/assets/logo.jpg" alt="Archer logo">
-      <div class="brandline">
-        <a href="/index.html" style="color: inherit; text-decoration: none;">PAYTON ST. GEME</a>
-      </div>
+<header class="site-header">
+  <div class="header-container">
+    <div class="logo-name-wrapper">
+      <a href="/" class="logo-link">
+        <img src="/assets/images/logo.png" alt="Logo" class="header-logo">
+      </a>
+      <a href="/" class="site-name-link">
+        <h1 class="site-name">PAYTON ST. GEME</h1>
+      </a>
     </div>
-  </div>
-
-  <div class="rule"></div>
-
-  <div class="container">
-    <nav class="center-nav">
-      <a href="/index.html" class="nav-link" data-nav="home">Home</a>
-      <a href="/posts.html" class="nav-link" data-nav="posts">Posts</a>
-      <a href="/views.html" class="nav-link" data-nav="views">Views</a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">HOME</a>
+      <a href="/posts" class="nav-link">POSTS</a>
+      <a href="/views" class="nav-link">VIEWS</a>
     </nav>
   </div>
+  <hr class="header-line">
 </header>
-<!-- =========================================================================== -->
-
-<script>
-  // ==== Hide header after 50% scroll ====
-  const header = document.getElementById('site-header');
-  let lastScrollY = 0;
-
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const docHeight = document.body.scrollHeight - window.innerHeight;
-    const scrollPercent = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
-
-    if (scrollPercent > 50 && scrollY > lastScrollY) {
-      header.classList.add('hide');
-    } else {
-      header.classList.remove('hide');
-    }
-    lastScrollY = scrollY;
-  });
-</script>
 
 <style>
-  #site-header {
-    position: sticky;
-    top: 0;
-    transition: transform 0.4s ease-in-out;
-    z-index: 1000;
-    background: #fff;
+  .site-header {
+    padding: 20px 0;
+    text-align: center;
   }
-  #site-header.hide {
-    transform: translateY(-100%);
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .logo-name-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .header-logo {
+    height: 60px;
+    width: auto;
+    margin-bottom: 8px;
+  }
+  .site-name {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+  .site-name-link, .logo-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 10px;
+  }
+  .nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  .header-line {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+  }
+  @media (max-width: 768px) {
+    .nav-links {
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .header-logo {
+      height: 50px;
+    }
+    .site-name {
+      font-size: 1.2rem;
+    }
   }
 </style>
-
-<!-- ==== EB Garamond Font ==== -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- ========================= -->
-
-</body>
-</html>
