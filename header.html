@@ -8,26 +8,60 @@
 </head>
 <body>
 
-<!-- ====================== ORIGINAL MASTHEAD ====================== -->
-<div class="container">
-  <div class="masthead">
-    <img class="logo" src="/assets/logo.jpg" alt="Archer logo">
-    <div class="brandline">
-      <a href="/index.html" style="color: inherit; text-decoration: none;">PAYTON ST. GEME</a>
+<!-- ====================== ORIGINAL MASTHEAD + NAV (WITH HIDE) ====================== -->
+<header id="site-header" class="header">
+  <div class="container">
+    <div class="masthead">
+      <img class="logo" src="/assets/logo.jpg" alt="Archer logo">
+      <div class="brandline">
+        <a href="/index.html" style="color: inherit; text-decoration: none;">PAYTON ST. GEME</a>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="rule"></div>
+  <div class="rule"></div>
 
-<div class="container">
-  <nav class="center-nav">
-    <a href="/index.html" class="nav-link" data-nav="home">Home</a>
-    <a href="/posts.html" class="nav-link" data-nav="posts">Posts</a>
-    <a href="/views.html" class="nav-link" data-nav="views">Views</a>
-  </nav>
-</div>
-<!-- =========================================================== -->
+  <div class="container">
+    <nav class="center-nav">
+      <a href="/index.html" class="nav-link" data-nav="home">Home</a>
+      <a href="/posts.html" class="nav-link" data-nav="posts">Posts</a>
+      <a href="/views.html" class="nav-link" data-nav="views">Views</a>
+    </nav>
+  </div>
+</header>
+<!-- =========================================================================== -->
+
+<script>
+  // ==== Hide header after 50% scroll ====
+  const header = document.getElementById('site-header');
+  let lastScrollY = 0;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+
+    if (scrollPercent > 50 && scrollY > lastScrollY) {
+      header.classList.add('hide');
+    } else {
+      header.classList.remove('hide');
+    }
+    lastScrollY = scrollY;
+  });
+</script>
+
+<style>
+  #site-header {
+    position: sticky;
+    top: 0;
+    transition: transform 0.4s ease-in-out;
+    z-index: 1000;
+    background: #fff;
+  }
+  #site-header.hide {
+    transform: translateY(-100%);
+  }
+</style>
 
 <!-- ==== EB Garamond Font ==== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
