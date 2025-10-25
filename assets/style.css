@@ -1,3 +1,58 @@
+/* ====================== ORIGINAL HEADER STYLES ====================== */
+.masthead {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0;
+  gap: 1rem;
+}
+
+.masthead .logo {
+  height: 60px;
+  width: auto;
+}
+
+.brandline {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.rule {
+  height: 1px;
+  background: #ccc;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.center-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.center-nav .nav-link {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.center-nav .nav-link:hover {
+  color: #0366d6;
+}
+
+/* Desktop: keep everything inline */
+@media (min-width: 769px) {
+  .masthead {
+    flex-direction: row;
+  }
+}
+/* ================================================================== */
 /* ======================================
    PAYTONSTGEME.COM — Minimal Centered Theme
    EB GARAMOND SITE-WIDE
