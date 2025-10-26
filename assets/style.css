@@ -313,5 +313,5 @@ body.menu-open .footer{
 
 /* Reduce gap between post title and date */
 .article .meta {
-  margin-top: 0.25rem;
+  margin-top: 0.10rem;
 }
