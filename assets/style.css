@@ -40,5 +40,5 @@ a:hover{text-decoration:underline}
 .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.25);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;z-index:999}
 .sidebar.open+.backdrop{opacity:1;visibility:visible}
 body.menu-open .container,body.menu-open main,body.menu-open .footer{margin-left:auto!important;margin-right:auto!important;transform:none!important;left:auto!important}
-.article .meta{margin-top:.1rem}
+.article .meta{margin-top:0rem}
 @media (max-width:700px){:root{--fs-h1:1.75rem}.center-nav{gap:24px}.masthead .logo{height:48px}.intro h1{font-size:1.75rem}}
