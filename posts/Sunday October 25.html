@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>sunday, october 25, 2025</title>
+  <link rel="stylesheet" href="/assets/style.css" />
+</head>
+
+<body>
+  <!-- Shared header placeholder -->
+  <header class="header" id="site-header"></header>
+
+  <!-- Return Button -->
+  <a href="/posts.html" class="return-btn">Return to List</a>
+
+  <!-- Main content -->
+  <main class="container article">
+    <h1>Sunday</h1>
+    <img src="/assets/your-photo.jpg" alt="Sunday, October 25, 2025" style="display:block; width:min(100%,720px); margin:1.5rem auto 1rem; border:1px solid var(--line); border-radius:4px;">
+    <div class="meta"><time datetime="2025-10-25">October 25, 2025</time></div>
+
+    <!-- Post body -->
+    <p>
+
+
+      
+    </p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Payton St Geme</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // 1) Footer year
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+
+    // 2) Inject shared header and set active nav
+    fetch("/header.html")
+      .then(r => r.text())
+      .then(html => {
+        const host = document.getElementById("site-header");
+        host.innerHTML = html;
+
+        // Determine which tab to highlight
+        const path = location.pathname.toLowerCase();
+        let key = 'home';
+        if (path.startsWith('/posts')) key = 'posts';
+        else if (path.startsWith('/views')) key = 'views';
+
+        host.querySelectorAll('.center-nav .nav-link').forEach(a => {
+          if (a.dataset.nav === key) a.classList.add('active');
+        });
+
+        // Sidebar wiring (no-op if elements aren’t present)
+        const btn = host.querySelector(".menu-button");
+        const sidebar = host.querySelector(".sidebar");
+        const backdrop = host.querySelector(".backdrop");
+
+        function openMenu(){
+          sidebar?.classList.add("open");
+          document.body.classList.add("menu-open");
+          btn?.setAttribute("aria-expanded","true");
+          sidebar?.setAttribute("aria-hidden","false");
+          if (backdrop) backdrop.hidden = false;
+        }
+        function closeMenu(){
+          sidebar?.classList.remove("open");
+          document.body.classList.remove("menu-open");
+          btn?.setAttribute("aria-expanded","false");
+          sidebar?.setAttribute("aria-hidden","true");
+          if (backdrop) backdrop.hidden = true;
+        }
+        btn?.addEventListener("click", () =>
+          sidebar?.classList.contains("open") ? closeMenu() : openMenu()
+        );
+        backdrop?.addEventListener("click", closeMenu);
+        document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+      });
+  </script>
+</body>
+</html>
