@@ -310,3 +310,8 @@ body.menu-open .footer{
   .masthead .logo{height:48px}
   .intro h1{font-size:1.75rem}
 }
+
+/* Reduce gap between post title and date */
+.article .meta {
+  margin-top: 0.25rem;
+}
