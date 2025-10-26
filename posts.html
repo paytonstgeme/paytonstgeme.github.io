@@ -13,14 +13,33 @@
   <!-- Main content -->
   <main class="container posts-list">
     <h1>Posts</h1>
-    <ul class="list">
-      
-      <li class="item">
-        <a class="item-title" href="posts/firstpost.html">Will</a>
-        <p class="item-desc">Testing.</p>
-        <time class="item-date" datetime="2025-09-1">Sep 1, 2025</time>
-      </li>
-    </ul>
+    <ul class="list" id="posts-list">
+  <script>
+    fetch('/posts_index.json')
+      .then(r => r.json())
+      .then(posts => {
+        const list = document.getElementById('posts-list');
+        list.innerHTML = ''; // clear placeholder
+        posts.forEach(p => {
+          const li = document.createElement('li');
+          li.className = 'item';
+          li.innerHTML = `
+            <a class="item-title" href="${p.url}">${p.title}</a>
+            <p class="item-desc">${p.desc || ''}</p>
+            <time class="item-date" datetime="${p.date}">${formatDate(p.date)}</time>
+          `;
+          list.appendChild(li);
+        });
+      });
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+    }
+  </script>
+</ul>
   </main>
 
   <!-- Footer -->
