@@ -5,27 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Views · Payton St Geme</title>
 
-  <!-- Google Fonts: Inter (clean, Century Gothic-style) -->
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Main stylesheet (new modern design) -->
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-  <!-- Shared header (injected via JS) -->
   <header class="header" id="site-header"></header>
 
   <main class="container">
     <section class="views-gallery">
       <h1>Views</h1>
 
-      <!-- Gallery with scroll buttons -->
       <div class="gallery-wrapper">
         <button class="scroll-btn left" aria-label="Scroll left">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M15 18L9 12L15 6" />
+            <path d="M15 18L9 12L15 6"/>
           </svg>
         </button>
 
@@ -44,7 +42,7 @@
 
         <button class="scroll-btn right" aria-label="Scroll right">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18L15 12L9 6" />
+            <path d="M9 18L15 12L9 6"/>
           </svg>
         </button>
       </div>
@@ -58,21 +56,16 @@
   </footer>
 
   <script>
-    // Update copyright year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Load header + activate "Views" nav link
     fetch("/header.html")
       .then(r => r.text())
       .then(html => {
         const host = document.getElementById("site-header");
         host.innerHTML = html;
-
-        // Activate correct nav link
         host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
         host.querySelector('.nav-link[href="/views.html"]')?.classList.add("active");
 
-        // Mobile menu (if present)
         const btn = host.querySelector(".menu-button");
         const sidebar = host.querySelector(".sidebar");
         const backdrop = host.querySelector(".backdrop");
@@ -95,7 +88,7 @@
         document.addEventListener("keydown", e => e.key === "Escape" && closeMenu());
       });
 
-    // === GALLERY SCROLL LOGIC (unchanged — works perfectly with new CSS) ===
+    // GALLERY SCROLL LOGIC
     const gallery = document.getElementById('gallery-grid');
     const leftBtn = document.querySelector('.scroll-btn.left');
     const rightBtn = document.querySelector('.scroll-btn.right');
@@ -136,7 +129,6 @@
       requestAnimationFrame(updateButtons);
     }
 
-    // Keyboard navigation
     document.addEventListener('keydown', e => {
       if (!gallery || document.activeElement.tagName === 'INPUT') return;
       if (e.key === 'ArrowLeft') leftBtn?.click();
