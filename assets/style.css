@@ -1,6 +1,5 @@
 /* ====================== MODERN SANS-SERIF THEME — PAYTONSTGEME.COM ====================== */
 /* Inter | Geometric | Clean | Professional | High Legibility */
-
 :root {
   --text: #1a1a1a;
   --muted: #555;
@@ -13,23 +12,18 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.07);
   --transition: all 0.22s ease;
-
   --fs-base: 17px;
   --lh-base: 1.68;
   --fs-h1: 2.6rem;
   --fs-h2: 1.4rem;
   --fs-small: 0.89rem;
-
   --maxw: 820px;
 }
-
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
-
 html { box-sizing: border-box; scroll-behavior: smooth; }
 *, *::before, *::after { box-sizing: inherit; }
-
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -38,28 +32,24 @@ body {
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLeg9ibility;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
-
 h1, h2, h3, h4, h5, h6, p, a, li, span, div, figcaption,
 .brandline, .center-nav, .nav-link, .item-title, .item-desc, .item-date,
 .footer p, .lede {
   font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
   font-feature-settings: 'cv05', 'cv09', 'cv10';
 }
-
 img, svg { max-width: 100%; height: auto; display: block; }
 main { display: block; }
 a { color: inherit; text-decoration: none; }
-
 /* Layout */
 .container {
   width: min(var(--maxw), 100%);
   margin-inline: auto;
   padding-inline: 24px;
 }
-
 /* Header */
 .header {
   background: #fff;
@@ -69,7 +59,6 @@ a { color: inherit; text-decoration: none; }
   z-index: 100;
   box-shadow: var(--shadow-sm);
 }
-
 .masthead {
   display: flex;
   flex-direction: column;
@@ -77,13 +66,11 @@ a { color: inherit; text-decoration: none; }
   padding: 24px 0 14px;
   gap: 10px;
 }
-
 .masthead .logo {
   height: 58px;
   width: auto;
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.06));
 }
-
 .brandline {
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -92,7 +79,6 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   margin: 0;
 }
-
 .rule {
   height: 1px;
   background: var(--hairline);
@@ -100,7 +86,6 @@ a { color: inherit; text-decoration: none; }
   width: 90%;
   max-width: 1200px;
 }
-
 .center-nav {
   display: flex;
   justify-content: center;
@@ -112,7 +97,6 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   border-bottom: 1px solid var(--line);
 }
-
 .center-nav a {
   color: var(--muted);
   padding: 8px 4px;
@@ -120,7 +104,6 @@ a { color: inherit; text-decoration: none; }
   transition: var(--transition);
   position: relative;
 }
-
 .center-nav a::after {
   content: '';
   position: absolute;
@@ -132,17 +115,14 @@ a { color: inherit; text-decoration: none; }
   transition: width 0.22s ease, left 0.22s ease;
   transform: translateX(-50%);
 }
-
 .center-nav a:hover::after,
 .center-nav a.active::after {
   width: 100%;
 }
-
 .center-nav a:hover,
 .center-nav a.active {
   color: var(--text);
 }
-
 /* Intro */
 .intro {
   text-align: center;
@@ -153,7 +133,6 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
 }
-
 .intro h1 {
   margin: 0 0 18px;
   font-size: var(--fs-h1);
@@ -161,7 +140,6 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.04em;
   line-height: 1.12;
 }
-
 .lede {
   font-size: 1.2rem;
   color: var(--muted);
@@ -169,7 +147,6 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto 32px;
   font-weight: 500;
 }
-
 .hero-img {
   width: min(580px, 92%);
   margin: 36px auto 0;
@@ -179,17 +156,14 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--hairline);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .hero-img:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
 }
-
 /* Posts List */
 .posts-list {
   padding: 48px 0;
 }
-
 .posts-list h1 {
   text-align: center;
   margin: 0 0 36px;
@@ -197,7 +171,6 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.03em;
   font-size: var(--fs-h1);
 }
-
 .list {
   list-style: none;
   margin: 0;
@@ -209,18 +182,15 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
-
 .item {
   background: #fff;
   padding: 24px;
   transition: var(--transition);
 }
-
 .item:hover {
   background: #fcfcfc;
   transform: translateY(-1px);
 }
-
 .item-title {
   font-weight: 700;
   font-size: 1.38rem;
@@ -228,23 +198,19 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.02em;
   margin: 0 0 8px;
 }
-
 .item-title a {
   color: var(--text);
   transition: color 0.2s ease;
 }
-
 .item-title a:hover {
   color: var(--accent);
 }
-
 .item-desc {
   margin: 8px 0 10px;
   color: var(--muted);
   font-size: 1.04rem;
   font-weight: 450;
 }
-
 .item-date {
   font-size: var(--fs-small);
   color: var(--muted-2);
@@ -252,7 +218,6 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-
 /* Footer */
 .footer {
   text-align: center;
@@ -263,7 +228,6 @@ a { color: inherit; text-decoration: none; }
   margin-top: 70px;
   font-weight: 500;
 }
-
 /* Responsive */
 @media (max-width: 768px) {
   :root {
@@ -276,12 +240,10 @@ a { color: inherit; text-decoration: none; }
   .item { padding: 20px; }
   .item-title { font-size: 1.3rem; }
 }
-
 @media (max-width: 480px) {
   .container { padding-inline: 18px; }
   .center-nav { gap: 16px; padding: 14px 0; }
 }
-
 /* VIEWS GALLERY — HORIZONTAL SCROLL */
 .views-gallery h1 {
   text-align: center;
@@ -290,15 +252,12 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.03em;
   font-size: var(--fs-h1);
 }
-
 .gallery-wrapper {
   position: relative;
   padding: 0 60px;
   overflow: hidden;
   max-width: 100%;
 }
-
-/* THIS IS THE KEY FIX */
 .views-gallery .grid {
   display: flex !important;
   flex-wrap: nowrap !important;
@@ -315,14 +274,12 @@ a { color: inherit; text-decoration: none; }
 }
 .views-gallery .grid::-webkit-scrollbar { display: none; }
 .views-gallery .grid:active { cursor: grabbing; }
-
 .views-gallery figure {
   flex: 0 0 auto;
   scroll-snap-align: center;
   margin: 0;
   text-align: center;
 }
-
 .views-gallery img {
   width: 380px;
   height: auto;
@@ -332,12 +289,10 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .views-gallery img:hover {
   transform: scale(1.045);
   box-shadow: 0 12px 32px rgba(0,0,0,0.14);
 }
-
 .views-gallery figcaption {
   font-size: 0.96rem;
   color: var(--muted);
@@ -345,7 +300,6 @@ a { color: inherit; text-decoration: none; }
   font-style: italic;
   max-width: 380px;
 }
-
 .scroll-btn {
   position: absolute;
   top: 50%;
@@ -364,28 +318,22 @@ a { color: inherit; text-decoration: none; }
   transition: var(--transition);
   backdrop-filter: blur(6px);
 }
-
 .scroll-btn:hover {
   background: white;
   box-shadow: 0 6px 16px rgba(0,0,0,0.18);
   transform: translateY(-50%) scale(1.08);
 }
-
-.scroll-btn.left  { left: 12px; }
+.scroll-btn.left { left: 12px; }
 .scroll-btn.right { right: 12px; }
-
 .scroll-btn svg {
   width: 22px;
   height: 22px;
   stroke: var(--text);
 }
-
 .scroll-btn.hidden {
-  opacity:GLuint 0;
+  opacity: 0;
   pointer-events: none;
 }
-
-/* Responsive */
 @media (max-width: 720px) {
   .gallery-wrapper { padding: 0 16px; }
   .views-gallery img { width: 300px; }
@@ -394,7 +342,6 @@ a { color: inherit; text-decoration: none; }
 @media (pointer: coarse) {
   .scroll-btn { display: none; }
 }
-
 /* ====================== LIGHTBOX (Pure CSS + JS) ====================== */
 .lightbox {
   position: fixed;
@@ -436,12 +383,8 @@ a { color: inherit; text-decoration: none; }
   border-radius: 6px;
   backdrop-filter: blur(4px);
 }
-
-/* Zoom animation */
 @keyframes zoomIn {
   from { transform: scale(0.85); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+  to { transform: scale(1); opacity: 1; }
 }
-
-/* Close on Escape */
 body.lightbox-open { overflow: hidden; }
