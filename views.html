@@ -23,6 +23,7 @@
           </svg>
         </button>
 
+        <!-- HORIZONTAL SCROLL CONTAINER -->
         <div class="grid" id="gallery-grid">
           <figure><img src="/assets/image2.jpg" alt="Ancient ruins" loading="lazy" draggable="false"><figcaption></figcaption></figure>
           <figure><img src="/assets/Bridgeheadlands.png" alt="Bridge view from the headlands" loading="lazy" draggable="false"><figcaption></figcaption></figure>
@@ -51,7 +52,7 @@
     </div>
   </footer>
 
-  <!-- LIGHTBOX MODAL -->
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <img src="" alt="" id="lightbox-img">
     <figcaption id="lightbox-caption"></figcaption>
@@ -63,31 +64,60 @@
     fetch("/header.html")
       .then(r => r.text())
       .then(html => {
-        const host = document.getElementById("site-header");
-        host.innerHTML = html;
-        host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
-        host.querySelector('.nav-link[href="/views.html"]')?.classList.add("active");
-        // ... mobile menu code unchanged ...
+        document.getElementById("site-header").innerHTML = html;
+        document.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
+        document.querySelector('.nav-link[href="/views.html"]')?.classList.add("active");
       });
 
-    // GALLERY SCROLL LOGIC (unchanged)
+    // HORIZONTAL SCROLL + ARROWS
     const gallery = document.getElementById('gallery-grid');
     const leftBtn = document.querySelector('.scroll-btn.left');
     const rightBtn = document.querySelector('.scroll-btn.right');
-    // ... scroll logic unchanged ...
 
-    // === LIGHTBOX FUNCTIONALITY ===
+    const updateScrollAmount = () => {
+      const first = gallery.querySelector('figure');
+      if (!first) return 400;
+      const gap = parseInt(getComputedStyle(gallery).gap) || 28;
+      return first.offsetWidth + gap;
+    };
+
+    let scrollAmount = updateScrollAmount();
+
+    leftBtn.addEventListener('click', () => {
+      scrollAmount = updateScrollAmount();
+      gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    rightBtn.addEventListener('click', () => {
+      scrollAmount = updateScrollAmount();
+      gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    const updateButtons = () => {
+      const atStart = gallery.scrollLeft <= 10;
+      const atEnd = Math.abs(gallery.scrollLeft + gallery.clientWidth - gallery.scrollWidth) <= 10;
+      leftBtn.classList.toggle('hidden', atStart);
+      rightBtn.classList.toggle('hidden', atEnd);
+    };
+
+    gallery.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', () => {
+      scrollAmount = updateScrollAmount();
+      requestAnimationFrame(updateButtons);
+    });
+    requestAnimationFrame(updateButtons);
+
+    // LIGHTBOX
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
 
-    document.querySelectorAll('.views-gallery figure img').forEach(img => {
+    document.querySelectorAll('.views-gallery img').forEach(img => {
       img.style.cursor = 'zoom-in';
-      img.addEventListener('click', () => {
-        const src = img.src;
-        const caption = img.parentElement.querySelector('figcaption')?.textContent || '';
-        lightboxImg.src = src;
-        lightboxCaption.textContent = caption;
+      img.addEventListener('click', e => {
+        e.stopPropagation();
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = img.parentElement.querySelector('figcaption')?.textContent || '';
         lightbox.classList.add('open');
         document.body.classList.add('lightbox-open');
       });
@@ -103,9 +133,10 @@
     });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && lightbox.classList.contains('open')) {
-        lightbox.click();
-      }
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) lightbox.click();
+      if (!gallery) return;
+      if (e.key === 'ArrowLeft') leftBtn.click();
+      if (e.key === 'ArrowRight') rightBtn.click();
     });
   </script>
 </body>

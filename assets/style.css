@@ -282,8 +282,7 @@ a { color: inherit; text-decoration: none; }
   .center-nav { gap: 16px; padding: 14px 0; }
 }
 
-/* ====================== VIEWS GALLERY — MODERN HORIZONTAL SCROLL ====================== */
-
+/* VIEWS GALLERY — HORIZONTAL SCROLL */
 .views-gallery h1 {
   text-align: center;
   margin: 0 0 36px;
@@ -292,33 +291,31 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--fs-h1);
 }
 
-/* Wrapper */
 .gallery-wrapper {
   position: relative;
   padding: 0 60px;
   overflow: hidden;
+  max-width: 100%;
 }
 
-/* Scroll container */
+/* THIS IS THE KEY FIX */
 .views-gallery .grid {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   gap: 28px;
   padding: 12px 0 24px;
   scroll-behavior: smooth;
   cursor: grab;
-
-  /* Hide scrollbar */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 .views-gallery .grid::-webkit-scrollbar { display: none; }
 .views-gallery .grid:active { cursor: grabbing; }
 
-/* Items */
 .views-gallery figure {
   flex: 0 0 auto;
   scroll-snap-align: center;
@@ -329,7 +326,6 @@ a { color: inherit; text-decoration: none; }
 .views-gallery img {
   width: 380px;
   height: auto;
-  max-width: none;
   border-radius: var(--radius);
   border: 1px solid var(--hairline);
   box-shadow: var(--shadow-md);
@@ -340,7 +336,6 @@ a { color: inherit; text-decoration: none; }
 .views-gallery img:hover {
   transform: scale(1.045);
   box-shadow: 0 12px 32px rgba(0,0,0,0.14);
-  z-index: 1;
 }
 
 .views-gallery figcaption {
@@ -351,55 +346,15 @@ a { color: inherit; text-decoration: none; }
   max-width: 380px;
 }
 
-/* Scroll buttons */
-.scroll-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.96);
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-  backdrop-filter: blur(6px);
-}
-
-.scroll-btn:hover {
-  background: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  transform: translateY(-50%) scale(1.08);
-}
-
-.scroll-btn.left  { left: 12px; }
-.scroll-btn.right { right: 12px; }
-
-.scroll-btn svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--text);
-}
-
-.scroll-btn.hidden {
-  opacity:GLuint 0;
-  pointer-events: none;
-}
+/* Arrows */
+.scroll-btn { /* ... your existing styles ... */ }
 
 /* Responsive */
 @media (max-width: 720px) {
   .gallery-wrapper { padding: 0 16px; }
   .views-gallery img { width: 300px; }
-  .views-gallery figcaption { max-width: 300px; }
   .views-gallery .grid { gap: 18px; }
 }
-
-/* Hide arrows on touch devices */
 @media (pointer: coarse) {
   .scroll-btn { display: none; }
 }
