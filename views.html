@@ -4,11 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Views · Payton St Geme</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
 
+  <!-- Inter font for the modern theme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Your main stylesheet -->
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
   <header class="header" id="site-header"></header>
@@ -16,7 +19,6 @@
   <main class="container">
     <section class="views-gallery">
       <h1>Views</h1>
-
       <div class="gallery-wrapper">
         <button class="scroll-btn left" aria-label="Scroll left">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -60,8 +62,10 @@
   </div>
 
   <script>
+    // Current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Load header and set active nav
     fetch("/header.html")
       .then(r => r.text())
       .then(html => {
