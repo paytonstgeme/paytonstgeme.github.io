@@ -31,3 +31,22 @@
   </main>
 </body>
 </html>
+<script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Set active nav link after header loads
+    const checkHeader = setInterval(() => {
+      const header = document.getElementById('shared-header');
+      if (header && header.innerHTML) {
+        clearInterval(checkHeader);
+
+        // Highlight "VIEWS" in sidebar
+        header.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+        const viewsLink = header.querySelector('.nav a[href="/views.html"]');
+        if (viewsLink) viewsLink.classList.add('active');
+      }
+    }, 50);
+  </script>
+</body>
+</html>
