@@ -1,109 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Payton St. Geme - Home</title>
+  <title>Payton St. Geme</title>
 
-  <!-- Google Fonts: Inter (modern Century Gothic-style) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/style.css">
 
-  <!-- Main stylesheet (already using the new Inter version) -->
-  <link rel="stylesheet" href="/assets/style.css">
+  <!-- Preload shared header for instant render -->
+  <link rel="preload" href="/header.html" as="fetch" crossorigin>
+
+  <!-- Load shared menu/sidebar/back-button -->
+  <script>
+    fetch('/header.html')
+      .then(r => r.text())
+      .then(html => document.getElementById('shared-header').innerHTML = html);
+  </script>
 </head>
 
 <body>
-  <!-- Shared header placeholder -->
-  <header class="header" id="site-header"></header>
+  <!-- Shared UI (menu, sidebar, back-button) is injected here -->
+  <div id="shared-header"></div>
 
-  <!-- Main content -->
-   <main class="container posts-list">
-    <h1>Home</h1>
-    <ul class="list">
-
-    <!-- Hero image -->
-    <img
-      src="assets/Kanji and Hexagram of Harmony.png"
-      alt="Kanji and Hexagram of Harmony"
-      class="hero-img"
-    />
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>© <span id="year"></span> Payton St Geme</p>
+  <!-- PAGE-SPECIFIC HEADER: logo + brand line -->
+  <header class="header">
+    <div class="container masthead">
+      <img src="/assets/newlogo.png" alt="Logo" class="logo">
+      <div class="brandline">PAYTON ST. GEME</div>
     </div>
-  </footer>
+  </header>
 
-  <!-- Scripts -->
-  <script>
-    // 1) Footer year
-    const y = document.getElementById('year');
-    if (y) y.textContent = new Date().getFullYear();
-
-    // 2) Fetch and inject shared header, then highlight active link
-    fetch("header.html")
-      .then(r => r.text())
-      .then(html => {
-        const host = document.getElementById("site-header");
-        host.innerHTML = html;
-
-        // Determine current page
-        const file = location.pathname.split("/").pop() || "index.html";
-        const isHome  = file === "index.html";
-        const isPosts = file === "posts.html";
-        const isViews = file === "views.html";
-
-        // Highlight active nav link
-        host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
-        if (isHome)  host.querySelector('.nav a[href="index.html"]')?.classList.add("active");
-        if (isPosts) host.querySelector('.nav a[href="posts.html"]')?.classList.add("active");
-        if (isViews) host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
-
-        // Optional menu button logic
-        const btn = host.querySelector(".menu-button");
-        const sidebar = host.querySelector(".sidebar");
-        const backdrop = host.querySelector(".backdrop");
-
-        function openMenu() {
-          sidebar?.classList.add("open");
-          document.body.classList.add("menu-open");
-          btn?.setAttribute("aria-expanded", "true");
-          sidebar?.setAttribute("aria-hidden", "false");
-          if (backdrop) backdrop.hidden = false;
-        }
-
-        function closeMenu() {
-          sidebar?.classList.remove("open");
-          document.body.classList.remove("menu-open");
-          btn?.setAttribute("aria-expanded", "false");
-          sidebar?.setAttribute("aria-hidden", "true");
-          if (backdrop) backdrop.hidden = true;
-        }
-
-        btn?.addEventListener("click", () =>
-          sidebar?.classList.contains("open") ? closeMenu() : openMenu()
-        );
-        backdrop?.addEventListener("click", closeMenu);
-        document.addEventListener("keydown", e => {
-          if (e.key === "Escape") closeMenu();
-        });
-      });
-  </script>
+  <!-- MAIN CONTENT -->
+  <main class="container intro">
+    <h1></h1>
+    
+  </main>
 </body>
 </html>
-
-<script>
-  const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  const map = { 'index.html':'home', 'posts.html':'posts', 'views.html':'views' };
-  const key = map[file];
-  if (key) {
-    document.querySelectorAll(`.center-nav [data-nav="${key}"]`).forEach(a=>{
-      a.classList.add('active');
-    });
-  }
-</script>
-
