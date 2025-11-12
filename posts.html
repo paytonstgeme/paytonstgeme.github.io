@@ -7,14 +7,12 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-
   <div class="container">
     <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
     <div class="logo">
       <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
       <span>Payton St. Geme</span>
     </div>
-
     <main class="page-content">
       <h1>Posts</h1>
       <div id="posts-list" class="preview-grid"></div>
@@ -33,9 +31,16 @@
   <script src="scripts/main.js" defer></script>
   <script>
     fetch('data/posts_index.json')
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
+        return r.json();
+      })
       .then(posts => {
         const container = document.getElementById('posts-list');
+        if (!posts || posts.length === 0) {
+          container.innerHTML = '<p>No posts yet.</p>';
+          return;
+        }
         posts.forEach(p => {
           const card = document.createElement('article');
           card.className = 'post-card';
@@ -47,44 +52,14 @@
             </a>`;
           container.appendChild(card);
         });
+      })
+      .catch(err => {
+        console.error('Failed to load posts:', err);
+        document.getElementById('posts-list').innerHTML = `
+          <p style="color:red; text-align:center;">
+            Error loading posts. Check console (F12).
+          </p>`;
       });
   </script>
-
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const navLinks = document.querySelectorAll('.nav-list a');
-
-    // Highlight active page
-    const currentPage = location.pathname.split('/').pop() || 'index.html';
-    navLinks.forEach(link => {
-      if (link.getAttribute('href') === currentPage) {
-        link.classList.add('active');
-      }
-    });
-
-    function openMenu() {
-      menuBtn.textContent = 'menu_open';
-      sidebar.classList.add('open');
-      overlay.classList.add('open');
-    }
-
-    function closeMenu() {
-      menuBtn.textContent = 'menu';
-      sidebar.classList.remove('open');
-      overlay.classList.remove('open');
-    }
-
-    menuBtn.addEventListener('click', () => {
-      sidebar.classList.contains('open') ? closeMenu() : openMenu();
-    });
-
-    overlay.addEventListener('click', closeMenu);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && sidebar.classList.contains('open')) closeMenu();
-    });
-  </script>
-  
 </body>
 </html>
