@@ -4,26 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Payton St. Geme</title>
-
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="/style.css">
-
-  <!-- Preload shared header for instant render -->
   <link rel="preload" href="/header.html" as="fetch" crossorigin>
-
-  <!-- Load shared menu/sidebar/back-button -->
   <script>
     fetch('/header.html')
       .then(r => r.text())
       .then(html => document.getElementById('shared-header').innerHTML = html);
   </script>
 </head>
-
 <body>
-  <!-- Shared UI (menu, sidebar, back-button) is injected here -->
   <div id="shared-header"></div>
 
-  <!-- PAGE-SPECIFIC HEADER: logo + brand line -->
+  <!-- LOGO + BRAND (page-specific) -->
   <header class="header">
     <div class="container masthead">
       <img src="/assets/newlogo.png" alt="Logo" class="logo">
@@ -31,10 +23,11 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
   <main class="container intro">
-    <h1></h1>
-    
+    <h1>Welcome</h1>
+    <figure>
+      <img src="/assets/Kanji and Hexagram of Harmony.png" alt="Harmony" class="hero-img">
+    </figure>
   </main>
 </body>
 </html>
