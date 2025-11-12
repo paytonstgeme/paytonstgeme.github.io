@@ -3,6 +3,207 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Views | Payton St. Geme</title>
+
+  <!-- Google Material Icons -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
+
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; background: #fff; overflow-x: hidden; }
+
+    /* Main Layout */
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      padding: 2rem;
+      padding-top: 6rem; /* Space for menu button */
+    }
+
+    /* Logo */
+    .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .logo img {
+      width: 80px;
+      height: auto;
+      display: block;
+      margin: 0 auto 12px;
+    }
+    .logo span {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: #000;
+    }
+
+    /* Hamburger Button */
+    .menu-btn {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 2.2rem;
+      cursor: pointer;
+      z-index: 30;
+      transition: opacity 0.2s ease;
+      user-select: none;
+    }
+    .menu-btn:hover { opacity: 0.7; }
+
+    /* Sidebar Menu */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 260px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      z-index: 20;
+      padding-top: 6rem;
+      overflow-y: auto;
+    }
+    .sidebar.open { transform: translateX(0); }
+
+    .nav-list {
+      list-style: none;
+      padding: 0 2rem;
+    }
+    .nav-list li { margin-bottom: 1.8rem; }
+    .nav-list a {
+      color: #111;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      transition: color 0.2s ease;
+      display: block;
+    }
+    .nav-list a:hover { color: #555; }
+    .nav-list a.active {
+      color: #000;
+      font-weight: 700;
+      position: relative;
+    }
+    .nav-list a.active::after {
+      content: '';
+      position: absolute;
+      left: -1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      background: #000;
+      border-radius: 50%;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+    .overlay.open { opacity: 1; visibility: visible; }
+
+    /* Material Icons */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    }
+
+    /* Gallery Section */
+    .views-gallery {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .views-gallery h1 {
+      font-size: 1.8rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 2.5rem;
+      color: #000;
+    }
+
+    /* Responsive Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    /* Image Figure */
+    figure {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    figure:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    figcaption {
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      color: #444;
+      font-style: italic;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 480px) {
+      .sidebar { width: 220px; }
+      .menu-btn { top: 1.2rem; left: 1.2rem; font-size: 2rem; }
+      .logo img { width: 70px; }
+      .grid { grid-template-columns: 1fr; gap: 1rem; }
+      .views-gallery h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Menu Button -->
+    <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
+
+    <!-- Logo -->
+    <div class="logo">
+      <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
+      <span>Payton St. Geme</span>
+    </div>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Posts | Payton St. Geme</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
