@@ -10,21 +10,26 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
 
   <style>
+    /* Reset & Base */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; background: #fff; overflow-x: hidden; }
 
+    /* Main Layout */
     .container {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       position: relative;
       padding: 2rem;
+      padding-top: 6rem; /* Space for menu button */
     }
 
+    /* Logo */
     .logo {
       text-align: center;
+      margin-bottom: 2rem;
     }
     .logo img {
       width: 80px;
@@ -41,6 +46,7 @@
       color: #000;
     }
 
+    /* Hamburger Button */
     .menu-btn {
       position: absolute;
       top: 1.5rem;
@@ -48,11 +54,12 @@
       font-size: 2.2rem;
       cursor: pointer;
       z-index: 30;
-      transition: all 0.2s ease;
+      transition: opacity 0.2s ease;
       user-select: none;
     }
     .menu-btn:hover { opacity: 0.7; }
 
+    /* Sidebar Menu */
     .sidebar {
       position: fixed;
       top: 0; left: 0;
@@ -101,6 +108,7 @@
       border-radius: 50%;
     }
 
+    /* Overlay */
     .overlay {
       position: fixed;
       inset: 0;
@@ -112,34 +120,70 @@
     }
     .overlay.open { opacity: 1; visibility: visible; }
 
+    /* Material Icons */
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
     }
 
-    /* Page Content */
-    .page-content {
-      margin-top: 3rem;
-      text-align: center;
-      max-width: 600px;
-      padding: 0 1rem;
+    /* Gallery Section */
+    .views-gallery {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .page-content h1 {
+    .views-gallery h1 {
       font-size: 1.8rem;
-      margin-bottom: 1.5rem;
+      text-align: center;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-    }
-    .page-content p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: #444;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      color: #000;
     }
 
+    /* Responsive Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    /* Image Figure */
+    figure {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    figure:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    figcaption {
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      color: #444;
+      font-style: italic;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    /* Mobile Adjustments */
     @media (max-width: 480px) {
       .sidebar { width: 220px; }
       .menu-btn { top: 1.2rem; left: 1.2rem; font-size: 2rem; }
       .logo img { width: 70px; }
+      .grid { grid-template-columns: 1fr; gap: 1rem; }
+      .views-gallery h1 { font-size: 1.5rem; }
     }
   </style>
 </head>
@@ -147,34 +191,64 @@
 <body>
 
   <div class="container">
+    <!-- Menu Button -->
     <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
 
+    <!-- Logo -->
     <div class="logo">
       <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
       <span>Payton St. Geme</span>
     </div>
 
-    <!-- Page Content -->
-   <main class="container">
+    <!-- Gallery -->
     <section class="views-gallery">
       <h1>Views</h1>
-      <div class="gallery-wrapper">
-        <div class="grid" id="gallery-grid">
-          <figure><img src="/assets/image2.jpg" alt="Ancient ruins" loading="lazy"><figcaption></figcaption></figure>
-          <figure><img src="/assets/Bridgeheadlands.png" alt="Bridge view from the headlands" loading="lazy"><figcaption></figcaption></figure>
-          <figure><img src="/assets/bridgecloseup.png" alt="Close-up of bridge structure" loading="lazy"><figcaption></figcaption></figure>
-          <figure><img src="/assets/bridgered.PNG" alt="Golden Gate Bridge in red" loading="lazy"><figcaption>the bay.</figcaption></figure>
-          <figure><img src="/assets/IMG_1057.JPG" alt="Speed and motion blur" loading="lazy"><figcaption>speed.</figcaption></figure>
-          <figure><img src="/assets/IMG_3291.JPG" alt="Wanderer in the mist" loading="lazy"><figcaption>eternal wander.</figcaption></figure>
-          <figure><img src="/assets/pers.jpg" alt="Perseus constellation" loading="lazy"><figcaption>perseus.</figcaption></figure>
-          <figure><img src="/assets/IMG_1941.JPG" alt="Golden light at sunset" loading="lazy"><figcaption></figcaption></figure>
-          <figure><img src="/assets/IMG_1970.JPG" alt="Distant horizon" loading="lazy"><figcaption></figcaption></figure>
-          <figure><img src="/assets/IMG_2747.JPG" alt="Quiet moment" loading="lazy"><figcaption></figcaption></figure>
-        </div>
+      <div class="grid" id="gallery-grid">
+        <figure>
+          <img src="assets/image2.jpg" alt="Ancient ruins" loading="lazy">
+          <figcaption>timeless stone.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/Bridgeheadlands.png" alt="Bridge view from the headlands" loading="lazy">
+          <figcaption>from the headlands.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/bridgecloseup.png" alt="Close-up of bridge structure" loading="lazy">
+          <figcaption>steel and sky.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/bridgered.PNG" alt="Golden Gate Bridge in red" loading="lazy">
+          <figcaption>the bay.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/IMG_1057.JPG" alt="Speed and motion blur" loading="lazy">
+          <figcaption>speed.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/IMG_3291.JPG" alt="Wanderer in the mist" loading="lazy">
+          <figcaption>eternal wander.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/pers.jpg" alt="Perseus constellation" loading="lazy">
+          <figcaption>perseus.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/IMG_1941.JPG" alt="Golden light at sunset" loading="lazy">
+          <figcaption>golden hour.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/IMG_1970.JPG" alt="Distant horizon" loading="lazy">
+          <figcaption>endless horizon.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/IMG_2747.JPG" alt="Quiet moment" loading="lazy">
+          <figcaption>stillness.</figcaption>
+        </figure>
       </div>
     </section>
-  </main>
+  </div>
 
+  <!-- Sidebar -->
   <nav class="sidebar" id="sidebar">
     <ul class="nav-list">
       <li><a href="index.html">Home</a></li>
@@ -183,15 +257,17 @@
     </ul>
   </nav>
 
+  <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
 
+  <!-- JavaScript -->
   <script>
     const menuBtn = document.getElementById('menuBtn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const navLinks = document.querySelectorAll('.nav-list a');
 
-    // Auto-highlight current page
+    // Highlight active page
     const currentPage = location.pathname.split('/').pop() || 'index.html';
     navLinks.forEach(link => {
       if (link.getAttribute('href') === currentPage) {
@@ -216,7 +292,7 @@
     });
 
     overlay.addEventListener('click', closeMenu);
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && sidebar.classList.contains('open')) closeMenu();
     });
   </script>
