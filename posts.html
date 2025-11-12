@@ -1,33 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Posts - Payton St. Geme</title>
 
-  <!-- Google Fonts: Inter (EB GARAMOND) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+  <!-- Main stylesheet (includes EB Garamond + Material Symbols) -->
+  <link rel="stylesheet" href="/style.css">
 
-  <!-- Main stylesheet (already using the new Inter version) -->
-  <link rel="stylesheet" href="/assets/style.css">
+  <!-- Preload shared header -->
+  <link rel="preload" href="/header.html" as="fetch" crossorigin>
+
+  <!-- Load shared header (menu, sidebar, back-button logic) -->
+  <script>
+    fetch('/header.html')
+      .then(r => r.text())
+      .then(html => document.getElementById('shared-header').innerHTML = html);
+  </script>
 </head>
 
 <body>
-  <!-- Shared header placeholder -->
-  <header class="header" id="site-header"></header>
+  <!-- Shared UI: menu, sidebar, backdrop -->
+  <div id="shared-header"></div>
 
-  <!-- Main content -->
+  <!-- PAGE-SPECIFIC HEADER: logo + brand -->
+  <header class="header">
+    <div class="container masthead">
+      <img src="/assets/newlogo.png" alt="Logo" class="logo">
+      <div class="brandline">PAYTON ST. GEME</div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
   <main class="container posts-list">
     <h1>Posts</h1>
     <ul class="list" id="posts-list">
+      <!-- Filled by JS -->
+    </ul>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Payton St. Geme</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
   <script>
+    // === Footer year ===
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // === Load posts from JSON ===
     fetch('/posts_index.json')
       .then(r => r.json())
       .then(posts => {
         const list = document.getElementById('posts-list');
-        list.innerHTML = ''; // clear placeholder
+        list.innerHTML = '';
         posts.forEach(p => {
           const li = document.createElement('li');
           li.className = 'item';
@@ -46,67 +75,48 @@
       const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
       return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
     }
-  </script>
-</ul>
-  </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>© <span id="year"></span> Payton St Geme</p>
-    </div>
-  </footer>
+    // === Active nav & menu wiring (runs after header loads) ===
+    const checkHeader = setInterval(() => {
+      const header = document.getElementById('shared-header');
+      if (header && header.innerHTML) {
+        clearInterval(checkHeader);
 
-  <!-- Scripts -->
-  <script>
-    // Footer year
-    const y = document.getElementById('year');
-    if (y) y.textContent = new Date().getFullYear();
+        // --- Set active link ---
+        const isPostsPage = location.pathname === '/posts.html' || location.pathname.startsWith('/posts/');
+        header.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+        if (isPostsPage) {
+          const link = header.querySelector('.nav a[href="/posts.html"]');
+          if (link) link.classList.add('active');
+        }
 
-    // Load shared header, set active link, wire sidebar menu
-    fetch("header.html")
-      .then(r => r.text())
-      .then(html => {
-        const host = document.getElementById("site-header");
-        host.innerHTML = html;
-
-        // --- Active nav (treat page + any /posts/... as Posts) ---
-        const file = location.pathname.split("/").pop() || "index.html";
-        const isHome  = file === "index.html";
-        const isPosts = file === "posts.html" || location.pathname.includes("/posts/");
-        const isViews = file === "views.html";
-
-        host.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
-        if (isHome)  host.querySelector('.nav a[href="index.html"]')?.classList.add("active");
-        if (isPosts) host.querySelector('.nav a[href="posts.html"]')?.classList.add("active");
-        if (isViews) host.querySelector('.nav a[href="views.html"]')?.classList.add("active");
-
-        // --- Sidebar menu wiring (adds/removes body.menu-open) ---
-        const btn = host.querySelector(".menu-button");
-        const sidebar = host.querySelector(".sidebar");
-        const backdrop = host.querySelector(".backdrop");
+        // --- Menu toggle (already in header.html, but safe to re-wire) ---
+        const btn = header.querySelector('.menu-button');
+        const sidebar = header.querySelector('.sidebar');
+        const backdrop = header.querySelector('.backdrop');
 
         function openMenu() {
-          sidebar?.classList.add("open");
-          document.body.classList.add("menu-open");   // <-- shifts brand via CSS
-          btn?.setAttribute("aria-expanded","true");
-          sidebar?.setAttribute("aria-hidden","false");
+          sidebar?.classList.add('open');
+          document.body.classList.add('menu-open');
+          btn?.setAttribute('aria-expanded', 'true');
+          sidebar?.setAttribute('aria-hidden', 'false');
           if (backdrop) backdrop.hidden = false;
         }
         function closeMenu() {
-          sidebar?.classList.remove("open");
-          document.body.classList.remove("menu-open"); // <-- resets brand
-          btn?.setAttribute("aria-expanded","false");
-          sidebar?.setAttribute("aria-hidden","true");
+          sidebar?.classList.remove('open');
+          document.body.classList.remove('menu-open');
+          btn?.setAttribute('aria-expanded', 'false');
+          sidebar?.setAttribute('aria-hidden', 'true');
           if (backdrop) backdrop.hidden = true;
         }
 
-        btn?.addEventListener("click", () =>
-          sidebar?.classList.contains("open") ? closeMenu() : openMenu()
+        btn?.addEventListener('click', () => 
+          sidebar?.classList.contains('open') ? closeMenu() : openMenu()
         );
-        backdrop?.addEventListener("click", closeMenu);
-        document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
-      });
+        backdrop?.addEventListener('click', closeMenu);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+      }
+    }, 50);
   </script>
 </body>
 </html>
