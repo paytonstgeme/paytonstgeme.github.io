@@ -207,6 +207,28 @@
       if (e.key === 'Escape' && sidebar.classList.contains('open')) closeMenu();
     });
   </script>
+<script>
+  fetch('posts_index.json')
+    .then(response => response.json())
+    .then(posts => {
+      const container = document.getElementById('posts-list');
+      posts.forEach(post => {
+        const item = document.createElement('div');
+        item.className = 'post-item';
+        item.innerHTML = `
+          <h3><a href="${post.url}">${post.title}</a></h3>
+          <p class="date">${formatDate(post.date)}</p>
+          <p>${post.desc}</p>
+        `;
+        container.appendChild(item);
+      });
+    });
 
+  function formatDate(dateStr) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateStr).toLocaleDateString(undefined, options);
+  }
+</script>
+  
 </body>
 </html>
