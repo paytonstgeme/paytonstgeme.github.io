@@ -1,17 +1,53 @@
-<header class="header">
-  <div class="container">
-    <div class="masthead">
-      <a href="/" class="logo-link">
-        <img src="/assets/newlogo.png" alt="Payton St. Geme" class="logo">
-      </a>
-      <div class="brandline">Payton St. Geme</div>
-    </div>
+<!-- MENU BUTTON -->
+<button class="menu-button" aria-label="Open menu" id="menuBtn">
+  <span class="material-symbols-outlined">menu</span>
+</button>
 
-    <nav class="center-nav">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/posts.html" class="nav-link">Posts</a>
-      <a href="/views.html" class="nav-link">Views</a>
-    </nav>
+<!-- SIDEBAR NAV -->
+<nav class="sidebar" id="sidebar">
+  <div class="nav">
+    <a href="/" class="nav-link">HOME</a>
+    <a href="/posts.html" class="nav-link">POSTS</a>
+    <a href="/views.html" class="nav-link">VIEWS</a>
   </div>
-  <hr class="rule">
-</header>
+</nav>
+
+<!-- BACKDROP -->
+<div class="backdrop" id="backdrop"></div>
+
+<!-- BACK-TO-POSTS BUTTON (only on post pages) -->
+<div id="back-to-posts-placeholder"></div>
+
+<script>
+  // === MENU TOGGLE ===
+  const btn = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('backdrop');
+  const body = document.body;
+
+  function openMenu() {
+    sidebar.classList.add('open');
+    backdrop.classList.add('open');
+    body.classList.add('menu-open');
+    btn.innerHTML = '<span class="material-symbols-outlined">menu_open</span>';
+  }
+  function closeMenu() {
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('open');
+    body.classList.remove('menu-open');
+    btn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+  }
+
+  btn.addEventListener('click', () => sidebar.classList.contains('open') ? closeMenu() : openMenu());
+  backdrop.addEventListener('click', closeMenu);
+
+  // === BACK-TO-POSTS BUTTON (only inject on /posts/*.html) ===
+  if (window.location.pathname.startsWith('/posts/') && window.location.pathname !== '/posts.html') {
+    const placeholder = document.getElementById('back-to-posts-placeholder');
+    placeholder.innerHTML = `
+      <a href="/posts.html" class="back-to-posts" aria-label="Back to all posts">
+        <span class="material-symbols-outlined">arrow_circle_left</span>
+      </a>
+    `;
+  }
+</script>
