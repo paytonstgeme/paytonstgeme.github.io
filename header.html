@@ -15,11 +15,10 @@
 <!-- BACKDROP -->
 <div class="backdrop" id="backdrop"></div>
 
-<!-- BACK-TO-POSTS BUTTON (only on post pages) -->
+<!-- BACK-TO-POSTS PLACEHOLDER -->
 <div id="back-to-posts-placeholder"></div>
 
 <script>
-  // === MENU TOGGLE ===
   const btn = document.getElementById('menuBtn');
   const sidebar = document.getElementById('sidebar');
   const backdrop = document.getElementById('backdrop');
@@ -41,10 +40,8 @@
   btn.addEventListener('click', () => sidebar.classList.contains('open') ? closeMenu() : openMenu());
   backdrop.addEventListener('click', closeMenu);
 
-  // === BACK-TO-POSTS BUTTON (only inject on /posts/*.html) ===
-  if (window.location.pathname.startsWith('/posts/') && window.location.pathname !== '/posts.html') {
-    const placeholder = document.getElementById('back-to-posts-placeholder');
-    placeholder.innerHTML = `
+  if (window.location.pathname.startsWith('/posts/') && !window.location.pathname.endsWith('posts.html')) {
+    document.getElementById('back-to-posts-placeholder').innerHTML = `
       <a href="/posts.html" class="back-to-posts" aria-label="Back to all posts">
         <span class="material-symbols-outlined">arrow_circle_left</span>
       </a>
