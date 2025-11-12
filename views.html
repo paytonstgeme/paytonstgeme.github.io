@@ -1,21 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Views · Payton St Geme</title>
+  <title>Views · Payton St. Geme</title>
 
-  <!-- Inter font for the modern theme -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+  <!-- Main stylesheet (includes EB Garamond + Material Symbols) -->
+  <link rel="stylesheet" href="/style.css">
 
-  <!-- Your main stylesheet -->
-  <link rel="stylesheet" href="/assets/style.css">
+  <!-- Preload shared header -->
+  <link rel="preload" href="/header.html" as="fetch" crossorigin>
+
+  <!-- Load shared header (menu, sidebar, back-button logic) -->
+  <script>
+    fetch('/header.html')
+      .then(r => r.text())
+      .then(html => document.getElementById('shared-header').innerHTML = html);
+  </script>
 </head>
-<body>
-  <header class="header" id="site-header"></header>
 
+<body>
+  <!-- Shared UI: menu, sidebar, backdrop -->
+  <div id="shared-header"></div>
+
+  <!-- PAGE-SPECIFIC HEADER: logo + brand -->
+  <header class="header">
+    <div class="container masthead">
+      <img src="/assets/newlogo.png" alt="Logo" class="logo">
+      <div class="brandline">PAYTON ST. GEME</div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
   <main class="container">
     <section class="views-gallery">
       <h1>Views</h1>
@@ -26,7 +42,7 @@
           </svg>
         </button>
 
-        <!-- HORIZONTAL SCROLL CONTAINER -->
+        <!-- HORIZONTAL SCROLL GALLERY -->
         <div class="grid" id="gallery-grid">
           <figure><img src="/assets/image2.jpg" alt="Ancient ruins" loading="lazy" draggable="false"><figcaption></figcaption></figure>
           <figure><img src="/assets/IMG_1941.JPG" alt="Golden light at sunset" loading="lazy" draggable="false"><figcaption></figcaption></figure>
@@ -49,9 +65,10 @@
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <p>© <span id="year"></span> Payton St Geme</p>
+      <p>© <span id="year"></span> Payton St. Geme</p>
     </div>
   </footer>
 
@@ -61,20 +78,25 @@
     <figcaption id="lightbox-caption"></figcaption>
   </div>
 
+  <!-- SCRIPTS -->
   <script>
-    // Current year
+    // === Footer year ===
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Load header and set active nav
-    fetch("/header.html")
-      .then(r => r.text())
-      .then(html => {
-        document.getElementById("site-header").innerHTML = html;
-        document.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
-        document.querySelector('.nav-link[href="/views.html"]')?.classList.add("active");
-      });
+    // === Load posts & set active nav after header loads ===
+    const checkHeader = setInterval(() => {
+      const header = document.getElementById('shared-header');
+      if (header && header.innerHTML) {
+        clearInterval(checkHeader);
 
-    // HORIZONTAL SCROLL + ARROWS
+        // Highlight "VIEWS" in sidebar
+        header.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+        const viewsLink = header.querySelector('.nav a[href="/views.html"]');
+        if (viewsLink) viewsLink.classList.add('active');
+      }
+    }, 50);
+
+    // === HORIZONTAL SCROLL + ARROWS ===
     const gallery = document.getElementById('gallery-grid');
     const leftBtn = document.querySelector('.scroll-btn.left');
     const rightBtn = document.querySelector('.scroll-btn.right');
@@ -112,7 +134,7 @@
     });
     requestAnimationFrame(updateButtons);
 
-    // LIGHTBOX
+    // === LIGHTBOX ===
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
