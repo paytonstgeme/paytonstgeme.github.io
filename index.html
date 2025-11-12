@@ -15,7 +15,6 @@
 <body>
   <div id="shared-header"></div>
 
-  <!-- LOGO + BRAND (page-specific) -->
   <header class="header">
     <div class="container masthead">
       <img src="/assets/newlogo.png" alt="Logo" class="logo">
@@ -29,22 +28,19 @@
       <img src="/assets/Kanji and Hexagram of Harmony.png" alt="Harmony" class="hero-img">
     </figure>
   </main>
-</body>
-</html>
-<script>
-    // Footer year
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Payton St. Geme</p>
+    </div>
+  </footer>
+
+  <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Set active nav link after header loads
-    const checkHeader = setInterval(() => {
-      const header = document.getElementById('shared-header');
-      if (header && header.innerHTML) {
-        clearInterval(checkHeader);
-
-        // Highlight "VIEWS" in sidebar
-        header.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-        const viewsLink = header.querySelector('.nav a[href="/views.html"]');
-        if (viewsLink) viewsLink.classList.add('active');
+    const check = setInterval(() => {
+      if (document.getElementById('shared-header').innerHTML) {
+        clearInterval(check);
+        document.querySelector('.nav a[href="/"]')?.classList.add('active');
       }
     }, 50);
   </script>
