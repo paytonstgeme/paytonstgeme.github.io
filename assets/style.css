@@ -1,4 +1,19 @@
 /* ──────────────────────────────────────
+   1. Variables & Reset
+   ────────────────────────────────────── */
+:root {
+  --color-bg: #fff;
+  --color-text: #222;
+  --color-muted: #555;
+  --menu-width: 260px;
+  --transition-menu: .25s ease;
+  --radius: 8px;
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+ul { list-style:none; }
+html, body { height:100%; font-family:sans-serif; background:var(--color-bg); }
+
+/* ──────────────────────────────────────
    0. Site Header (always at top)
    ────────────────────────────────────── */
 .site-header {
@@ -46,22 +61,6 @@ body { padding-top: 5rem; }        /* matches .site-header height */
   transition: transform .2s;
 }
 .back-to-posts:hover { transform: scale(1.1); }
-
-/* ──────────────────────────────────────
-   1. Variables & Reset
-   ────────────────────────────────────── */
-:root {
-  --color-bg: #fff;
-  --color-text: #222;
-  --color-muted: #555;
-  --menu-width: 260px;
-  --transition-menu: .25s ease;
-  --radius: 8px;
-}
-*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-ul { list-style:none; }
-html, body { height:100%; font-family:sans-serif; background:var(--color-bg); }
-
 /* ──────────────────────────────────────
    2. Layout
    ────────────────────────────────────── */
