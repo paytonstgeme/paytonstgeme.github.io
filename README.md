@@ -12,7 +12,6 @@
       <a class="brand" href="index.html">PAYTON ST GEME</a>
       <nav class="nav">
         <a class="nav-link active" href="index.html">Home</a>
-        <a class="nav-link" href="posts.html">Posts</a>
         <a class="nav-link" href="views.html">Views</a>
       </nav>
     </div>
@@ -20,8 +19,7 @@
 
   <main class="container">
     <h1>Home</h1>
-    <figure>
-      <img src="assets/Kanji and Hexagram of Harmony.png" alt="Harmony" style="max-width:100%;height:auto;" />
+    <p> Sandbox. </p>
   </main>
 
 
