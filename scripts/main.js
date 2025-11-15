@@ -1,27 +1,39 @@
-// scripts/main.js
+// Shared script for menu toggle and active link highlighting
 document.addEventListener('DOMContentLoaded', () => {
   const menuBtn = document.getElementById('menuBtn');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
+  const navLinks = document.querySelectorAll('.nav-list a');
 
-  function open() {
+  // Determine current page to highlight active link
+  const currentPage = location.pathname.split('/').pop() || 'index.html';
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage) {
+      link.classList.add('active');
+    }
+  });
+
+  function openMenu() {
     menuBtn.textContent = 'menu_open';
     sidebar.classList.add('open');
     overlay.classList.add('open');
   }
-  function close() {
+  function closeMenu() {
     menuBtn.textContent = 'menu';
     sidebar.classList.remove('open');
     overlay.classList.remove('open');
   }
 
-  menuBtn.addEventListener('click', () => sidebar.classList.contains('open') ? close() : open());
-  overlay.addEventListener('click', close);
-  document.addEventListener('keydown', e => e.key === 'Escape' && sidebar.classList.contains('open') && close());
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  overlay.addEventListener('click', closeMenu);
 
-  // Highlight active nav link
-  const current = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-list a').forEach(a => {
-    if (a.getAttribute('href') === current) a.classList.add('active');
+  // Close with ESC key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+      closeMenu();
+    }
   });
 });
