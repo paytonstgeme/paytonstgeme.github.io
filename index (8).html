@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payton St. Geme</title>
+
+  <!-- Google Material Icons: load only the icons we need (menu and chevron_left) -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=chevron_left,menu" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Header with menu button and centred logo -->
+  <header class="site-header">
+    <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
+    <a href="index.html" class="logo">
+      <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
+      <span>Payton St. Geme</span>
+    </a>
+  </header>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="posts.html">Posts</a></li>
+      <li><a href="views.html">Views</a></li>
+    </ul>
+  </nav>
+
+  <!-- Click‑catching overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Main content area -->
+  <main class="content">
+    <article class="post">
+      <h1>Testing</h1>
+      <time datetime="2025-10-20">October 20, 2025</time>
+      <p>
+        Testing the waters. Let's see if this works.
+      </p>
+    </article>
+  </main>
+
+  <!-- JavaScript for menu toggle and active link highlighting -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    // Highlight the current page in the nav
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage) {
+        link.classList.add('active');
+      }
+    });
+
+    function openMenu() {
+      menuBtn.textContent = 'chevron_left';
+      sidebar.classList.add('open');
+      overlay.classList.add('open');
+    }
+
+    function closeMenu() {
+      menuBtn.textContent = 'menu';
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Clicking the overlay closes the menu
+    overlay.addEventListener('click', closeMenu);
+
+    // Close the menu with the Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && sidebar.classList.contains('open')) closeMenu();
+    });
+  </script>
+
+</body>
+</html>
