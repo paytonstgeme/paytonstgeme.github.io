@@ -23,25 +23,26 @@ html, body { height:100%; font-family: sans-serif; background:#fff; }
 /* ──────────────────────────────────────
    3. Logo (centered)
    ────────────────────────────────────── */
-.logo {
-  display: flex;          /* you already have this */
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;  /* prevents underline */
-  color: inherit;         /* keeps text black */
-}
 
-}
-.logo img {
-  width:10px;
-}
-.logo span {
-  font-size:1rem;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
+/* Logo */
+    .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .logo img {
+      width: 80px;
+      height: auto;
+      display: block;
+      margin: 0 auto 12px;
+    }
+    .logo span {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: #000;
+    }
 /* ──────────────────────────────────────
    4. Hamburger button
    ────────────────────────────────────── */
