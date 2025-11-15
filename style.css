@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────
-   1. Variables & Reset
+   style.css — SINGLE SOURCE OF TRUTH
    ────────────────────────────────────── */
 :root{
   --color-bg:#fff;
@@ -13,18 +13,16 @@
 ul{list-style:none}
 html,body{height:100%;font-family:sans-serif;background:var(--color-bg)}
 
-/* ──────────────────────────────────────
-   0. Fixed Header (always on top)
-   ────────────────────────────────────── */
+/* Fixed Header */
 .site-header{
   position:fixed;top:0;left:0;right:0;height:5rem;
   background:var(--color-bg);display:flex;align-items:center;
   justify-content:center;z-index:25;padding:0 1.5rem;
   box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
-body,body.menu-open{padding-top:5rem}               /* push content down */
+body,body.menu-open{padding-top:5rem}
 
-/* Logo inside header */
+/* Logo in header */
 .site-header .logo{
   display:flex;flex-direction:column;align-items:center;gap:4px;
   text-decoration:none;color:inherit;
@@ -35,9 +33,7 @@ body,body.menu-open{padding-top:5rem}               /* push content down */
   text-transform:uppercase;
 }
 
-/* ──────────────────────────────────────
-   4. Hamburger button
-   ────────────────────────────────────── */
+/* Hamburger */
 .menu-button{
   position:absolute;top:1.5rem;left:1.5rem;
   font-size:2rem;cursor:pointer;z-index:30;
@@ -45,9 +41,7 @@ body,body.menu-open{padding-top:5rem}               /* push content down */
 }
 .menu-button.open{transform:rotate(90deg)}
 
-/* ──────────────────────────────────────
-   5. Sidebar (off-canvas)
-   ────────────────────────────────────── */
+/* Sidebar */
 .sidebar{
   position:fixed;top:0;left:0;width:var(--menu-width);height:100%;
   background:var(--color-bg);box-shadow:2px 0 8px rgba(0,0,0,.1);
@@ -56,9 +50,7 @@ body,body.menu-open{padding-top:5rem}               /* push content down */
 }
 .sidebar.open{transform:translateX(0)}
 
-/* ──────────────────────────────────────
-   6. Overlay (menu + lightbox)
-   ────────────────────────────────────── */
+/* Backdrop */
 .backdrop,.lightbox-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,.4);
   opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
@@ -66,9 +58,7 @@ body,body.menu-open{padding-top:5rem}               /* push content down */
 }
 .backdrop.open,.lightbox-overlay.open{opacity:1;visibility:visible}
 
-/* ──────────────────────────────────────
-   7. Navigation links
-   ────────────────────────────────────── */
+/* Nav links */
 .nav a{
   display:block;padding:0 1.5rem;color:var(--color-text);
   text-decoration:none;font-size:1.1rem;text-transform:uppercase;
@@ -81,25 +71,19 @@ body,body.menu-open{padding-top:5rem}               /* push content down */
   width:4px;height:4px;background:#000;border-radius:50%;
 }
 
-/* ──────────────────────────────────────
-   8. Material Icons
-   ────────────────────────────────────── */
+/* Icons */
 .material-symbols-outlined{
   font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48;
 }
 
-/* ──────────────────────────────────────
-   9. Back-to-posts arrow
-   ────────────────────────────────────── */
+/* Back to posts */
 .back-to-posts{
   position:fixed;bottom:2rem;left:2rem;font-size:2.4rem;
   color:var(--color-muted);z-index:15;transition:transform .2s;
 }
 .back-to-posts:hover{transform:scale(1.1)}
 
-/* ──────────────────────────────────────
-   Lightbox (unchanged – keep the rest of your lightbox CSS)
-   ────────────────────────────────────── */
+/* Lightbox (keep yours) */
 #lightbox{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;
   justify-content:center;visibility:hidden;opacity:0;
   transition:opacity .3s,visibility .3s}
