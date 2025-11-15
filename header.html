@@ -1,12 +1,32 @@
 <!-- ============================== -->
-<!--  SHARED MENU ONLY (no logo/brand) -->
+<!-- SHARED HEADER (logo + menu)   -->
 <!-- ============================== -->
+<header class="site-header">
+  <!-- Hamburger Menu Button (top-left) -->
+  <button
+    class="menu-button"
+    aria-label="Open navigation menu"
+    id="menuBtn"
+    aria-expanded="false"
+  >
+    <span class="material-symbols-outlined">menu</span>
+  </button>
 
-<button class="menu-button" aria-label="Open menu" id="menuBtn">
-  <span class="material-symbols-outlined">menu</span>
-</button>
+  <!-- Centered Logo / Site Title -->
+  <div class="logo">
+    <!-- Replace with your actual logo image or just use text -->
+    <a href="/" aria-label="Home">
+      <img src="/logo.png" alt="" width="80" height="80">
+      <span>Payton St. Geme</span>
+    </a>
+  </div>
 
-<nav class="sidebar" id="sidebar">
+  <!-- Back-to-Posts Arrow (injected by JS) -->
+  <div id="back-to-posts-placeholder"></div>
+</header>
+
+<!-- Off-canvas Sidebar -->
+<nav class="sidebar" id="sidebar" aria-hidden="true">
   <div class="nav">
     <a href="/" class="nav-link">HOME</a>
     <a href="/posts.html" class="nav-link">POSTS</a>
@@ -14,37 +34,48 @@
   </div>
 </nav>
 
-<div class="backdrop" id="backdrop"></div>
-
-<div id="back-to-posts-placeholder"></div>
+<!-- Dark backdrop (shared with lightbox) -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
 
 <script>
-  const btn = document.getElementById('menuBtn');
+  // Cache elements once
+  const menuBtn = document.getElementById('menuBtn');
+  const menuIcon = menuBtn.querySelector('.material-symbols-outlined');
   const sidebar = document.getElementById('sidebar');
   const backdrop = document.getElementById('backdrop');
   const body = document.body;
+  const backToPosts = document.getElementById('back-to-posts-placeholder');
 
-  function openMenu() {
-    sidebar.classList.add('open');
-    backdrop.classList.add('open');
-    body.classList.add('menu-open');
-    btn.innerHTML = '<span class="material-symbols-outlined">menu_open</span>';
+  // Toggle menu state
+  function toggleMenu(open) {
+    const isOpen = open ?? sidebar.classList.toggle('open');
+    sidebar.classList.toggle('open', isOpen);
+    backdrop.classList.toggle('open', isOpen);
+    body.classList.toggle('menu-open', isOpen);
+    menuIcon.textContent = isOpen ? 'menu_open' : 'menu';
+    menuBtn.setAttribute('aria-expanded', isOpen);
+    sidebar.setAttribute('aria-hidden', !isOpen);
+    backdrop.setAttribute('aria-hidden', !isOpen);
   }
-  function closeMenu() {
-    sidebar.classList.remove('open');
-    backdrop.classList.remove('open');
-    body.classList.remove('menu-open');
-    btn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
-  }
 
-  btn.addEventListener('click', () => sidebar.classList.contains('open') ? closeMenu() : openMenu());
-  backdrop.addEventListener('click', closeMenu);
+  // Event Listeners
+  menuBtn.addEventListener('click', () => toggleMenu());
+  backdrop.addEventListener('click', () => toggleMenu(false));
 
-  if (window.location.pathname.startsWith('/posts/') && !window.location.pathname.endsWith('posts.html')) {
-    document.getElementById('back-to-posts-placeholder').innerHTML = `
+  // Close with Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+      toggleMenu(false);
+    }
+  });
+
+  // Inject "Back to Posts" arrow on individual post pages
+  const path = location.pathname;
+  if (path.startsWith('/posts/') && path !== '/posts.html' && !path.includes('/', 7)) {
+    backToPosts.innerHTML = `
       <a href="/posts.html" class="back-to-posts" aria-label="Back to all posts">
         <span class="material-symbols-outlined">arrow_circle_left</span>
       </a>
     `;
   }
-</script>
+</script><
