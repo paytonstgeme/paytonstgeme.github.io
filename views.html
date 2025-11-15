@@ -5,96 +5,297 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Views | Payton St. Geme</title>
 
-  <!-- Material Icons -->
+  <!-- Google Material Icons -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open,arrow_circle_left" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
 
-  <!-- Shared Styles (ONE FILE) -->
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; background: #fff; overflow-x: hidden; }
+
+    /* Main Layout */
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      padding: 2rem;
+      padding-top: 6rem; /* Space for menu button */
+    }
+
+    /* Logo */
+    .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .logo img {
+      width: 80px;
+      height: auto;
+      display: block;
+      margin: 0 auto 12px;
+    }
+    .logo span {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: #000;
+    }
+
+    /* Hamburger Button */
+    .menu-btn {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 2.2rem;
+      cursor: pointer;
+      z-index: 30;
+      transition: opacity 0.2s ease;
+      user-select: none;
+    }
+    .menu-btn:hover { opacity: 0.7; }
+
+    /* Sidebar Menu */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 260px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      z-index: 20;
+      padding-top: 6rem;
+      overflow-y: auto;
+    }
+    .sidebar.open { transform: translateX(0); }
+
+    .nav-list {
+      list-style: none;
+      padding: 0 2rem;
+    }
+    .nav-list li { margin-bottom: 1.8rem; }
+    .nav-list a {
+      color: #111;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      transition: color 0.2s ease;
+      display: block;
+    }
+    .nav-list a:hover { color: #555; }
+    .nav-list a.active {
+      color: #000;
+      font-weight: 700;
+      position: relative;
+    }
+    .nav-list a.active::after {
+      content: '';
+      position: absolute;
+      left: -1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      background: #000;
+      border-radius: 50%;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+    .overlay.open { opacity: 1; visibility: visible; }
+
+    /* Material Icons */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    }
+
+    /* Gallery Section */
+    .views-gallery {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .views-gallery h1 {
+      font-size: 1.8rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 2.5rem;
+      color: #000;
+    }
+
+    /* Responsive Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    /* Image Figure */
+    figure {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    figure:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    figcaption {
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      color: #444;
+      font-style: italic;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 480px) {
+      .sidebar { width: 220px; }
+      .menu-btn { top: 1.2rem; left: 1.2rem; font-size: 2rem; }
+      .logo img { width: 70px; }
+      .grid { grid-template-columns: 1fr; gap: 1rem; }
+      .views-gallery h1 { font-size: 1.5rem; }
+    }
+  </style>
 </head>
+
 <body>
 
-  <!-- SHARED HEADER (menu + logo) -->
-  <div data-include="header.html"></div>
+  <div class="container">
+    <!-- Menu Button -->
+    <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
 
-  <!-- Main Content -->
-  <main class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
+      <span>Payton St. Geme</span>
+    </div>
+
+    <!-- Gallery -->
     <section class="views-gallery">
       <h1>Views</h1>
       <div class="grid" id="gallery-grid">
         <figure>
           <img src="assets/image2.jpg" alt="Ancient ruins" loading="lazy">
-          <figcaption>.</figcaption>
-        </figure>
-         <figure>
-          <img src="assets/IMG_4915.JPG" alt="Ancient ruins" loading="lazy">
-          <figcaption>.</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/IMG_4916.JPG" alt="Ancient ruins" loading="lazy">
-          <figcaption>.</figcaption>
+          <figcaption>timeless stone.</figcaption>
         </figure>
         <figure>
           <img src="assets/Bridgeheadlands.png" alt="Bridge view from the headlands" loading="lazy">
-          <figcaption></figcaption>
+          <figcaption>from the headlands.</figcaption>
         </figure>
         <figure>
           <img src="assets/bridgecloseup.png" alt="Close-up of bridge structure" loading="lazy">
-          <figcaption></figcaption>
+          <figcaption>steel and sky.</figcaption>
         </figure>
         <figure>
           <img src="assets/bridgered.PNG" alt="Golden Gate Bridge in red" loading="lazy">
-          <figcaption></figcaption>
+          <figcaption>the bay.</figcaption>
         </figure>
         <figure>
           <img src="assets/IMG_1057.JPG" alt="Speed and motion blur" loading="lazy">
-          <figcaption></figcaption>
+          <figcaption>speed.</figcaption>
         </figure>
         <figure>
           <img src="assets/IMG_3291.JPG" alt="Wanderer in the mist" loading="lazy">
-          <figcaption> </figcaption>
+          <figcaption>eternal wander.</figcaption>
         </figure>
         <figure>
           <img src="assets/pers.jpg" alt="Perseus constellation" loading="lazy">
-          <figcaption> </figcaption>
+          <figcaption>perseus.</figcaption>
         </figure>
         <figure>
           <img src="assets/IMG_1941.JPG" alt="Golden light at sunset" loading="lazy">
-          <figcaption> </figcaption>
+          <figcaption>golden hour.</figcaption>
         </figure>
         <figure>
           <img src="assets/IMG_1970.JPG" alt="Distant horizon" loading="lazy">
-          <figcaption> </figcaption>
+          <figcaption>endless horizon.</figcaption>
         </figure>
         <figure>
           <img src="assets/IMG_2747.JPG" alt="Quiet moment" loading="lazy">
-          <figcaption> </figcaption>
+          <figcaption>stillness.</figcaption>
         </figure>
       </div>
     </section>
-  </main>
+  </div>
 
-  <!-- Include Header Script (runs once per page) -->
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="posts.html">Posts</a></li>
+      <li><a href="views.html" class="active">Views</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- JavaScript -->
   <script>
-    function includeHTML() {
-      document.querySelectorAll('[data-include]').forEach(el => {
-        const file = el.getAttribute('data-include');
-        fetch(file)
-          .then(r => r.text())
-          .then(html => {
-            el.innerHTML = html;
-            el.removeAttribute('data-include');
-            // Re-execute scripts inside included file
-            el.querySelectorAll('script').forEach(old => {
-              const script = document.createElement('script');
-              script.textContent = old.textContent;
-              old.parentNode.replaceChild(script, old);
-            });
-          })
-          .catch(err => console.error('Failed to load include:', file, err));
-      });
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    // Highlight active page
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage) {
+        link.classList.add('active');
+      }
+    });
+
+    function openMenu() {
+      menuBtn.textContent = 'menu_open';
+      sidebar.classList.add('open');
+      overlay.classList.add('open');
     }
-    document.addEventListener('DOMContentLoaded', includeHTML);
+
+    function closeMenu() {
+      menuBtn.textContent = 'menu';
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && sidebar.classList.contains('open')) closeMenu();
+    });
   </script>
+
 </body>
 </html>
