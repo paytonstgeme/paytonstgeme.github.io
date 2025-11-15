@@ -9,7 +9,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open,arrow_circle_left" />
 
-  <!-- Shared Styles (ONE FILE) -->
+  <!-- Shared Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,12 +17,13 @@
   <!-- SHARED HEADER (menu + logo) -->
   <div data-include="header.html"></div>
 
-  <!-- Main Centered Content -->
+  <!-- Main Content: Empty (logo is in header) -->
   <main class="container">
-    
+    <!-- Optional: Add hero artwork here later -->
+    <!-- <img src="assets/home-artwork.jpg" alt="Home artwork" class="home-art"> -->
   </main>
 
-  <!-- Include Header Script (runs once per page) -->
+  <!-- Include Header Script -->
   <script>
     function includeHTML() {
       document.querySelectorAll('[data-include]').forEach(el => {
@@ -32,7 +33,6 @@
           .then(html => {
             el.innerHTML = html;
             el.removeAttribute('data-include');
-            // Re-execute scripts inside included file
             el.querySelectorAll('script').forEach(old => {
               const script = document.createElement('script');
               script.textContent = old.textContent;
