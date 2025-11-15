@@ -1,90 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2025-10-20 - Payton St. Geme</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Testing – Payton St. Geme</title>
 
-  <!-- Google Fonts: Inter (modern Century Gothic-style) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Material Icons: menu & menu_open -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
 
-  <!-- Main stylesheet (already using the new Inter version) -->
-  <link rel="stylesheet" href="/assets/style.css">
+  <!-- Shared stylesheet -->
+  <link rel="stylesheet" href="../style.css">
+  <script src="../scripts/main.js" defer></script>
 </head>
 
 <body>
-  <!-- Shared header placeholder -->
-  <header class="header" id="site-header"></header>
 
-  <!-- Return Button -->
-  <a href="/posts.html" class="return-btn">Return to List</a>
+  <!-- Main Centered Content -->
+  <div class="container">
+    <!-- Hamburger Menu Button -->
+    <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
 
-  <!-- Main content -->
+    <!-- Logo & Title -->
+    <a href="../index.html" class="logo">
+      <img src="../assets/your-logo.png" alt="Payton St. Geme Logo">
+      <span>Payton St. Geme</span>
+    </a>
+
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <ul class="nav-list">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../posts.html" class="active">Posts</a></li>
+      <li><a href="../views.html">Views</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
   <main class="container article">
-    <h1>loading</h1>
-    <div class="meta"><time datetime="2025-10-20">October 20, 2025</time></div>
+    <h1>Testing</h1>
+    <div class="meta"><time datetime="2025-10-20">November 2025</time></div>
 
-    <!-- Post body -->
-    <p></p>
+    <!-- Full post body -->
+    <p>
+Loading
+    </p>
+    <p>
+      </p>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p><span id="year"></span> Payton St Geme</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    // 1) Footer year
-    const y = document.getElementById('year');
-    if (y) y.textContent = new Date().getFullYear();
-
-    // 2) Inject shared header and set active nav
-    fetch("/header.html")
-      .then(r => r.text())
-      .then(html => {
-        const host = document.getElementById("site-header");
-        host.innerHTML = html;
-
-        // Determine which tab to highlight
-        const path = location.pathname.toLowerCase();
-        let key = 'home';
-        if (path.startsWith('/posts')) key = 'posts';
-        else if (path.startsWith('/views')) key = 'views';
-
-        host.querySelectorAll('.center-nav .nav-link').forEach(a => {
-          if (a.dataset.nav === key) a.classList.add('active');
-        });
-
-        // Sidebar wiring (no-op if elements aren’t present)
-        const btn = host.querySelector(".menu-button");
-        const sidebar = host.querySelector(".sidebar");
-        const backdrop = host.querySelector(".backdrop");
-
-        function openMenu(){
-          sidebar?.classList.add("open");
-          document.body.classList.add("menu-open");
-          btn?.setAttribute("aria-expanded","true");
-          sidebar?.setAttribute("aria-hidden","false");
-          if (backdrop) backdrop.hidden = false;
-        }
-        function closeMenu(){
-          sidebar?.classList.remove("open");
-          document.body.classList.remove("menu-open");
-          btn?.setAttribute("aria-expanded","false");
-          sidebar?.setAttribute("aria-hidden","true");
-          if (backdrop) backdrop.hidden = true;
-        }
-        btn?.addEventListener("click", () =>
-          sidebar?.classList.contains("open") ? closeMenu() : openMenu()
-        );
-        backdrop?.addEventListener("click", closeMenu);
-        document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
-      });
-  </script>
 </body>
 </html>
