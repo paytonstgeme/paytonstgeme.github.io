@@ -1,74 +1,50 @@
 <!-- ============================== -->
-<!--  SHARED HEADER + MENU          -->
+<!--  SHARED MENU ONLY (no logo/brand) -->
 <!-- ============================== -->
-<header class="site-header">
-  <!-- Hamburger -->
-  <button class="menu-button" aria-label="Open menu" id="menuBtn" aria-expanded="false">
-    <span class="material-symbols-outlined">menu</span>
-  </button>
 
-  <!-- Centered logo / title -->
-  <a href="/" class="logo" aria-label="Home">
-    <img src="assets/your-logo.png" alt="" width="48" height="48">
-    <span>Payton St. Geme</span>
-  </a>
+<button class="menu-button" aria-label="Open menu" id="menuBtn">
+  <span class="material-symbols-outlined">menu</span>
+</button>
 
-  <!-- Back-to-posts placeholder (filled by JS on post pages) -->
-  <div id="back-to-posts-placeholder"></div>
-</header>
-
-<!-- Off-canvas sidebar -->
-<nav class="sidebar" id="sidebar" aria-hidden="true">
+<nav class="sidebar" id="sidebar">
   <div class="nav">
-    <a href="/"          class="nav-link">HOME</a>
+    <a href="/" class="nav-link">HOME</a>
     <a href="/posts.html" class="nav-link">POSTS</a>
     <a href="/views.html" class="nav-link">VIEWS</a>
   </div>
 </nav>
 
-<!-- Dark backdrop (menu + lightbox) -->
-<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+<div class="backdrop" id="backdrop"></div>
+
+<div id="back-to-posts-placeholder"></div>
 
 <script>
-  // Cache DOM
-  const menuBtn   = document.getElementById('menuBtn');
-  const icon      = menuBtn.querySelector('.material-symbols-outlined');
-  const sidebar   = document.getElementById('sidebar');
-  const backdrop  = document.getElementById('backdrop');
-  const body      = document.body;
-  const backPlaceholder = document.getElementById('back-to-posts-placeholder');
+  const btn = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('backdrop');
+  const body = document.body;
 
-  // Toggle function (open = true/false/undefined)
-  function toggle(open) {
-    const willOpen = open ?? sidebar.classList.toggle('open');
-    sidebar.classList.toggle('open', willOpen);
-    backdrop.classList.toggle('open', willOpen);
-    body.classList.toggle('menu-open', willOpen);
-    icon.textContent = willOpen ? 'menu_open' : 'menu';
-    menuBtn.setAttribute('aria-expanded', willOpen);
-    sidebar.setAttribute('aria-hidden', !willOpen);
-    backdrop.setAttribute('aria-hidden', !willOpen);
+  function openMenu() {
+    sidebar.classList.add('open');
+    backdrop.classList.add('open');
+    body.classList.add('menu-open');
+    btn.innerHTML = '<span class="material-symbols-outlined">menu_open</span>';
+  }
+  function closeMenu() {
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('open');
+    body.classList.remove('menu-open');
+    btn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
   }
 
-  // Events
-  menuBtn.addEventListener('click', () => toggle());
-  backdrop.addEventListener('click', () => toggle(false));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && sidebar.classList.contains('open')) toggle(false);
-  });
+  btn.addEventListener('click', () => sidebar.classList.contains('open') ? closeMenu() : openMenu());
+  backdrop.addEventListener('click', closeMenu);
 
-  // ---- Back-to-posts arrow (only on /posts/xyz.html) ----
-  const path = location.pathname;
-  if (path.startsWith('/posts/') && path !== '/posts.html' && !path.includes('/',7)) {
-    backPlaceholder.innerHTML = `
+  if (window.location.pathname.startsWith('/posts/') && !window.location.pathname.endsWith('posts.html')) {
+    document.getElementById('back-to-posts-placeholder').innerHTML = `
       <a href="/posts.html" class="back-to-posts" aria-label="Back to all posts">
         <span class="material-symbols-outlined">arrow_circle_left</span>
-      </a>`;
+      </a>
+    `;
   }
-
-  // ---- Active link highlight (optional, works on every page) ----
-  const current = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-link').forEach(a => {
-    if (a.getAttribute('href').split('/').pop() === current) a.classList.add('active');
-  });
 </script>
