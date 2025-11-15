@@ -279,6 +279,15 @@ html, body { height:100%; font-family: sans-serif; background:#fff; }
 }
 
 /* ──────────────────────────────────────
+   10. Adjustments for main containers
+   ────────────────────────────────────── */
+/* Remove full-height and top-padding from main content areas that also use the 'container' class. */
+main.container {
+  min-height: auto;
+  padding-top: 0;
+}
+
+/* ──────────────────────────────────────
    7. Material Icons
    ────────────────────────────────────── */
 .material-symbols-outlined {
