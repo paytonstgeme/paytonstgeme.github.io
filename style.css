@@ -210,6 +210,7 @@ html, body { height:100%; font-family: sans-serif; background:#fff; }
   text-align: center;
   background: #fafafa;
 }
+
 /* Lightbox overlay */
 .lightbox-overlay {
   position: fixed;
@@ -223,54 +224,35 @@ html, body { height:100%; font-family: sans-serif; background:#fff; }
   transition: opacity 0.3s ease;
   z-index: 50;
 }
+
 .lightbox-overlay.open {
   opacity: 1;
   visibility: visible;
 }
+
+/* Wrapper constrains the image safely */
 .lightbox-wrapper {
   position: relative;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;              /* prevents any spillover */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+/* Ensures all images fit INSIDE the frame */
 .lightbox-image {
+  width: 100%;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
+  object-fit: contain;           /* always contain within box */
+  object-position: center;       /* keeps image centered */
   display: block;
   border-radius: 4px;
 }
-.lightbox-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2.2rem;
-  color: #fff;
-  cursor: pointer;
-  user-select: none;
-  padding: 0.5rem;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.3);
-}
-.lightbox-arrow:hover {
-  background: rgba(0,0,0,0.5);
-}
-.lightbox-prev { left: -3rem; }
-.lightbox-next { right: -3rem; }
-.lightbox-close {
-  position: absolute;
-  top: -2.5rem;
-  right: -2.5rem;
-  font-size: 1.8rem;
-  color: #fff;
-  cursor: pointer;
-  user-select: none;
-  padding: 0.3rem;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.3);
-}
-.lightbox-close:hover {
-  background: rgba(0,0,0,0.5);
-}
+
 
 /* ──────────────────────────────────────
    10. Adjustments for main containers
@@ -314,7 +296,9 @@ main.container {
 .hero-image-frame img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+   object-position: center;
+   background: #000;
 }
 
 .hero-arrow {
@@ -323,7 +307,7 @@ main.container {
   font-size: 2.5rem;
   line-height: 1;
   cursor: pointer;
-  padding: 0 0.5rem;
+  padding: 0 0.75rem;
   user-select: none;
 }
 
