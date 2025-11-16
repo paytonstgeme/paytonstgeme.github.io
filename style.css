@@ -239,12 +239,13 @@ html, body { height:100%; font-family: sans-serif; background:#fff; }
   display: flex;
   align-items: center;
   justify-content: center;
+   background: transparent;
 }
 
 /* Ensures all images fit INSIDE the frame */
 .lightbox-image {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;           /* always contain within box */
@@ -278,8 +279,8 @@ main.container {
 .hero-image-frame {
   flex: 1;
   max-width: 720px;
-  aspect-ratio: 16 / 9;
-  background: #3b3b3b;
+  
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -295,10 +296,13 @@ main.container {
 
 .hero-image-frame img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-   object-position: center;
-   background: #000;
+  height: auto;
+  max-width: 100%;
+  max-height: 70vh;        /* prevent hero from being taller than viewport */
+  object-fit: contain;     /* show whole image */
+  object-position: center;
+  background: transparent; /* no black behind image */
+  display: block;
 }
 
 .hero-arrow {
