@@ -10,8 +10,8 @@ html, body { height:100%; font-family: sans-serif; background:#fff; }
    2. Layout containers
    ────────────────────────────────────── */
 .container {
-  padding-top: 2rem;      
-  padding-bottom: 3rem;   
+  padding-top: 1.5rem;      
+  padding-bottom: 2rem;   
   display: flex;
   flex-direction: column;
   align-items: center;
