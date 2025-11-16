@@ -46,35 +46,115 @@
   </main>
   <!-- JavaScript: populate posts list -->
   <script>
-    // Fetch posts from the JSON index and build the list
-    fetch('data/posts_index.json')
-      .then(resp => resp.json())
-      .then(posts => {
-        const postsList = document.getElementById('posts-list');
-        // Helper to format ISO date to human-readable (e.g., October 20, 2025)
-        function formatDate(iso) {
-          const date = new Date(iso);
-          return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        }
-        posts.forEach(post => {
-          const item = document.createElement('div');
-          item.className = 'post-item';
-          item.innerHTML = `
-            <a href="${post.url}">
-              <h2>${post.title}</h2>
-              <div class="meta"><time datetime="${post.date}">${formatDate(post.date)}</time></div>
-              <p>${post.desc}</p>
-            </a>
-          `;
-          postsList.appendChild(item);
-        });
-      })
-      .catch(err => {
-        console.error('Error loading posts index:', err);
-        const postsList = document.getElementById('posts-list');
-        postsList.innerHTML = '<p>Error loading posts.</p>';
+  // Helper to format ISO date to human-readable (e.g., October 20, 2025)
+  function formatDate(iso) {
+    const date = new Date(iso);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  // ---------------------------
+  // POSTS: populate posts list
+  // ---------------------------
+  fetch('data/posts_index.json')
+    .then(resp => resp.json())
+    .then(posts => {
+      const postsList = document.getElementById('posts-list');
+      posts.forEach(post => {
+        const item = document.createElement('div');
+        item.className = 'post-item';
+        item.innerHTML = `
+          <a href="${post.url}">
+            <h2>${post.title}</h2>
+            <div class="meta">
+              <time datetime="${post.date}">${formatDate(post.date)}</time>
+            </div>
+            <p>${post.desc}</p>
+          </a>
+        `;
+        postsList.appendChild(item);
       });
-  </script>
+    })
+    .catch(err => {
+      console.error('Error loading posts index:', err);
+      const postsList = document.getElementById('posts-list');
+      postsList.innerHTML = '<p>Error loading posts.</p>';
+    });
+
+  // -------------------------------------------
+  // VIEWS HERO: pull images from views.html
+  // -------------------------------------------
+  async function initViewsHero() {
+    const heroSection   = document.getElementById('home-views-hero');
+    const heroImg       = document.getElementById('hero-image');
+    const placeholder   = heroSection.querySelector('.hero-placeholder');
+    const prevBtn       = heroSection.querySelector('.hero-prev');
+    const nextBtn       = heroSection.querySelector('.hero-next');
+
+    try {
+      const resp = await fetch('views.html');
+      const html = await resp.text();
+
+      // Parse views.html and find images
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      // Adjust this selector to match your views.html structure.
+      // If you used the .views-gallery/.gallery-grid markup, this will work out of the box.
+      const imgNodes = doc.querySelectorAll('.gallery-grid img, .views-gallery img, img[data-view]');
+      const urls = Array.from(imgNodes)
+        .map(img => img.getAttribute('src'))
+        .filter(Boolean);
+
+      const uniqueUrls = Array.from(new Set(urls));
+
+      if (!uniqueUrls.length) {
+        // no images found, hide hero
+        heroSection.classList.add('is-hidden');
+        return;
+      }
+
+      let currentIndex = 0;
+
+      function show(index) {
+        currentIndex = (index + uniqueUrls.length) % uniqueUrls.length;
+        const src = uniqueUrls[currentIndex];
+
+        heroImg.src = src;
+        heroImg.style.display = 'block';
+        if (placeholder) placeholder.style.display = 'none';
+      }
+
+      prevBtn.addEventListener('click', () => show(currentIndex - 1));
+      nextBtn.addEventListener('click', () => show(currentIndex + 1));
+
+      // Clicking the hero takes you to the full views page
+      heroImg.addEventListener('click', () => {
+        window.location.href = 'views.html';
+      });
+
+      // Keyboard navigation when focused
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') show(currentIndex - 1);
+        if (e.key === 'ArrowRight') show(currentIndex + 1);
+      });
+
+      // Show first image
+      show(0);
+
+    } catch (err) {
+      console.error('Error loading images from views.html:', err);
+      heroSection.classList.add('is-hidden');
+    }
+  }
+
+  // Initialize hero after DOM is ready
+  document.addEventListener('DOMContentLoaded', initViewsHero);
+</script>
+
 
 </body>
 </html>
