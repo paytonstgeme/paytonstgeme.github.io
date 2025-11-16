@@ -10,19 +10,13 @@ html, body { height:100%; font-family: sans-serif; background:#fff; }
    2. Layout containers
    ────────────────────────────────────── */
 .container {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;  /* move content to top */
-  padding-top:4rem;            /* push logo downward (adjust as needed) */
-  position:relative;
+  padding-top: 2rem;      
+  padding-bottom: 3rem;   
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
-
-
-/* ──────────────────────────────────────
-   3. Logo (centered)
-   ────────────────────────────────────── */
 
 /* Logo */
     .logo {
