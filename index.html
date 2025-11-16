@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payton St. Geme</title>
 
-  <!-- Google Material Icons: menu & menu_open -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
 
@@ -15,12 +14,9 @@
 
 <body>
 
-  <!-- Main Centered Content -->
   <div class="container">
-    <!-- Hamburger Menu Button -->
     <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
 
-    <!-- Logo & Title -->
     <a href="index.html" class="logo">
   <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
   <span>Payton St. Geme</span>
@@ -28,7 +24,6 @@
 
   </div>
 
-  <!-- Sidebar Navigation -->
   <nav class="sidebar" id="sidebar">
     <ul class="nav-list">
       <li><a href="index.html" class="active">Home</a></li>
@@ -37,16 +32,25 @@
     </ul>
   </nav>
 
-  <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
   
   <main class="container">
-    <!-- Posts list will be dynamically populated here -->
-    <div class="post-list" id="posts-list"></div>
-  </main>
-  <!-- JavaScript: populate posts list -->
+
+  <section class="home-views-hero" id="home-views-hero">
+    <button class="hero-arrow hero-prev" type="button">&#10094;</button>
+
+    <div class="hero-image-frame">
+      <span class="hero-placeholder">&lt;images go here&gt;</span>
+      <img id="hero-image" src="" alt="View image" style="display:none;">
+    </div>
+
+    <button class="hero-arrow hero-next" type="button">&#10095;</button>
+  </section>
+
+  <div class="post-list" id="posts-list"></div>
+</main>
+
   <script>
-  // Helper to format ISO date to human-readable (e.g., October 20, 2025)
   function formatDate(iso) {
     const date = new Date(iso);
     return date.toLocaleDateString('en-US', {
@@ -56,9 +60,7 @@
     });
   }
 
-  // ---------------------------
-  // POSTS: populate posts list
-  // ---------------------------
+
   fetch('data/posts_index.json')
     .then(resp => resp.json())
     .then(posts => {
