@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Views | Payton St. Geme</title>
 
-  <!-- Google Material Icons: include icons used in navigation and lightbox (sorted alphabetically) -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=chevron_left,chevron_right,close,menu,menu_open" />
 
-  <!-- Shared stylesheet and menu script -->
   <link rel="stylesheet" href="style.css">
   <script src="scripts/main.js" defer></script>
 </head>
 
 <body>
 
-  <!-- Header & navigation toggle -->
   <div class="container">
     <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
     <a href="index.html" class="logo">
@@ -25,7 +22,6 @@
     </a>
   </div>
 
-  <!-- Sidebar Navigation -->
   <nav class="sidebar" id="sidebar">
     <ul class="nav-list">
       <li><a href="index.html">Home</a></li>
@@ -34,73 +30,116 @@
     </ul>
   </nav>
 
-  <!-- Overlay for sidebar -->
   <div class="overlay" id="overlay"></div>
 
   <main class="container">
-    <!-- Gallery Section -->
     <section class="views-gallery">
       <h1>Views</h1>
       <div class="gallery-grid" id="gallery-grid">
-        <!-- Each figure represents a photo; update paths & captions to your images -->
+
         <figure>
-          <img src="assets/image2.jpg" alt="Ancient ruins" loading="lazy">
-          <figcaption>timeless stone.</figcaption>
+          <img src="assets/image2.jpg" alt="Landing scene" loading="lazy">
         </figure>
+
         <figure>
-          <img src="assets/Bridgeheadlands.png" alt="Bridge view from the headlands" loading="lazy">
-          <figcaption>from the headlands.</figcaption>
+          <img src="assets/Bridgeheadlands.png" alt="Bridge from the headlands" loading="lazy">
         </figure>
+
         <figure>
-          <img src="assets/bridgecloseup.png" alt="Close-up of bridge structure" loading="lazy">
-          <figcaption>steel and sky.</figcaption>
+          <img src="assets/bridgecloseup.png" alt="Close-up bridge structure" loading="lazy">
         </figure>
+
         <figure>
           <img src="assets/bridgered.PNG" alt="Golden Gate Bridge in red" loading="lazy">
-          <figcaption>the bay.</figcaption>
         </figure>
+
+        <figure>
+          <img src="assets/IMG_0946.JPG" alt="Motion and light trails" loading="lazy">
+        </figure>
+
         <figure>
           <img src="assets/IMG_1057.JPG" alt="Speed and motion blur" loading="lazy">
-          <figcaption>speed.</figcaption>
         </figure>
+
         <figure>
-          <img src="assets/IMG_3291.JPG" alt="Wanderer in the mist" loading="lazy">
-          <figcaption>eternal wander.</figcaption>
+          <img src="assets/IMG_1061.JPG" alt="Blurred horizon" loading="lazy">
         </figure>
+
         <figure>
-          <img src="assets/pers.jpg" alt="Perseus constellation" loading="lazy">
-          <figcaption>perseus.</figcaption>
+          <img src="assets/IMG_1428.JPG" alt="Dramatic sky" loading="lazy">
         </figure>
+
         <figure>
           <img src="assets/IMG_1941.JPG" alt="Golden light at sunset" loading="lazy">
-          <figcaption>golden hour.</figcaption>
         </figure>
+
         <figure>
           <img src="assets/IMG_1970.JPG" alt="Distant horizon" loading="lazy">
-          <figcaption>endless horizon.</figcaption>
         </figure>
+
+        <figure>
+          <img src="assets/IMG_2513.JPG" alt="Soft pastel sky" loading="lazy">
+        </figure>
+
         <figure>
           <img src="assets/IMG_2747.JPG" alt="Quiet moment" loading="lazy">
-          <figcaption>stillness.</figcaption>
         </figure>
+
+        <figure>
+          <img src="assets/IMG_3131.JPG" alt="Moody landscape" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/IMG_3291.JPG" alt="Wanderer in the mist" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/IMG_4474.JPG" alt="Silhouette against sunset" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/IMG_4902.JPG" alt="Evening glow" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/IMG_4915.JPG" alt="Calm waters at dusk" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/IMG_4916.JPG" alt="Reflections on water" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/IMG_5039.JPG" alt="Night city lights" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/IMG_6799.JPG" alt="Starlit night" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/San Francisco-4.PNG" alt="San Francisco skyline" loading="lazy">
+        </figure>
+
+        <figure>
+          <img src="assets/pers.jpg" alt="Perseus constellation" loading="lazy">
+        </figure>
+
       </div>
     </section>
   </main>
 
-  <!-- Lightbox overlay for viewing images -->
+  <!-- Lightbox (unchanged) -->
   <div class="lightbox-overlay" id="lightbox">
     <div class="lightbox-wrapper">
-      <!-- Close button -->
       <span class="material-symbols-outlined lightbox-close" id="lightbox-close">close</span>
-      <!-- Image display -->
       <img class="lightbox-image" id="lightbox-img" src="" alt="">
-      <!-- Navigation arrows -->
       <span class="material-symbols-outlined lightbox-arrow lightbox-prev" id="lightbox-prev">chevron_left</span>
       <span class="material-symbols-outlined lightbox-arrow lightbox-next" id="lightbox-next">chevron_right</span>
     </div>
   </div>
 
-  <!-- Lightbox & gallery script -->
+  <!-- Lightbox & gallery script (unchanged) -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const galleryImages = Array.from(document.querySelectorAll('#gallery-grid figure img'));
@@ -111,7 +150,6 @@
       const btnClose = document.getElementById('lightbox-close');
       let currentIndex = 0;
 
-      // Initialize click events for images
       galleryImages.forEach((img, idx) => {
         img.dataset.index = idx;
         img.addEventListener('click', () => {
@@ -149,12 +187,10 @@
       btnNext.addEventListener('click', showNext);
       btnClose.addEventListener('click', closeLightbox);
 
-      // Close lightbox when clicking outside image area
       lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
       });
 
-      // Keyboard navigation
       document.addEventListener('keydown', e => {
         if (!lightbox.classList.contains('open')) return;
         if (e.key === 'Escape') closeLightbox();
