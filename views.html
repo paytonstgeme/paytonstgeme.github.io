@@ -5,34 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Views | Payton St. Geme</title>
 
-  <!-- Google Material Icons: menu & menu_open -->
+  <!-- Material Symbols: menu, arrows, close -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,chevron_left,chevron_right,close" />
 
-  <!-- Shared stylesheet and menu script -->
+  <!-- Your shared styles & menu script -->
   <link rel="stylesheet" href="style.css">
   <script src="scripts/main.js" defer></script>
-</head>
 
-<body>
-
-  <!-- Main Centered Content -->
-  <div class="container">
-    <!-- Hamburger Menu Button -->
-    <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
-
-    <!-- Logo & Title -->
-    <a href="index.html" class="logo">
-      <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
-      <span>Payton St. Geme</span>
-    </a>
-
+  <!-- Custom styles for the sliding gallery -->
   <style>
     .views-gallery {
       position: relative;
       overflow: hidden;
       padding: 2rem 0;
     }
+
     .slider-container {
       display: flex;
       overflow-x: auto;
@@ -41,22 +29,18 @@
       -webkit-overflow-scrolling: touch;
       gap: 1rem;
       padding: 1rem 0;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
     }
-    .slider-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
-    
+    .slider-container::-webkit-scrollbar { display: none; }
+
     .slider-container figure {
       scroll-snap-align: center;
-      flex: 0 0 90vw;        /* Mobile: nearly full width */
+      flex: 0 0 90vw;
       max-width: 600px;
       margin: 0;
     }
-    @media (min-width: 768px) {
-      .slider-container figure { flex: 0 0 70vw; }
-    }
-    @media (min-width: 1024px) {
-      .slider-container figure { flex: 0 0 50vw; }
-    }
+    @media (min-width: 768px)  { .slider-container figure { flex: 0 0 70vw; } }
+    @media (min-width: 1024px) { .slider-container figure { flex: 0 0 50vw; } }
 
     .slider-container img {
       width: 100%;
@@ -75,31 +59,29 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.5);
       color: white;
       border: none;
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      font-size: 2rem;
+      font-size: 2.5rem;
       cursor: pointer;
       z-index: 10;
       display: flex;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(6px);
+      user-select: none;
     }
     .nav-arrow.left  { left: 10px; }
     .nav-arrow.right { right: 10px; }
-    @media (min-width: 1024px) {
-      .nav-arrow { opacity: 0.7; }
-      .nav-arrow:hover { opacity: 1; background: rgba(0,0,0,0.6); }
-    }
+    .nav-arrow:hover { background: rgba(0,0,0,0.7); }
   </style>
 </head>
-<body>
 
-  <!-- Header & Nav (unchanged) -->
+<body>
+  <!-- Header -->
   <div class="container">
     <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
     <a href="index.html" class="logo">
@@ -108,6 +90,7 @@
     </a>
   </div>
 
+  <!-- Sidebar Navigation -->
   <nav class="sidebar" id="sidebar">
     <ul class="nav-list">
       <li><a href="index.html">Home</a></li>
@@ -115,50 +98,50 @@
       <li><a href="views.html" class="active">Views</a></li>
     </ul>
   </nav>
-
   <div class="overlay" id="overlay"></div>
 
+  <!-- Main Content -->
   <main class="container">
     <section class="views-gallery">
       <h1>Views</h1>
 
-      <!-- Navigation Arrows -->
-      <button class="nav-arrow left" id="prevBtn" aria-label="Previous image">
+      <!-- Left / Right Arrows -->
+      <button class="nav-arrow left"  id="prevBtn" aria-label="Previous">
         <span class="material-symbols-outlined">chevron_left</span>
       </button>
-      <button class="nav-arrow right" id="nextBtn" aria-label="Next image">
+      <button class="nav-arrow right" id="nextBtn" aria-label="Next">
         <span class="material-symbols-outlined">chevron_right</span>
       </button>
 
-      <!-- Sliding Gallery -->
+      <!-- Horizontal Sliding Gallery -->
       <div class="slider-container" id="slider">
-        <figure><img src="assets/image2.jpg" alt="Landing scene" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/Bridgeheadlands.png" alt="Bridge from the headlands" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/bridgecloseup.png" alt="Close-up bridge structure" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/bridgered.PNG" alt="Golden Gate Bridge in red" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_0946.JPG" alt="Motion trails" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_1057.JPG" alt="Speed" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_1061.JPG" alt="Blurred horizon" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_1428.JPG" alt="Dramatic sky" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_1941.JPG" alt="Golden hour" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_1970.JPG" alt="Endless horizon" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_2513.JPG" alt="Pastel sky" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_2747.JPG" alt="Stillness" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_3131.JPG" alt="Into the mist" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_3291.JPG" alt="Eternal wander" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_4474.JPG" alt="Last light" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_4902.JPG" alt="Ember sky" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_4915.JPG" alt="Mirror of twilight" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_4916.JPG" alt="Liquid glass" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_5039.JPG" alt="City breathes" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/IMG_6799.JPG" alt="Under the vault" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/San Francisco-4.PNG" alt="The city by the bay" loading="lazy" decoding="async"></figure>
-        <figure><img src="assets/pers.jpg" alt="Perseus constellation" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/image2.jpg"               alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/Bridgeheadlands.png"       alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/bridgecloseup.png"         alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/bridgered.PNG"             alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_0946.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_1057.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_1061.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_1428.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_1941.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_1970.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_2513.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_2747.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_3131.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_3291.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_4474.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_4902.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_4915.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_4916.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_5039.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/IMG_6799.JPG"              alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/San Francisco-4.PNG"       alt="" loading="lazy" decoding="async"></figure>
+        <figure><img src="assets/pers.jpg"                  alt="" loading="lazy" decoding="async"></figure>
       </div>
     </section>
   </main>
 
-  <!-- Lightbox (unchanged – still works perfectly) -->
+  <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightbox">
     <div class="lightbox-wrapper">
       <span class="material-symbols-outlined lightbox-close" id="lightbox-close">close</span>
@@ -168,7 +151,7 @@
     </div>
   </div>
 
-  <!-- Updated Script: Lightbox + Arrow Navigation -->
+  <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const images = Array.from(document.querySelectorAll('.slider-container img'));
@@ -176,11 +159,11 @@
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
 
-      // Lightbox
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
+      const lightbox     = document.getElementById('lightbox');
+      const lightboxImg  = document.getElementById('lightbox-img');
       let currentIndex = 0;
 
+      // Open lightbox on image click
       images.forEach((img, i) => {
         img.addEventListener('click', () => {
           currentIndex = i;
@@ -190,6 +173,7 @@
         });
       });
 
+      // Lightbox navigation
       document.querySelector('.lightbox-prev').onclick = () => {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         lightboxImg.src = images[currentIndex].src;
@@ -199,17 +183,18 @@
         lightboxImg.src = images[currentIndex].src;
       };
       document.getElementById('lightbox-close').onclick = () => lightbox.classList.remove('open');
-      lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); };
+      lightbox.onclick = e => { if (e.target === lightbox) lightbox.classList.remove('open'); };
 
-      // Slider arrow navigation
-      prevBtn.onclick = () => slider.scrollBy({ left: -window.innerWidth * 0.8, behavior: 'smooth' });
-      nextBtn.onclick = () => slider.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' });
+      // Slider arrows
+      prevBtn.onclick = () => slider.scrollBy({ left: -innerWidth * 0.8, behavior: 'smooth' });
+      nextBtn.onclick = () => slider.scrollBy({ left:  innerWidth * 0.8, behavior: 'smooth' });
 
       // Keyboard support
       document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft') prevBtn.click();
+        if (e.key === 'ArrowLeft')  prevBtn.click();
         if (e.key === 'ArrowRight') nextBtn.click();
-        if (e.key === 'Escape' && lightbox.classList.contains('open')) lightbox.classList.remove('open');
+        if (e.key === 'Escape' && lightbox.classList.contains('open'))
+          lightbox.classList.remove('open');
       });
     });
   </script>
