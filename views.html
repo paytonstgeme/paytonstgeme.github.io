@@ -4,86 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Views | Payton St. Geme</title>
-
+  
+  <!-- Material Symbols (includes menu, close, chevrons, etc.) -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=chevron_left,chevron_right,close,menu" />
-
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,close,chevron_left,chevron_right" />
+  
   <link rel="stylesheet" href="style.css">
   <script src="scripts/main.js" defer></script>
-
-  <style>
-    .views-gallery {
-      position: relative;
-      overflow: hidden;
-      padding: 2rem 0;
-    }
-    .slider-container {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      gap: 1rem;
-      padding: 1rem 0;
-      scrollbar-width: none; /* Firefox */
-    }
-    .slider-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
-    
-    .slider-container figure {
-      scroll-snap-align: center;
-      flex: 0 0 90vw;        /* Mobile: nearly full width */
-      max-width: 600px;
-      margin: 0;
-    }
-    @media (min-width: 768px) {
-      .slider-container figure { flex: 0 0 70vw; }
-    }
-    @media (min-width: 1024px) {
-      .slider-container figure { flex: 0 0 50vw; }
-    }
-
-    .slider-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-      object-fit: cover;
-      aspect-ratio: 1 / 1;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .slider-container img:hover { transform: scale(1.02); }
-
-    /* Navigation arrows */
-    .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.4);
-      color: white;
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      font-size: 2rem;
-      cursor: pointer;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(4px);
-    }
-    .nav-arrow.left  { left: 10px; }
-    .nav-arrow.right { right: 10px; }
-    @media (min-width: 1024px) {
-      .nav-arrow { opacity: 0.7; }
-      .nav-arrow:hover { opacity: 1; background: rgba(0,0,0,0.6); }
-    }
-  </style>
 </head>
-<body>
 
-  <!-- Header & Nav (unchanged) -->
+<body>
+  <!-- Header with menu button and logo -->
   <div class="container">
     <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
     <a href="index.html" class="logo">
@@ -92,6 +23,7 @@
     </a>
   </div>
 
+  <!-- Sidebar Navigation -->
   <nav class="sidebar" id="sidebar">
     <ul class="nav-list">
       <li><a href="index.html">Home</a></li>
@@ -100,13 +32,15 @@
     </ul>
   </nav>
 
+  <!-- Dark overlay when menu is open -->
   <div class="overlay" id="overlay"></div>
 
-  <main class="container">
+  <!-- Main page content -->
+  <main>
     <section class="views-gallery">
       <h1>Views</h1>
 
-      <!-- Navigation Arrows -->
+      <!-- Navigation arrows -->
       <button class="nav-arrow left" id="prevBtn" aria-label="Previous image">
         <span class="material-symbols-outlined">chevron_left</span>
       </button>
@@ -114,7 +48,7 @@
         <span class="material-symbols-outlined">chevron_right</span>
       </button>
 
-      <!-- Sliding Gallery -->
+      <!-- Horizontal slider gallery -->
       <div class="slider-container" id="slider">
         <figure><img src="assets/image2.jpg" alt="Landing scene" loading="lazy" decoding="async"></figure>
         <figure><img src="assets/Bridgeheadlands.png" alt="Bridge from the headlands" loading="lazy" decoding="async"></figure>
@@ -142,7 +76,7 @@
     </section>
   </main>
 
-  <!-- Lightbox (unchanged – still works perfectly) -->
+  <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightbox">
     <div class="lightbox-wrapper">
       <span class="material-symbols-outlined lightbox-close" id="lightbox-close">close</span>
@@ -152,19 +86,81 @@
     </div>
   </div>
 
-  <!-- Updated Script: Lightbox + Arrow Navigation -->
+  <!-- Inline styles for the slider (you can move these to style.css later if you want) -->
+  <style>
+    .views-gallery {
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+    .slider-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      gap: 1rem;
+      padding: 1rem 0;
+      scrollbar-width: none;
+    }
+    .slider-container::-webkit-scrollbar { display: none; }
+    .slider-container figure {
+      scroll-snap-align: center;
+      flex: 0 0 90vw;
+      max-width: 600px;
+      margin: 0;
+    }
+    @media (min-width: 768px) { .slider-container figure { flex: 0 0 70vw; } }
+    @media (min-width: 1024px) { .slider-container figure { flex: 0 0 50vw; } }
+    .slider-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .slider-container img:hover { transform: scale(1.02); }
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .nav-arrow.left { left: 10px; }
+    .nav-arrow.right { right: 10px; }
+    @media (min-width: 1024px) {
+      .nav-arrow { opacity: 0.7; }
+      .nav-arrow:hover { opacity: 1; background: rgba(0,0,0,0.6); }
+    }
+  </style>
+
+  <!-- Lightbox + Slider Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const images = Array.from(document.querySelectorAll('.slider-container img'));
       const slider = document.getElementById('slider');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
-
-      // Lightbox
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
       let currentIndex = 0;
 
+      // Open lightbox
       images.forEach((img, i) => {
         img.addEventListener('click', () => {
           currentIndex = i;
@@ -174,6 +170,7 @@
         });
       });
 
+      // Lightbox navigation
       document.querySelector('.lightbox-prev').onclick = () => {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         lightboxImg.src = images[currentIndex].src;
@@ -183,9 +180,9 @@
         lightboxImg.src = images[currentIndex].src;
       };
       document.getElementById('lightbox-close').onclick = () => lightbox.classList.remove('open');
-      lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); };
+      lightbox.onclick = e => { if (e.target === lightbox) lightbox.classList.remove('open'); };
 
-      // Slider arrow navigation
+      // Slider arrows
       prevBtn.onclick = () => slider.scrollBy({ left: -window.innerWidth * 0.8, behavior: 'smooth' });
       nextBtn.onclick = () => slider.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' });
 
