@@ -4,26 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Views | Payton St. Geme</title>
-  
-  <!-- Material Symbols (includes menu, close, chevrons, etc.) -->
+
+  <!-- Material Symbols (includes menu, close, chevrons) -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,close,chevron_left,chevron_right" />
-  
+
   <link rel="stylesheet" href="style.css">
   <script src="scripts/main.js" defer></script>
 </head>
 
 <body>
-  <!-- Header with menu button and logo -->
+
+  <!-- Header + Menu Button (identical to index.html) -->
   <div class="container">
     <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
+
     <a href="index.html" class="logo">
       <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
       <span>Payton St. Geme</span>
     </a>
   </div>
 
-  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation (identical to index.html) -->
   <nav class="sidebar" id="sidebar">
     <ul class="nav-list">
       <li><a href="index.html">Home</a></li>
@@ -32,10 +34,10 @@
     </ul>
   </nav>
 
-  <!-- Dark overlay when menu is open -->
+  <!-- Overlay when menu is open -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- Main page content -->
+  <!-- Main content — NO .container class (prevents layout shift bug) -->
   <main>
     <section class="views-gallery">
       <h1>Views</h1>
@@ -48,7 +50,7 @@
         <span class="material-symbols-outlined">chevron_right</span>
       </button>
 
-      <!-- Horizontal slider gallery -->
+      <!-- Horizontal scrolling gallery -->
       <div class="slider-container" id="slider">
         <figure><img src="assets/image2.jpg" alt="Landing scene" loading="lazy" decoding="async"></figure>
         <figure><img src="assets/Bridgeheadlands.png" alt="Bridge from the headlands" loading="lazy" decoding="async"></figure>
@@ -86,13 +88,9 @@
     </div>
   </div>
 
-  <!-- Inline styles for the slider (you can move these to style.css later if you want) -->
+  <!-- Slider-specific styles (you can move to style.css later) -->
   <style>
-    .views-gallery {
-      position: relative;
-      overflow: hidden;
-      padding: 2rem 0;
-    }
+    .views-gallery { position: relative; overflow: hidden; padding: 2rem 0; }
     .slider-container {
       display: flex;
       overflow-x: auto;
@@ -160,7 +158,6 @@
       const lightboxImg = document.getElementById('lightbox-img');
       let currentIndex = 0;
 
-      // Open lightbox
       images.forEach((img, i) => {
         img.addEventListener('click', () => {
           currentIndex = i;
@@ -170,23 +167,20 @@
         });
       });
 
-      // Lightbox navigation
-      document.querySelector('.lightbox-prev').onclick = () => {
+      document.querySelector('.lightbox-prev')?.addEventListener('click', () => {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         lightboxImg.src = images[currentIndex].src;
-      };
-      document.querySelector('.lightbox-next').onclick = () => {
+      });
+      document.querySelector('.lightbox-next')?.addEventListener('click', () => {
         currentIndex = (currentIndex + 1) % images.length;
         lightboxImg.src = images[currentIndex].src;
-      };
-      document.getElementById('lightbox-close').onclick = () => lightbox.classList.remove('open');
-      lightbox.onclick = e => { if (e.target === lightbox) lightbox.classList.remove('open'); };
+      });
+      document.getElementById('lightbox-close')?.addEventListener('click', () => lightbox.classList.remove('open'));
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
 
-      // Slider arrows
-      prevBtn.onclick = () => slider.scrollBy({ left: -window.innerWidth * 0.8, behavior: 'smooth' });
-      nextBtn.onclick = () => slider.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' });
+      prevBtn.addEventListener('click', () => slider.scrollBy({ left: -window.innerWidth * 0.8, behavior: 'smooth' }));
+      nextBtn.addEventListener('click', () => slider.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' }));
 
-      // Keyboard support
       document.addEventListener('keydown', e => {
         if (e.key === 'ArrowLeft') prevBtn.click();
         if (e.key === 'ArrowRight') nextBtn.click();
@@ -194,5 +188,6 @@
       });
     });
   </script>
+
 </body>
 </html>
