@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Views | Payton St. Geme</title>
 
-  <!-- Load all needed icons: menu, close, and proper arrows -->
-  <link rel="stylesheet"
-         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
+  <!-- Load all needed icons: menu, close, and arrows -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open,close,arrow_back,arrow_forward"
+  />
 
   <link rel="stylesheet" href="style.css">
   <script src="scripts/main.js" defer></script>
@@ -36,7 +38,7 @@
   <div class="overlay" id="overlay"></div>
 
   <!-- Main Content -->
-<main class="container">
+  <main class="container">
 
     <!-- Hero section -->
     <section class="home-views-hero" id="home-views-hero">
@@ -53,7 +55,7 @@
     <!-- Gallery Slider -->
     <section class="views-gallery">
       <button class="nav-arrow left" id="prevBtn" type="button">&#10094;</button>
-      <!-- Gallery Slider -->
+
       <div class="slider-container" id="slider">
         <figure><img src="assets/image2.jpg" alt="Landing scene" loading="lazy"></figure>
         <figure><img src="assets/Bridgeheadlands.png" alt="Bridge from the headlands" loading="lazy"></figure>
@@ -78,10 +80,13 @@
         <figure><img src="assets/San Francisco-4.PNG" alt="The city by the bay" loading="lazy"></figure>
         <figure><img src="assets/pers.jpg" alt="Perseus constellation" loading="lazy"></figure>
       </div>
+
+      <button class="nav-arrow right" id="nextBtn" type="button">&#10095;</button>
     </section>
+
   </main>
 
-  <!-- Lightbox (also updated to use proper arrows) -->
+  <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightbox">
     <div class="lightbox-wrapper">
       <span class="material-symbols-outlined lightbox-close" id="lightbox-close">close</span>
@@ -93,7 +98,11 @@
 
   <!-- Slider Styles -->
   <style>
-    .views-gallery { position: relative; overflow: hidden; padding: 2rem 0; }
+    .views-gallery {
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
     .slider-container {
       display: flex;
       overflow-x: auto;
@@ -154,15 +163,19 @@
     .nav-arrow.right { right: 16px; }
   </style>
 
-  <!-- Lightbox + Slider Script (fully working) -->
+  <!-- Lightbox + Slider Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const images    = Array.from(document.querySelectorAll('.slider-container img'));
-      const slider    = document.getElementById('slider');
-      const prevBtn   = document.getElementById('prevBtn');
-      const nextBtn   = document.getElementById('nextBtn');
-      const lightbox  = document.getElementById('lightbox');
+      const images      = Array.from(document.querySelectorAll('.slider-container img'));
+      const slider      = document.getElementById('slider');
+      const prevBtn     = document.getElementById('prevBtn');
+      const nextBtn     = document.getElementById('nextBtn');
+      const lightbox    = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxPrev = document.querySelector('.lightbox-prev');
+      const lightboxNext = document.querySelector('.lightbox-next');
+      const lightboxClose = document.getElementById('lightbox-close');
+
       let currentIndex = 0;
 
       // Open lightbox on click
@@ -176,26 +189,48 @@
       });
 
       // Lightbox navigation
-      document.querySelector('.lightbox-prev')?.addEventListener('click', () => {
+      lightboxPrev?.addEventListener('click', () => {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt;
       });
-      document.querySelector('.lightbox-next')?.addEventListener('click', () => {
+
+      lightboxNext?.addEventListener('click', () => {
         currentIndex = (currentIndex + 1) % images.length;
         lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt;
       });
-      document.getElementById('lightbox-close')?.addEventListener('click', () => lightbox.classList.remove('open'));
-      lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
+      lightboxClose?.addEventListener('click', () => {
+        lightbox.classList.remove('open');
+      });
+
+      lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('open');
+        }
+      });
 
       // Slider arrows
-      prevBtn.addEventListener('click', () => slider.scrollBy({ left: -window.innerWidth * 0.8, behavior: 'smooth' }));
-      nextBtn.addEventListener('click', () => slider.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' }));
+      prevBtn?.addEventListener('click', () => {
+        slider.scrollBy({ left: -window.innerWidth * 0.8, behavior: 'smooth' });
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        slider.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' });
+      });
 
       // Keyboard support
       document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft') prevBtn.click();
-        if (e.key === 'ArrowRight') nextBtn.click();
-        if (e.key === 'Escape' && lightbox.classList.contains('open')) lightbox.classList.remove('open');
+        if (e.key === 'ArrowLeft') {
+          prevBtn?.click();
+        }
+        if (e.key === 'ArrowRight') {
+          nextBtn?.click();
+        }
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+          lightbox.classList.remove('open');
+        }
       });
     });
   </script>
