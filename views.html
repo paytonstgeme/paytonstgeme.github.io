@@ -7,7 +7,7 @@
 
   <!-- Load all needed icons: menu, close, and proper arrows -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,close,arrow_back,arrow_forward" />
+         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
 
   <link rel="stylesheet" href="style.css">
   <script src="scripts/main.js" defer></script>
@@ -36,17 +36,20 @@
   <div class="overlay" id="overlay"></div>
 
   <!-- Main Content -->
-  <main>
-    <section class="views-gallery">
-      <h1>Views</h1>
+  <main class="container">
 
-      <!-- Proper Left & Right Arrows (using arrow_back / arrow_forward) -->
-      <button class="nav-arrow left" id="prevBtn" aria-label="Previous image">
-        <span class="material-symbols-outlined">arrow_back</span>
-      </button>
-      <button class="nav-arrow right" id="nextBtn" aria-label="Next image">
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </button>
+  <section class="home-views-hero" id="home-views-hero">
+    <button class="hero-arrow hero-prev" type="button">&#10094;</button>
+
+    <div class="hero-image-frame">
+      <span class="hero-placeholder">&lt;images go here&gt;</span>
+      <img id="hero-image" src="" alt="View image" style="display:none;">
+    </div>
+
+    <button class="hero-arrow hero-next" type="button">&#10095;</button>
+    <button class="hero-arrow hero-arrow-left" aria-label="Previous">Left Arrow</button>
+  <button class="hero-arrow hero-arrow-right" aria-label="Next">Right Arrow</button>
+  </section>  
 
       <!-- Gallery Slider -->
       <div class="slider-container" id="slider">
