@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Payton St. Geme</title>
+  <title>Home</title>
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
@@ -19,11 +19,11 @@
 
     <a href="index.html" class="logo">
   <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
-  <span>Payton St. Geme</span>
+  <span>Home</span>
 </a>
   </div>
   
-<nav class="sidebar" id="sidebar">
+ <nav class="sidebar" id="sidebar">
     <ul class="nav-list">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="posts.html">Posts</a></li>
@@ -86,7 +86,10 @@
       postsList.innerHTML = '<p>Error loading posts.</p>';
     });
 
-   async function initViewsHero() {
+  // -------------------------------------------
+  // VIEWS HERO: pull images from views.html
+  // -------------------------------------------
+  async function initViewsHero() {
     const heroSection   = document.getElementById('home-views-hero');
     const heroImg       = document.getElementById('hero-image');
     const placeholder   = heroSection.querySelector('.hero-placeholder');
