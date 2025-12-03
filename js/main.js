@@ -24,3 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (link.getAttribute('href') === current) link.classList.add('active');
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn   = document.getElementById('menuBtn');
+  const sidebar  = document.getElementById('sidebar');
+  const overlay  = document.getElementById('overlay');
+
+  const toggleMenu = () => {
+    menuBtn.classList.toggle('open');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+  };
+
+  menuBtn.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+
+  // Highlight current page
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-link').forEach(link => {
+    if (link.getAttribute('href').endsWith(path)) {
+      link.classList.add('active');
+    }
+  });
+});
