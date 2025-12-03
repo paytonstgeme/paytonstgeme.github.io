@@ -5,11 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home</title>
 
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
+  <!-- Italiana from Google Fonts -->
+  <https://fonts.google.com/specimen/Italiana> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
   <script src="scripts/main.js" defer></script>
+
+  <style>
+    /* Apply Italiana globally – you can remove this block if you prefer to keep everything in style.css */
+    body {
+      font-family: 'Italiana', serif;
+      font-weight: 400;
+    }
+
+    /* Make sure headings, nav, and post items inherit the font */
+    h1, h2, h3, h4, h5, h6,
+    nav, .nav-list a,
+    .post-item h2,
+    .meta time,
+    .logo span {
+      font-family: 'Italiana', serif;
+    }
+
+    /* Optional: slightly larger base size for better readability with this elegant font */
+    body {
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* Give the logo text a nice touch of elegance */
+    .logo span {
+      font-size: 1.1em;
+      letter-spacing: 0.5px;
+    }
+  </style>
 </head>
 
 <body>
@@ -18,12 +50,12 @@
     <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
 
     <a href="index.html" class="logo">
-  <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
-  <span>Home</span>
-</a>
+      <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
+      <span>Home</span>
+    </a>
   </div>
   
- <nav class="sidebar" id="sidebar">
+  <nav class="sidebar" id="sidebar">
     <ul class="nav-list">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="posts.html">Posts</a></li>
@@ -35,128 +67,106 @@
   
   <main class="container">
 
-  <section class="home-views-hero" id="home-views-hero">
-    <button class="hero-arrow hero-prev" type="button">&#10094;</button>
+    <section class="home-views-hero" id="home-views-hero">
+      <button class="hero-arrow hero-prev" type="button">Previous</button>
 
-    <div class="hero-image-frame">
-      <span class="hero-placeholder">&lt;images go here&gt;</span>
-      <img id="hero-image" src="" alt="View image" style="display:none;">
-    </div>
+      <div class="hero-image-frame">
+        <span class="hero-placeholder">&lt;images go here&gt;</span>
+        <img id="hero-image" src="" alt="View image" style="display:none;">
+      </div>
 
-    <button class="hero-arrow hero-arrow-left" aria-label="Previous">Left Arrow</button>
-  <button class="hero-arrow hero-arrow-right" aria-label="Next">Right Arrow</button>
-  </section>
+      <button class="hero-arrow hero-arrow-left" aria-label="Previous">Left Arrow</button>
+      <button class="hero-arrow hero-arrow-right" aria-label="Next">Right Arrow</button>
+    </section>
 
-  <div class="post-list" id="posts-list"></div>
-</main>
+    <div class="post-list" id="posts-list"></div>
+  </main>
 
   <script>
-  function formatDate(iso) {
-    const date = new Date(iso);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
-
-
-  fetch('data/posts_index.json')
-    .then(resp => resp.json())
-    .then(posts => {
-      const postsList = document.getElementById('posts-list');
-      posts.forEach(post => {
-        const item = document.createElement('div');
-        item.className = 'post-item';
-        item.innerHTML = `
-          <a href="${post.url}">
-            <h2>${post.title}</h2>
-            <div class="meta">
-              <time datetime="${post.date}">${formatDate(post.date)}</time>
-            </div>
-            <p>${post.desc}</p>
-          </a>
-        `;
-        postsList.appendChild(item);
+    function formatDate(iso) {
+      const date = new Date(iso);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
       });
-    })
-    .catch(err => {
-      console.error('Error loading posts index:', err);
-      const postsList = document.getElementById('posts-list');
-      postsList.innerHTML = '<p>Error loading posts.</p>';
-    });
-
-  // -------------------------------------------
-  // VIEWS HERO: pull images from views.html
-  // -------------------------------------------
-  async function initViewsHero() {
-    const heroSection   = document.getElementById('home-views-hero');
-    const heroImg       = document.getElementById('hero-image');
-    const placeholder   = heroSection.querySelector('.hero-placeholder');
-    const prevBtn       = heroSection.querySelector('.hero-prev');
-    const nextBtn       = heroSection.querySelector('.hero-next');
-
-    try {
-      const resp = await fetch('views.html');
-      const html = await resp.text();
-
-      // Parse views.html and find images
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-
-      // Adjust this selector to match your views.html structure.
-      // If you used the .views-gallery/.gallery-grid markup, this will work out of the box.
-      const imgNodes = doc.querySelectorAll('.gallery-grid img, .views-gallery img, img[data-view]');
-      const urls = Array.from(imgNodes)
-        .map(img => img.getAttribute('src'))
-        .filter(Boolean);
-
-      const uniqueUrls = Array.from(new Set(urls));
-
-      if (!uniqueUrls.length) {
-        // no images found, hide hero
-        heroSection.classList.add('is-hidden');
-        return;
-      }
-
-      let currentIndex = 0;
-
-      function show(index) {
-        currentIndex = (index + uniqueUrls.length) % uniqueUrls.length;
-        const src = uniqueUrls[currentIndex];
-
-        heroImg.src = src;
-        heroImg.style.display = 'block';
-        if (placeholder) placeholder.style.display = 'none';
-      }
-
-      prevBtn.addEventListener('click', () => show(currentIndex - 1));
-      nextBtn.addEventListener('click', () => show(currentIndex + 1));
-
-      // Clicking the hero takes you to the full views page
-      heroImg.addEventListener('click', () => {
-        window.location.href = 'views.html';
-      });
-
-      // Keyboard navigation when focused
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') show(currentIndex - 1);
-        if (e.key === 'ArrowRight') show(currentIndex + 1);
-      });
-
-      // Show first image
-      show(0);
-
-    } catch (err) {
-      console.error('Error loading images from views.html:', err);
-      heroSection.classList.add('is-hidden');
     }
-  }
 
-  // Initialize hero after DOM is ready
-  document.addEventListener('DOMContentLoaded', initViewsHero);
-</script>
+    fetch('data/posts_index.json')
+      .then(resp => resp.json())
+      .then(posts => {
+        const postsList = document.getElementById('posts-list');
+        posts.forEach(post => {
+          const item = document.createElement('div');
+          item.className = 'post-item';
+          item.innerHTML = `
+            <a href="${post.url}">
+              <h2>${post.title}</h2>
+              <div class="meta">
+                <time datetime="${post.date}">${formatDate(post.date)}</time>
+              </div>
+              <p>${post.desc}</p>
+            </a>
+          `;
+          postsList.appendChild(item);
+        });
+      })
+      .catch(err => {
+        console.error('Error loading posts index:', err);
+        document.getElementById('posts-list').innerHTML = '<p>Error loading posts.</p>';
+      });
 
+    // VIEWS HERO – pull random images from views.html
+    async function initViewsHero() {
+      const heroSection = document.getElementById('home-views-hero');
+      const heroImg     = document.getElementById('hero-image');
+      const placeholder = heroSection.querySelector('.hero-placeholder');
+
+      try {
+        const resp = await fetch('views.html');
+        const html = await resp.text();
+        const doc  = new DOMParser().parseFromString(html, 'text/html');
+
+        const imgNodes = doc.querySelectorAll('.gallery-grid img, .views-gallery img, img[data-view]');
+        const urls = Array.from(imgNodes)
+          .map(img => img.src || img.dataset.src)
+          .filter(Boolean);
+
+        const uniqueUrls = [...new Set(urls)];
+
+        if (!uniqueUrls.length) {
+          heroSection.classList.add('is-hidden');
+          return;
+        }
+
+        let currentIndex = 0;
+
+        const show = (index) => {
+          currentIndex = (index + uniqueUrls.length) % uniqueUrls.length;
+          heroImg.src = uniqueUrls[currentIndex];
+          heroImg.style.display = 'block';
+          if (placeholder) placeholder.style.display = 'none';
+        };
+
+        heroSection.querySelector('.hero-prev, .hero-arrow-left').addEventListener('click', () => show(currentIndex - 1));
+        heroSection.querySelector('.hero-arrow-right').addEventListener('click', () => show(currentIndex + 1));
+
+        heroImg.onclick = () => location.href = 'views.html';
+
+        document.addEventListener('keydown', e => {
+          if (e.key === 'ArrowLeft') show(currentIndex - 1);
+          if (e.key === 'ArrowRight') show(currentIndex + 1);
+        });
+
+        show(0); // initial image
+      } catch (err) {
+        console.error('Error loading hero images:', err);
+        heroSection.classList.add('is-hidden');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initViewsHero);
+  </script>
 
 </body>
 </html>
