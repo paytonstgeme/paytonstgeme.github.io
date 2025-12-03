@@ -1,3 +1,23 @@
+/* css/global.css */
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
+
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: 'Italiana', serif;
+  font-weight: 400;
+  background: #fff;
+  color: #222;
+  line-height: 1.7;
+  font-size: 17.5px;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Italiana', serif; font-weight: 400; }
+
 /* ──────────────────────────────────────
    1. Global reset & Italiana font
    ────────────────────────────────────── */
