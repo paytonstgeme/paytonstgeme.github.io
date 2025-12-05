@@ -1,12 +1,9 @@
 /* ======================================
-   PAYTONSTGEME.COM — Global Styles
-   One single stylesheet for the entire site
-   EB Garamond site-wide | Centered minimal design
+   PAYTONSTGEME.COM — Minimal Centered Theme
+   EB GARAMOND SITE-WIDE
    ====================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&display=swap');
-
-/* ---------- Root Variables ---------- */
+/* ---------- Root & Base ---------- */
 :root {
   --text: #000;
   --muted: rgba(0,0,0,.7);
@@ -14,26 +11,22 @@
   --hairline: rgba(0,0,0,.12);
   --line: rgba(0,0,0,.10);
   --bg: #fff;
-
   --fs-base: 16px;
   --lh-base: 1.6;
   --fs-h1: 2rem;
   --fs-h2: 1.25rem;
   --fs-small: .95rem;
-
   --maxw: 880px;
 }
 
-/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
 
-/* Box sizing */
 html { box-sizing: border-box; }
 *, *::before, *::after { box-sizing: inherit; }
 
-/* ---------- Global Typography ---------- */
+/* ---------- GLOBAL FONT: EB GARAMOND ---------- */
 body {
   margin: 0;
   font-family: "EB Garamond", Georgia, serif;
@@ -46,85 +39,83 @@ body {
   overflow-x: hidden;
 }
 
-/* Force EB Garamond on everything */
-h1,h2,h3,h4,h5,h6,
-p,a,li,span,div,figcaption,
-time,nav,button,.brandline,.center-nav,
-.item-title,.item-desc,.item-date,
-.footer p,.lede {
+/* Force EB Garamond on all text */
+h1, h2, h3, h4, h5, h6,
+p, a, li, span, div, figcaption,
+.intro h1, .item-title, .item-desc, .item-date,
+.footer p, .lede, .brandline,
+.center-nav, .sidebar .nav {
   font-family: "EB Garamond", Georgia, serif !important;
 }
 
-/* Links */
+img, svg { max-width: 100%; height: auto; display: block; }
+main { display: block; }
+
 a { color: var(--text); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* Images */
-img, svg { max-width: 100%; height: auto; display: block; }
-
-/* Layout container */
 .container {
   width: min(var(--maxw), 100%);
   margin-inline: auto;
   padding-inline: 20px;
 }
 
-/* ---------- Header / Masthead ---------- */
+/* ---------- Header: Masthead + Logo + Nav ---------- */
 .header {
   background: #fff;
   border-bottom: 1px solid var(--line);
 }
 
 .masthead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0;
+  gap: 1rem;
   text-align: center;
-  padding: 18px 0 8px;
 }
 
 .masthead .logo {
-  height: 45px;
+  height: 60px;
   width: auto;
-  margin-inline: auto;
 }
 
 .brandline {
-  text-align: center;
-  font-variant: small-caps;
-  letter-spacing: .12em;
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 6px 0 10px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .rule {
   height: 1px;
-  background: var(--hairline);
-  margin: 12px auto;
+  background: #ccc;
+  margin: 0 auto;
   width: 90%;
   max-width: 1200px;
 }
 
-/* Centered navigation */
 .center-nav {
   display: flex;
-  gap: 40px;
-  align-items: center;
   justify-content: center;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-  text-transform: uppercase;
+  gap: 2rem;
+  padding: 1rem 0;
+  font-size: 1.1rem;
   font-weight: 500;
-  letter-spacing: .08em;
-  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .center-nav a {
-  color: var(--text);
+  color: #333;
   text-decoration: none;
   padding: 6px 2px;
+  transition: color 0.2s;
 }
 
 .center-nav a:hover,
 .center-nav a.active {
+  color: #0366d6;
   text-decoration: underline;
 }
 
@@ -132,89 +123,7 @@ img, svg { max-width: 100%; height: auto; display: block; }
   font-weight: 600;
 }
 
-/* ---------- Mobile Menu Button ---------- */
-.menu-button {
-  position: fixed;
-  top: 14px;
-  left: 14px;
-  z-index: 1001;
-  border: 1px solid rgba(0,0,0,.25);
-  background: #fff;
-  color: var(--text);
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1;
-  padding: 7px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: box-shadow .15s ease-in-out;
-}
-
-.menu-button:hover {
-  box-shadow: 0 1px 6px rgba(0,0,0,.08);
-}
-
-/* ---------- Sidebar Menu ---------- */
-.sidebar {
-  position: fixed;
-  top: 0; left: 0;
-  width: 240px;
-  height: 100dvh;
-  background: #fff;
-  border-right: 1px solid rgba(0,0,0,.15);
-  padding: 56px 20px 20px;
-  transform: translateX(-100%);
-  transition: transform .25s ease;
-  z-index: 1000;
-}
-
-.sidebar.open { transform: translateX(0); }
-
-.sidebar .nav {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-
-.sidebar .nav a {
-  color: var(--muted-2);
-  text-decoration: none;
-}
-
-.sidebar .nav a:hover,
-.sidebar .nav a.active {
-  color: var(--text);
-  text-decoration: underline;
-}
-
-.backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.25);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .25s ease, visibility .25s ease;
-  z-index: 999;
-}
-
-.sidebar.open + .backdrop,
-.backdrop.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Prevent layout shift when menu opens */
-body.menu-open .container,
-body.menu-open main,
-body.menu-open .footer {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  transform: none !important;
-}
-
-/* ---------- Intro / Hero Section ---------- */
+/* ---------- Home / Intro Section ---------- */
 .intro {
   display: flex;
   flex-direction: column;
@@ -239,10 +148,12 @@ body.menu-open .footer {
 }
 
 .hero-img {
+  display: block;
   width: min(520px, 90%);
   margin: 22px auto 0;
   border: 1px solid var(--line);
   border-radius: 4px;
+  background: #fff;
 }
 
 /* ---------- Posts List ---------- */
@@ -294,19 +205,83 @@ body.menu-open .footer {
   border-top: 1px solid var(--line);
 }
 
-/* ---------- Responsive Adjustments ---------- */
-@media (max-width: 700px) {
-  :root { --fs-h1: 1.75rem; }
-  .center-nav { gap: 24px; }
-  .masthead .logo { height: 48px; }
-  .intro h1 { font-size: 1.75rem; }
+/* ---------- Left Sidebar (Mobile Menu) ---------- */
+.menu-button {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 1001;
+  border: 1px solid rgba(0,0,0,.25);
+  background: #fff;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  padding: 7px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: box-shadow .15s ease-in-out;
 }
 
-/* Material Icons (for menu button) */
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+.menu-button:hover {
+  box-shadow: 0 1px 6px rgba(0,0,0,.08);
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100dvh;
+  background: #fff;
+  border-right: 1px solid rgba(0,0,0,.15);
+  padding: 56px 20px 20px;
+  transform: translateX(-100%);
+  transition: transform .25s ease;
+  z-index: 1000;
+}
+
+.sidebar.open { transform: translateX(0); }
+
+.sidebar .nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.sidebar .nav a {
+  color: var(--muted-2);
+  text-decoration: none;
+}
+
+.sidebar .nav a:hover,
+.sidebar .nav a.active {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+  z-index: 999;
+}
+
+.sidebar.open + .backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.menu-open .container,
+body.menu-open main,
+body.menu-open .footer {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform: none !important;
+  left: auto !important;
 }
