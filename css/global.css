@@ -285,3 +285,11 @@ body.menu-open .footer {
   transform: none !important;
   left: auto !important;
 }
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 700px) {
+  :root { --fs-h1: 1.75rem; }
+  .center-nav { gap: 24px; }
+  .masthead .logo { height: 48px; }
+  .intro h1 { font-size: 1.75rem; }
+}
