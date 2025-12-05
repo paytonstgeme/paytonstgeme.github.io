@@ -66,25 +66,23 @@ a:hover { text-decoration: underline; }
   border-bottom: 1px solid var(--line);
 }
 
+./* ——— Refined header branding ——— */
 .masthead {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem 0;
-  gap: 1rem;
-  text-align: center;
+  flex-direction: column;     /* stack logo + name vertically */
+  gap: 0.4rem;                /* tighter spacing */
+  padding: 1.8rem 0 1rem;
 }
 
 .masthead .logo {
-  height: 60px;
-  width: auto;
+  height: 52px;               /* slightly smaller logo for balance */
 }
 
 .brandline {
-  font-size: 1.8rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-size: 1.35rem !important;   /* reduced from ~1.8rem */
+  font-variant: normal;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  margin: 0;
 }
 
 .rule {
