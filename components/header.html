@@ -1,11 +1,26 @@
 <!-- components/header.html -->
-<header class="site-header">
-  <div class="container header-container">
-    <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
+<header class="header">
+  <div class="container">
+    <!-- Mobile menu button -->
+    <button class="menu-button" aria-label="Open menu">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
 
-    <a href="index.html" class="logo">
-      <img src="assets/your-logo.png" alt="Payton St. Geme Logo">
-      <span>Payton St. Geme</span>
-    </a>
+    <!-- Logo + Brand -->
+    <div class="masthead">
+      <a href="/" class="logo-link">
+        <img src="assets/your-logo.png" alt="Payton St. Geme" class="logo">
+      </a>
+      <div class="brandline">Payton St. Geme</div>
+    </div>
+
+    <div class="rule"></div>
+
+    <!-- Desktop centered navigation -->
+    <nav class="center-nav">
+      <a href="/">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/views.html">Views</a>
+    </nav>
   </div>
 </header>

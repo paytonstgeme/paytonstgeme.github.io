@@ -1,11 +1,16 @@
 <!-- components/sidebar.html -->
-<nav class="sidebar" id="sidebar">
-  <ul class="nav-list">
-    <li><a href="index.html" class="nav-link">Home</a></li>
-    <li><a href="posts.html" class="nav-link">Posts</a></li>
-    <li><a href="views.html" class="nav-link">Views</a></li>
-    <!-- add more pages here once and they appear everywhere -->
-  </ul>
-</nav>
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <button class="menu-button close-btn" aria-label="Close menu">
+    <span class="material-symbols-outlined">close</span>
+  </button>
 
-<div class="overlay" id="overlay"></div>
+  <nav class="nav">
+    <a href="/"         >Home</a>
+    <a href="/posts.html"   >Posts</a>
+    <a href="/views.html"   >Views</a>
+    <!-- Add new pages here — they’ll instantly appear site-wide -->
+  </nav>
+</aside>
+
+<!-- Dark backdrop when menu is open -->
+<div class="backdrop" id="backdrop"></div>

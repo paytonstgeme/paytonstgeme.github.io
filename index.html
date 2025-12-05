@@ -42,6 +42,30 @@
       .then(r => r.text())
       .then(html => document.getElementById('sidebar-placeholder').innerHTML = html);
   </script>
+  
+<script>
+  const menuBtn   = document.querySelector('header .menu-button');
+  const closeBtn  = document.querySelector('.sidebar .close-btn');
+  const sidebar   = document.getElementById('sidebar');
+  const backdrop  = document.getElementById('backdrop');
+
+  function openMenu() {
+    document.body.classList.add('menu-open');
+    sidebar.classList.add('open');
+    backdrop.classList.add('open');
+    sidebar.setAttribute('aria-hidden', 'false');
+  }
+  function closeMenu() {
+    document.body.classList.remove('menu-open');
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('open');
+    sidebar.setAttribute('aria-hidden', 'true');
+  }
+
+  menuBtn?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
+</script>
 
   <!-- Put page-specific scripts below (e.g. views hero only on index.html) -->
   <script src="js/build_posts_index.py"></script> 
