@@ -1,49 +1,105 @@
 // js/main.js
-document.addEventListener('DOMContentLoaded', () => {
-  const menuBtn = document.getElementById('menuBtn');
-  const sidebar  = document.getElementById('sidebar');
-  const overlay  = document.getElementById('overlay');
+// Global JavaScript for paytonstgeme.com
+// Handles: header/sidebar loading + mobile menu + posts list
 
-  function openMenu() {
-    menuBtn.classList.add('open');
-    sidebar.classList.add('open');
-    overlay.classList.add('open');
-  }
-  function closeMenu() {
-    menuBtn.classList.remove('open');
-    sidebar.classList.remove('open');
-    overlay.classList.remove('open');
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Load header and sidebar components
+  Promise.all([
+    fetch("components/header.html").then(r => r.ok ? r.text() : "<!-- header failed -->"),
+    fetch("components/sidebar.html").then(r => r.ok ? r.text() : "<!-- sidebar failed -->")
+  ])
+  .then(([headerHTML, sidebarHTML]) => {
+    // Replace placeholders with real components
+    const headerPlaceholder = document.getElementById("header-placeholder");
+    const sidebarPlaceholder = document.getElementById("sidebar-placeholder");
 
-  menuBtn.addEventListener('click', () => sidebar.classList.contains('open') ? closeMenu() : openMenu());
-  overlay.addEventListener('click', closeMenu);
+    if (headerPlaceholder) headerPlaceholder.outerHTML = headerHTML;
+    if (sidebarPlaceholder) sidebarPlaceholder.outerHTML = sidebarHTML;
 
-  // Highlight active page
-  const current = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-link').forEach(link => {
-    if (link.getAttribute('href') === current) link.classList.add('active');
+    // 2. Initialise mobile menu ONLY after components are in the DOM
+    initMobileMenu();
+    // 3. Initialise posts list (if on a page that has #posts-list)
+    initPostsList();
+  })
+  .catch(err => {
+    console.error("Failed to load header/sidebar:", err);
   });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-  const menuBtn   = document.getElementById('menuBtn');
-  const sidebar  = document.getElementById('sidebar');
-  const overlay  = document.getElementById('overlay');
+  // ——————————————————————————————————————
+  // Mobile Menu Logic
+  // ——————————————————————————————————————
+  function initMobileMenu() {
+    const menuBtn   = document.querySelector(".header .menu-button");
+    const closeBtn  = document.querySelector(".sidebar .close-btn");
+    const sidebar   = document.getElementById("sidebar");
+    const backdrop  = document.getElementById("backdrop");
 
-  const toggleMenu = () => {
-    menuBtn.classList.toggle('open');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('open');
-  };
+    if (!sidebar) return; // safety
 
-  menuBtn.addEventListener('click', toggleMenu);
-  overlay.addEventListener('click', toggleMenu);
-
-  // Highlight current page
-  const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-link').forEach(link => {
-    if (link.getAttribute('href').endsWith(path)) {
-      link.classList.add('active');
+    function openMenu() {
+      document.body.classList.add("menu-open");
+      sidebar.classList.add("open");
+      backdrop.classList.add("open");
+      sidebar.setAttribute("aria-hidden", "false");
     }
-  });
+
+    function closeMenu() {
+      document.body.classList.remove("menu-open");
+      sidebar.classList.remove("open");
+      backdrop.classList.remove("open");
+      sidebar.setAttribute("aria-hidden", "true");
+    }
+
+    menuBtn?.addEventListener("click", openMenu);
+    closeBtn?.addEventListener("click", closeMenu);
+    backdrop?.addEventListener("click", closeMenu);
+
+    // Optional: close with Escape key
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && sidebar.classList.contains("open")) closeMenu();
+    });
+  }
+
+  // ——————————————————————————————————————
+  // Posts List (on home or /posts.html)
+  // ——————————————————————————————————————
+  function initPostsList() {
+    const listContainer = document.getElementById("posts-list");
+    if (!listContainer) return;
+
+    fetch("posts_index.json")
+      .then(r => r.ok ? r.json() : [])
+      .then(posts => {
+        if (!posts || posts.length === 0) {
+          listContainer.innerHTML = "<p style='text-align:center;color:var(--muted)'>No posts yet.</p>";
+          return;
+        }
+
+        const ul = document.createElement("ul");
+        ul.className = "list";
+
+        posts.forEach(p => {
+          const li = document.createElement("li");
+          li.className = "item";
+
+          const date = p.date
+            ? new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+            : "";
+
+          li.innerHTML = `
+            <a href="${p.url}" class="item-title">${p.title || "Untitled"}</a>
+            ${p.desc ? `<p class="item-desc">${p.desc}</p>` : ""}
+            ${date ? `<time class="item-date">${date}</time>` : ""}
+          `;
+          ul.appendChild(li);
+        });
+
+        listContainer.innerHTML = "";
+        listContainer.appendChild(ul);
+      })
+      .catch(err => {
+        listContainer.innerHTML = "<p style='text-align:center;color:var(--muted)'>Could not load posts.</p>";
+        console.error(err);
+      });
+  }
 });
