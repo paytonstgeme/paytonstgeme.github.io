@@ -1,0 +1,293 @@
+/* ======================================
+   PAYTONSTGEME.COM — Minimal Centered Theme
+   EB GARAMOND SITE-WIDE
+   ====================================== */
+
+/* ---------- Root & Base ---------- */
+:root {
+  --text: #000;
+  --muted: rgba(0,0,0,.7);
+  --muted-2: rgba(0,0,0,.6);
+  --hairline: rgba(0,0,0,.12);
+  --line: rgba(0,0,0,.10);
+  --bg: #fff;
+  --fs-base: 16px;
+  --lh-base: 1.6;
+  --fs-h1: 2rem;
+  --fs-h2: 1.25rem;
+  --fs-small: .95rem;
+  --maxw: 880px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+/* ---------- GLOBAL FONT: EB GARAMOND ---------- */
+body {
+  margin: 0;
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Force EB Garamond on all text */
+h1, h2, h3, h4, h5, h6,
+p, a, li, span, div, figcaption,
+.intro h1, .item-title, .item-desc, .item-date,
+.footer p, .lede, .brandline,
+.center-nav, .sidebar .nav {
+  font-family: "EB Garamond", Georgia, serif !important;
+}
+
+img, svg { max-width: 100%; height: auto; display: block; }
+main { display: block; }
+
+a { color: var(--text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  width: min(var(--maxw), 100%);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+/* ---------- Header: Masthead + Logo + Nav ---------- */
+.header {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+./* ——— Refined header branding ——— */
+.masthead {
+  flex-direction: column;     /* stack logo + name vertically */
+  gap: 0.4rem;                /* tighter spacing */
+  padding: 1.8rem 0 1rem;
+}
+
+.masthead .logo {
+  height: 52px;               /* slightly smaller logo for balance */
+}
+
+.brandline {
+  font-size: 1.35rem !important;   /* reduced from ~1.8rem */
+  font-variant: normal;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.rule {
+  height: 1px;
+  background: #ccc;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.center-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.center-nav a {
+  color: #333;
+  text-decoration: none;
+  padding: 6px 2px;
+  transition: color 0.2s;
+}
+
+.center-nav a:hover,
+.center-nav a.active {
+  color: #0366d6;
+  text-decoration: underline;
+}
+
+.center-nav a.active {
+  font-weight: 600;
+}
+
+/* ---------- Home / Intro Section ---------- */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 36px 20px 60px;
+  min-height: calc(100dvh - 200px);
+}
+
+.intro h1 {
+  margin: 0 0 14px;
+  font-size: var(--fs-h1);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-size: 1.1rem;
+}
+
+.hero-img {
+  display: block;
+  width: min(520px, 90%);
+  margin: 22px auto 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* ---------- Posts List ---------- */
+.posts-list h1 {
+  margin: 28px 0 18px;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.item-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.item-desc {
+  margin: 4px 0 2px;
+  color: var(--muted);
+}
+
+.item-date {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: .95rem;
+  color: var(--muted-2);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 18px 0 26px;
+  color: var(--muted-2);
+  font-size: var(--fs-small);
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Left Sidebar (Mobile Menu) ---------- */
+.menu-button {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 1001;
+  border: 1px solid rgba(0,0,0,.25);
+  background: #fff;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  padding: 7px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: box-shadow .15s ease-in-out;
+}
+
+.menu-button:hover {
+  box-shadow: 0 1px 6px rgba(0,0,0,.08);
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100dvh;
+  background: #fff;
+  border-right: 1px solid rgba(0,0,0,.15);
+  padding: 56px 20px 20px;
+  transform: translateX(-100%);
+  transition: transform .25s ease;
+  z-index: 1000;
+}
+
+.sidebar.open { transform: translateX(0); }
+
+.sidebar .nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.sidebar .nav a {
+  color: var(--muted-2);
+  text-decoration: none;
+}
+
+.sidebar .nav a:hover,
+.sidebar .nav a.active {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+  z-index: 999;
+}
+
+.sidebar.open + .backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.menu-open .container,
+body.menu-open main,
+body.menu-open .footer {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform: none !important;
+  left: auto !important;
+}
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 700px) {
+  :root { --fs-h1: 1.75rem; }
+  .center-nav { gap: 24px; }
+  .masthead .logo { height: 48px; }
+  .intro h1 { font-size: 1.75rem; }
+}
