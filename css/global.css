@@ -491,7 +491,24 @@ ol {
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
+/* ——— Refined header branding ——— */
+.masthead {
+  flex-direction: column;     /* stack logo + name vertically */
+  gap: 0.4rem;                /* tighter spacing */
+  padding: 1.8rem 0 1rem;
+}
 
+.masthead .logo {
+  height: 52px;               /* slightly smaller logo for balance */
+}
+
+.brandline {
+  font-size: 1.35rem !important;   /* reduced from ~1.8rem */
+  font-variant: normal;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  margin: 0;
+}
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
