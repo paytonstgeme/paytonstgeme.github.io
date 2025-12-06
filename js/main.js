@@ -119,3 +119,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 });
+
+// js/main.js (add this at the end if not already there)
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await includeHTML();        // injects header + sidebar
+  initMobileMenu();           // attaches menu events
+
+  // Auto-load posts only on the Posts page
+  if (window.location.pathname.includes('posts.html') || window.location.pathname === '/posts') {
+    const script = document.createElement('script');
+    script.src = '/js/build_posts_index.js';
+    script.type = 'module';
+    document.body.appendChild(script);
+  }
+});
