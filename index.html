@@ -36,30 +36,20 @@
   </footer>
 
 <script src="https://www.w3schools.com/lib/w3.js"></script>
-<script>
-  w3.includeHTML(() => {
-    const menuBtn = document.querySelector('.header .menu-button');
+  <script>w3.includeHTML();</script>
+ <script src="js/main.js" defer></script> 
+  <script>
+    // Mobile menu script from Step 3 above
+    const menuBtn  = document.querySelector('.header .menu-button');
     const closeBtn = document.querySelector('.sidebar .close-btn');
-    const sidebar = document.getElementById('sidebar');
+    const sidebar  = document.getElementById('sidebar');
     const backdrop = document.getElementById('backdrop');
-
-    function openMenu() {
-      document.body.classList.add('menu-open');
-      sidebar.classList.add('open');
-      backdrop.classList.add('open');
-      sidebar.setAttribute('aria-hidden', 'false');
-    }
-    function closeMenu() {
-      document.body.classList.remove('menu-open');
-      sidebar.classList.remove('open');
-      backdrop.classList.remove('open');
-      sidebar.setAttribute('aria-hidden', 'true');
-    }
-
+    function openMenu() { document.body.classList.add('menu-open'); sidebar.classList.add('open'); backdrop.classList.add('open'); sidebar.setAttribute('aria-hidden', 'false'); }
+    function closeMenu() { document.body.classList.remove('menu-open'); sidebar.classList.remove('open'); backdrop.classList.remove('open'); sidebar.setAttribute('aria-hidden', 'true'); }
     menuBtn?.addEventListener('click', openMenu);
     closeBtn?.addEventListener('click', closeMenu);
     backdrop?.addEventListener('click', closeMenu);
-  });
-</script>
+  </script>
+
 </body>
 </html>
