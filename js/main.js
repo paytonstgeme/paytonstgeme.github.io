@@ -61,6 +61,41 @@ document.addEventListener('DOMContentLoaded', async () => {
   await includeHTML();     // 1. Inject header + sidebar
   initMobileMenu();        // 2. Attach menu events (now safe — DOM exists)
 
-  // Uncomment line below when you add build_posts_index.js
-  // loadPostsIndex();
+// Lightbox for Views page
+if (document.getElementById('gallery')) {
+  const images = document.querySelectorAll('.gallery-grid img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  let currentIndex = 0;
+
+  const openLightbox = (i) => {
+    currentIndex = i;
+    lightboxImg.src = images[i].src;
+    lightboxImg.alt = images[i].alt;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  const showPrev = () => openLightbox((currentIndex - 1 + images.length) % images.length);
+  const showNext = () => openLightbox((currentIndex + 1) % images.length);
+
+  images.forEach((img, i) => img.addEventListener('click', () => openLightbox(i)));
+  lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', showPrev);
+  lightbox.querySelector('.lightbox-next').addEventListener('click', showNext);
+  lightbox.addEventListener('click', e => e.target === lightbox && closeLightbox());
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+}
 });
