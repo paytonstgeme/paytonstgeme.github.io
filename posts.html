@@ -3,42 +3,42 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/global.css">
+  <title>Posts — Payton St. Geme</title>
+  <meta name="description" content="Nothing.">
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;600&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,close">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
 
-  <div w3-include-html="components/header.html"></div>
-  <div w3-include-html="components/sidebar.html"></div>
-  
-  <main class="container intro">
-    <h1>Posts</h1>
-    <p class="lede">Posts</p>
+  <!-- Header & Mobile Sidebar (injected via JS) -->
+  <div data-include="components/header.html"></div>
+  <div data-include="components/sidebar.html"></div>
+
+  <!-- Main Content -->
+  <main class="container">
+    <header class="page-header">
+      <h1>Posts</h1>
+      <p class="lede"></p>
+    </header>
+
+    <!-- Posts will be injected here by build_posts_index.js -->
+    <div id="posts-grid" class="posts-grid">
+      <!-- Loading state -->
+      <p class="loading text-center">Loading posts…</p>
+    </div>
   </main>
 
   <footer class="footer container">
     <p>© 2025 Payton St. Geme</p>
   </footer>
 
-  <script src="https://www.w3schools.com/lib/w3.js"></script>
-  <script>w3.includeHTML();</script>
- <script src="js/main.js" defer></script> 
-  <script>
-    // Mobile menu script from Step 3 above
-    const menuBtn  = document.querySelector('.header .menu-button');
-    const closeBtn = document.querySelector('.sidebar .close-btn');
-    const sidebar  = document.getElementById('sidebar');
-    const backdrop = document.getElementById('backdrop');
-    function openMenu() { document.body.classList.add('menu-open'); sidebar.classList.add('open'); backdrop.classList.add('open'); sidebar.setAttribute('aria-hidden', 'false'); }
-    function closeMenu() { document.body.classList.remove('menu-open'); sidebar.classList.remove('open'); backdrop.classList.remove('open'); sidebar.setAttribute('aria-hidden', 'true'); }
-    menuBtn?.addEventListener('click', openMenu);
-    closeBtn?.addEventListener('click', closeMenu);
-    backdrop?.addEventListener('click', closeMenu);
-  </script>
-
-  <script src="js/main.js" defer></script> 
-  <script src="js/build_posts_index.py" defer></script> 
-
+  <!-- Scripts (only once, in correct order) -->
+  <script src="/js/main.js" type="module"></script>
+  <!-- build_posts_index.js will run automatically from main.js if on /posts.html -->
 </body>
 </html>
-<!DOCTYPE html>
