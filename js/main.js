@@ -1,6 +1,30 @@
-// js/main.js
-// Global JavaScript for paytonstgeme.com
-// Handles: header/sidebar loading + mobile menu + posts list
+// Inject header & sidebar, then initialise menu
+async function includeHTML() {
+  const elements = document.querySelectorAll('[data-include]');
+  await Promise.all(Array.from(elements).map(async el => {
+    const file = el.getAttribute('data-include');
+    const resp = await fetch(file);
+    if (resp.ok) el.outerHTML = await resp.text();
+  }));
+
+  // Now the header definitely exists → safe to attach events
+  initMobileMenu();
+}
+
+function initMobileMenu() {
+  const menuBtn = document.querySelector('.header .menu-button');
+  const closeBtn = document.querySelector('.sidebar .close-btn');
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('backdrop');
+
+  if (!menuBtn) return;
+
+  menuBtn.addEventListener('click', () => document.body.classList.add('menu-open'));
+  closeBtn?.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  backdrop?.addEventListener('click', () => document.body.classList.remove('menu-open'));
+}
+
+includeHTML();
 
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Load header and sidebar components
@@ -16,18 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (headerPlaceholder) headerPlaceholder.outerHTML = headerHTML;
     if (sidebarPlaceholder) sidebarPlaceholder.outerHTML = sidebarHTML;
 
-    // 2. Initialise mobile menu ONLY after components are in the DOM
     initMobileMenu();
-    // 3. Initialise posts list (if on a page that has #posts-list)
     initPostsList();
   })
   .catch(err => {
     console.error("Failed to load header/sidebar:", err);
   });
 
-  // ——————————————————————————————————————
-  // Mobile Menu Logic
-  // ——————————————————————————————————————
   function initMobileMenu() {
     const menuBtn   = document.querySelector(".header .menu-button");
     const closeBtn  = document.querySelector(".sidebar .close-btn");
@@ -60,9 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ——————————————————————————————————————
-  // Posts List (on home or /posts.html)
-  // ——————————————————————————————————————
   function initPostsList() {
     const listContainer = document.getElementById("posts-list");
     if (!listContainer) return;
