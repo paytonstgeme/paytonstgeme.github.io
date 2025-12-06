@@ -1,136 +1,66 @@
-// Inject header & sidebar, then initialise menu
+// js/main.js — FINAL 2025 VERSION
+// One file. Zero conflicts. Works locally + deployed.
+
 async function includeHTML() {
   const elements = document.querySelectorAll('[data-include]');
-  await Promise.all(Array.from(elements).map(async el => {
+  for (const el of elements) {
     const file = el.getAttribute('data-include');
-    const resp = await fetch(file);
-    if (resp.ok) el.outerHTML = await resp.text();
-  }));
-
-  // Now the header definitely exists → safe to attach events
-  initMobileMenu();
+    try {
+      const resp = await fetch(file);
+      if (resp.ok) {
+        el.outerHTML = await resp.text();
+      } else {
+        el.outerHTML = `<!-- Failed to load ${file} -->`;
+      }
+    } catch (err) {
+      console.error(`Failed to load ${file}:`, err);
+      el.outerHTML = `<!-- Error loading ${file} -->`;
+    }
+  }
 }
 
 function initMobileMenu() {
-  const menuBtn = document.querySelector('.header .menu-button');
-  const closeBtn = document.querySelector('.sidebar .close-btn');
-  const sidebar = document.getElementById('sidebar');
+  const menuBtn  = document.querySelector('.menu-button');
+  const closeBtn = document.querySelector('.close-btn');
+  const sidebar  = document.getElementById('sidebar');
   const backdrop = document.getElementById('backdrop');
 
-  if (!menuBtn) return;
+  if (!menuBtn || !sidebar || !backdrop) return;
 
-  menuBtn.addEventListener('click', () => document.body.classList.add('menu-open'));
-  closeBtn?.addEventListener('click', () => document.body.classList.remove('menu-open'));
-  backdrop?.addEventListener('click', () => document.body.classList.remove('menu-open'));
+  const openMenu = () => {
+    document.body.classList.add('menu-open');
+    sidebar.classList.add('open');
+    backdrop.classList.add('open');
+    sidebar.setAttribute('aria-hidden', 'false');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeMenu = () => {
+    document.body.classList.remove('menu-open');
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('open');
+    sidebar.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  };
+
+  menuBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) closeMenu();
+  });
 }
 
-includeHTML();
-
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. Load header and sidebar components
-  Promise.all([
-    fetch("components/header.html").then(r => r.ok ? r.text() : "<!-- header failed -->"),
-    fetch("components/sidebar.html").then(r => r.ok ? r.text() : "<!-- sidebar failed -->")
-  ])
-  .then(([headerHTML, sidebarHTML]) => {
-    // Replace placeholders with real components
-    const headerPlaceholder = document.getElementById("header-placeholder");
-    const sidebarPlaceholder = document.getElementById("sidebar-placeholder");
-
-    if (headerPlaceholder) headerPlaceholder.outerHTML = headerHTML;
-    if (sidebarPlaceholder) sidebarPlaceholder.outerHTML = sidebarHTML;
-
-    initMobileMenu();
-    initPostsList();
-  })
-  .catch(err => {
-    console.error("Failed to load header/sidebar:", err);
-  });
-
-  function initMobileMenu() {
-    const menuBtn   = document.querySelector(".header .menu-button");
-    const closeBtn  = document.querySelector(".sidebar .close-btn");
-    const sidebar   = document.getElementById("sidebar");
-    const backdrop  = document.getElementById("backdrop");
-
-    if (!sidebar) return; // safety
-
-    function openMenu() {
-      document.body.classList.add("menu-open");
-      sidebar.classList.add("open");
-      backdrop.classList.add("open");
-      sidebar.setAttribute("aria-hidden", "false");
-    }
-
-    function closeMenu() {
-      document.body.classList.remove("menu-open");
-      sidebar.classList.remove("open");
-      backdrop.classList.remove("open");
-      sidebar.setAttribute("aria-hidden", "true");
-    }
-
-    menuBtn?.addEventListener("click", openMenu);
-    closeBtn?.addEventListener("click", closeMenu);
-    backdrop?.addEventListener("click", closeMenu);
-
-    // Optional: close with Escape key
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && sidebar.classList.contains("open")) closeMenu();
-    });
-  }
-
-  function initPostsList() {
-    const listContainer = document.getElementById("posts-list");
-    if (!listContainer) return;
-
-    fetch("posts_index.json")
-      .then(r => r.ok ? r.json() : [])
-      .then(posts => {
-        if (!posts || posts.length === 0) {
-          listContainer.innerHTML = "<p style='text-align:center;color:var(--muted)'>No posts yet.</p>";
-          return;
-        }
-
-        const ul = document.createElement("ul");
-        ul.className = "list";
-
-        posts.forEach(p => {
-          const li = document.createElement("li");
-          li.className = "item";
-
-          const date = p.date
-            ? new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
-            : "";
-
-          li.innerHTML = `
-            <a href="${p.url}" class="item-title">${p.title || "Untitled"}</a>
-            ${p.desc ? `<p class="item-desc">${p.desc}</p>` : ""}
-            ${date ? `<time class="item-date">${date}</time>` : ""}
-          `;
-          ul.appendChild(li);
-        });
-
-        listContainer.innerHTML = "";
-        listContainer.appendChild(ul);
-      })
-      .catch(err => {
-        listContainer.innerHTML = "<p style='text-align:center;color:var(--muted)'>Could not load posts.</p>";
-        console.error(err);
-      });
-  }
-});
-
-// js/main.js (add this at the end if not already there)
+// Optional: Auto-load posts index on /posts.html (uncomment when ready)
+// function loadPostsIndex() {
+//   if (!location.pathname.includes('posts')) return;
+//   import('./build_posts_index.js').catch(() => console.warn('Posts index not loaded'));
+// }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await includeHTML();        // injects header + sidebar
-  initMobileMenu();           // attaches menu events
+  await includeHTML();     // 1. Inject header + sidebar
+  initMobileMenu();        // 2. Attach menu events (now safe — DOM exists)
 
-  // Auto-load posts only on the Posts page
-  if (window.location.pathname.includes('posts.html') || window.location.pathname === '/posts') {
-    const script = document.createElement('script');
-    script.src = '/js/build_posts_index.js';
-    script.type = 'module';
-    document.body.appendChild(script);
-  }
+  // Uncomment line below when you add build_posts_index.js
+  // loadPostsIndex();
 });
