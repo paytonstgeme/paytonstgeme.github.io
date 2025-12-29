@@ -66,6 +66,8 @@ if (document.getElementById('gallery')) {
   const images = document.querySelectorAll('.gallery-grid img');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
+  const galleryPrevBtn = document.querySelector('.gallery-arrow.prev');
+  const galleryNextBtn = document.querySelector('.gallery-arrow.next');
   let currentIndex = 0;
 
   const openLightbox = (i) => {
@@ -83,14 +85,22 @@ if (document.getElementById('gallery')) {
     document.body.style.overflow = '';
   };
 
-  const showPrev = () => openLightbox((currentIndex - 1 + images.length) % images.length);
-  const showNext = () => openLightbox((currentIndex + 1) % images.length);
+  const showPrev = () => {
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    openLightbox(prevIndex);
+  };
+  const showNext = () => {
+    const nextIndex = (currentIndex + 1) % images.length;
+    openLightbox(nextIndex);
+  };
 
   images.forEach((img, i) => img.addEventListener('click', () => openLightbox(i)));
   lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
   lightbox.querySelector('.lightbox-prev').addEventListener('click', showPrev);
   lightbox.querySelector('.lightbox-next').addEventListener('click', showNext);
   lightbox.addEventListener('click', e => e.target === lightbox && closeLightbox());
+  galleryPrevBtn?.addEventListener('click', showPrev);
+  galleryNextBtn?.addEventListener('click', showNext);
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
