@@ -85,8 +85,8 @@ if (document.getElementById('gallery')) {
     document.body.style.overflow = '';
   };
 
-  const showPrev = () => {
-    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    const showPrev = () => {
+      const prevIndex = (currentIndex - 1 + images.length) % images.length;
     openLightbox(prevIndex);
   };
   const showNext = () => {
