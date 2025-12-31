@@ -26,6 +26,20 @@ body {
   padding-inline: 20px;
 }
 
+/* Material Symbols (required so icon ligatures render instead of text) */
+.material-symbols-outlined{
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
 /* Header */
 .header {
   padding: 2.5rem 0 2rem;
@@ -268,6 +282,7 @@ body {
 .lightbox-close { top: 2rem; right: 2rem; }
 .lightbox-prev   { left: 2rem; }
 .lightbox-next   { right: 2rem; }
+
 @media (max-width: 768px) {
   .lightbox button { font-size: 2.5rem; }
   .lightbox-close { top: 1rem; right: 1rem; }
