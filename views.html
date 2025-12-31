@@ -10,7 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,close,chevron_left,chevron_right" rel="stylesheet">
+
+  <!-- Material Symbols (fixed: removed icon_names parameter causing 400 Invalid selector) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
 
   <!-- Global styles only -->
   <link rel="stylesheet" href="/css/global.css">
@@ -29,7 +31,7 @@
 
     <!-- Responsive masonry-style grid -->
     <div class="gallery-grid" id="gallery">
-      <figure><img src="/assets/image2.jpg"          alt="Landing scene"          loading="lazy"></figure>
+      <figure><img src="/assets/image2.jpg"          alt="Landing scene"            loading="lazy"></figure>
       <figure><img src="/assets/Bridgeheadlands.png" alt="Bridge from the headlands" loading="lazy"></figure>
       <figure><img src="/assets/bridgecloseup.png"   alt="Close-up bridge structure" loading="lazy"></figure>
       <figure><img src="/assets/bridgered.PNG"       alt="Golden Gate Bridge in red" loading="lazy"></figure>
@@ -53,17 +55,18 @@
       <figure><img src="/assets/pers.jpg"            alt="Perseus constellation"     loading="lazy"></figure>
     </div>
   </main>
-  
-<div class="gallery-arrows" aria-label="Gallery navigation arrows">
-      <button type="button" class="gallery-arrow prev" aria-label="Previous image">
-        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button type="button" class="gallery-arrow next" aria-label="Next image">
-        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+
+  <div class="gallery-arrows" aria-label="Gallery navigation arrows">
+    <button type="button" class="gallery-arrow prev" aria-label="Previous image">
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button type="button" class="gallery-arrow next" aria-label="Next image">
+      <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
   <!-- Minimal, beautiful lightbox (now lives in global.css + main.js) -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <button class="lightbox-close" aria-label="Close">
