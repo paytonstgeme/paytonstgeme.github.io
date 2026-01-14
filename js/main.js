@@ -84,21 +84,10 @@ function initGallery() {
     lightbox.setAttribute('aria-hidden', 'true');
   }
 
-<<<<<<< HEAD
-    const showPrev = () => {
-      const prevIndex = (currentIndex - 1 + images.length) % images.length;
-    openLightbox(prevIndex);
-  };
-  const showNext = () => {
-    const nextIndex = (currentIndex + 1) % images.length;
-    openLightbox(nextIndex);
-  };
-=======
   function showNext() {
     currentIndex = (currentIndex + 1) % figures.length;
     showLightbox(figures[currentIndex].querySelector('img'));
   }
->>>>>>> 14a9bdb (Update design to Montclaire style)
 
   function showPrev() {
     currentIndex = (currentIndex - 1 + figures.length) % figures.length;
