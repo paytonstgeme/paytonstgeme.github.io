@@ -1,53 +1,21 @@
-<<<<<<< HEAD
-/* ========================================
-   MONTCLAIRE-INSPIRED DESIGN
-   Clean grid, generous spacing, refined typography
-   ======================================== */
-
-:root {
-  /* Montclaire color palette */
-=======
 /* MONTCLAIRE-INSPIRED DESIGN */
 
 :root {
->>>>>>> 14a9bdb (Update design to Montclaire style)
   --bg: #ffffff;
   --text: #1a1a1a;
   --text-secondary: #6b6b6b;
   --accent: #000000;
   --border: #e8e8e8;
-<<<<<<< HEAD
-  --hover-bg: #f7f7f7;
-  
-  /* Generous spacing */
-=======
->>>>>>> 14a9bdb (Update design to Montclaire style)
   --space-xs: 0.75rem;
   --space-sm: 1.5rem;
   --space-md: 3rem;
   --space-lg: 5rem;
   --space-xl: 8rem;
-<<<<<<< HEAD
-  
-  /* Typography - elegant and clean */
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: 'Space Grotesk', var(--font-body);
-  
-  /* Smooth transitions */
-  --transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* ========================================
-   BASE
-   ======================================== */
-
-=======
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-heading: 'Space Grotesk', var(--font-body);
   --transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
->>>>>>> 14a9bdb (Update design to Montclaire style)
 * {
   margin: 0;
   padding: 0;
@@ -68,23 +36,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-<<<<<<< HEAD
-/* ========================================
-   TYPOGRAPHY
-   ======================================== */
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 500;
-  margin-bottom: var(--space-md);
-=======
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 500;
@@ -96,7 +47,6 @@ h1 {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 500;
   margin-bottom: var(--space-sm);
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 h2 {
@@ -119,10 +69,7 @@ p {
   color: var(--text-secondary);
   line-height: 1.7;
   font-weight: 400;
-<<<<<<< HEAD
-=======
   margin-bottom: var(--space-md);
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 a {
@@ -135,13 +82,6 @@ a:hover {
   opacity: 0.6;
 }
 
-<<<<<<< HEAD
-/* ========================================
-   LAYOUT
-   ======================================== */
-
-=======
->>>>>>> 14a9bdb (Update design to Montclaire style)
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -150,22 +90,11 @@ a:hover {
 
 @media (min-width: 768px) {
   .container {
-<<<<<<< HEAD
-    padding: var(--space-lg) var(--space-md);
-  }
-}
-
-/* ========================================
-   HEADER - Floating & minimal
-   ======================================== */
-
-=======
     padding: var(--space-md) var(--space-md);
   }
 }
 
 /* HEADER */
->>>>>>> 14a9bdb (Update design to Montclaire style)
 header {
   position: fixed;
   top: 0;
@@ -187,19 +116,11 @@ nav {
   padding: var(--space-sm) var(--space-md);
   max-width: 1400px;
   margin: 0 auto;
-<<<<<<< HEAD
-=======
   gap: var(--space-md);
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 .logo {
   font-family: var(--font-heading);
-<<<<<<< HEAD
-  font-size: 1.125rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-=======
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -214,21 +135,12 @@ nav {
   width: 32px;
   height: 32px;
   object-fit: contain;
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 nav ul {
   display: flex;
   gap: var(--space-md);
   list-style: none;
-<<<<<<< HEAD
-}
-
-nav a {
-  font-size: 0.9375rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-=======
   align-items: center;
 }
 
@@ -237,7 +149,6 @@ nav a {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   white-space: nowrap;
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 .menu-toggle {
@@ -246,11 +157,6 @@ nav a {
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-<<<<<<< HEAD
-  font-size: 1.5rem;
-}
-
-=======
   flex-shrink: 0;
 }
 
@@ -258,23 +164,10 @@ nav a {
   font-size: 28px;
 }
 
->>>>>>> 14a9bdb (Update design to Montclaire style)
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
   }
-<<<<<<< HEAD
-  
-  nav ul {
-    display: none;
-  }
-}
-
-/* ========================================
-   SIDEBAR
-   ======================================== */
-
-=======
   nav ul {
     display: none;
   }
@@ -284,7 +177,6 @@ nav a {
 }
 
 /* SIDEBAR */
->>>>>>> 14a9bdb (Update design to Montclaire style)
 .sidebar {
   position: fixed;
   top: 0;
@@ -331,27 +223,14 @@ nav a {
   font-weight: 500;
 }
 
-<<<<<<< HEAD
-/* ========================================
-   MAIN CONTENT
-   ======================================== */
-
-main {
-  min-height: 100vh;
-  padding-top: 100px;
-=======
 /* MAIN */
 main {
   min-height: 100vh;
   padding-top: 90px;
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 .intro {
   text-align: center;
-<<<<<<< HEAD
-  padding: var(--space-xl) var(--space-sm);
-=======
   padding: var(--space-lg) var(--space-sm) var(--space-md);
   max-width: 800px;
   margin: 0 auto;
@@ -361,29 +240,18 @@ main {
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 400;
   margin-bottom: var(--space-sm);
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 .page-header {
   text-align: center;
-<<<<<<< HEAD
-  margin-bottom: var(--space-xl);
-=======
   margin-bottom: var(--space-lg);
   padding: var(--space-md) 0;
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 .text-center {
   text-align: center;
 }
 
-<<<<<<< HEAD
-/* ========================================
-   POSTS GRID - Montclaire style
-   ======================================== */
-
-=======
 article {
   max-width: 740px;
   margin: var(--space-lg) auto;
@@ -407,16 +275,11 @@ article p {
 }
 
 /* POSTS GRID */
->>>>>>> 14a9bdb (Update design to Montclaire style)
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: var(--space-lg);
-<<<<<<< HEAD
-  margin: var(--space-xl) 0;
-=======
   margin: var(--space-md) 0;
->>>>>>> 14a9bdb (Update design to Montclaire style)
 }
 
 .post-card {
@@ -461,24 +324,12 @@ article p {
   }
 }
 
-<<<<<<< HEAD
-/* ========================================
-   GALLERY GRID - Clean grid with spacing
-   ======================================== */
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--space-lg);
-  margin: var(--space-xl) 0;
-=======
 /* GALLERY */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--space-md);
   margin: var(--space-md) 0;
->>>>>>> 14a9bdb (Update design to Montclaire style)
   padding: 0;
 }
 
@@ -504,22 +355,11 @@ article p {
 @media (max-width: 768px) {
   .gallery-grid {
     grid-template-columns: 1fr;
-<<<<<<< HEAD
-    gap: var(--space-md);
-  }
-}
-
-/* ========================================
-   LIGHTBOX - Minimal and elegant
-   ======================================== */
-
-=======
     gap: var(--space-sm);
   }
 }
 
 /* LIGHTBOX */
->>>>>>> 14a9bdb (Update design to Montclaire style)
 .lightbox {
   position: fixed;
   inset: 0;
@@ -580,13 +420,6 @@ article p {
   right: var(--space-md);
 }
 
-<<<<<<< HEAD
-/* ========================================
-   GALLERY ARROWS
-   ======================================== */
-
-=======
->>>>>>> 14a9bdb (Update design to Montclaire style)
 .gallery-arrows {
   position: fixed;
   inset: 0;
@@ -622,45 +455,10 @@ article p {
   opacity: 0.5;
 }
 
-<<<<<<< HEAD
-/* ========================================
-   ARTICLE/POST CONTENT
-   ======================================== */
-
-article {
-  max-width: 740px;
-  margin: var(--space-xl) auto;
-  padding: 0 var(--space-sm);
-}
-
-article h2 {
-  margin-top: var(--space-lg);
-  margin-bottom: var(--space-sm);
-}
-
-article p {
-  margin-bottom: var(--space-md);
-  line-height: 1.8;
-}
-
-.purpose-article {
-  max-width: 640px;
-  margin: var(--space-xl) auto 0;
-}
-
-/* ========================================
-   FOOTER
-   ======================================== */
-
-footer {
-  margin-top: var(--space-xl);
-  padding: var(--space-lg) var(--space-md);
-=======
 /* FOOTER */
 footer {
   margin-top: var(--space-xl);
   padding: var(--space-md) var(--space-md);
->>>>>>> 14a9bdb (Update design to Montclaire style)
   border-top: 1px solid var(--border);
   text-align: center;
 }
@@ -671,14 +469,7 @@ footer p {
   letter-spacing: 0.05em;
 }
 
-<<<<<<< HEAD
-/* ========================================
-   UTILITIES
-   ======================================== */
-
-=======
 /* UTILITIES */
->>>>>>> 14a9bdb (Update design to Montclaire style)
 .loading {
   text-align: center;
   color: var(--text-secondary);
@@ -707,19 +498,8 @@ img {
   display: block;
 }
 
-<<<<<<< HEAD
-/* ========================================
-   ACCESSIBILITY
-   ======================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-=======
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
->>>>>>> 14a9bdb (Update design to Montclaire style)
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -731,32 +511,13 @@ img {
   outline-offset: 4px;
 }
 
-<<<<<<< HEAD
-/* ========================================
-   RESPONSIVE SPACING
-   ======================================== */
-
-=======
->>>>>>> 14a9bdb (Update design to Montclaire style)
 @media (max-width: 768px) {
   :root {
     --space-md: 2rem;
     --space-lg: 3rem;
     --space-xl: 4rem;
   }
-<<<<<<< HEAD
-  
-  main {
-    padding-top: 80px;
-  }
-  
-  nav {
-    padding: var(--space-sm);
-  }
-}
-=======
   main {
     padding-top: 80px;
   }
 }
->>>>>>> 14a9bdb (Update design to Montclaire style)
