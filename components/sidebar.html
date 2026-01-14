@@ -1,16 +1,14 @@
-<!-- components/sidebar.html -->
-<aside class="sidebar" id="sidebar" aria-hidden="true">
-  <button class="menu-button close-btn" aria-label="Close menu">
-    <span class="material-symbols-outlined">close</span>
+<div class="sidebar-overlay"></div>
+<aside class="sidebar">
+  <button class="menu-toggle" aria-label="Close menu">
+    <span class="material-icons">close</span>
   </button>
-
-  <nav class="nav">
-    <a href="/"         >Home</a>
-    <a href="/posts.html"   >Posts</a>
-    <a href="/views.html"   >Views</a>
-    <!-- Add new pages here — they’ll instantly appear site-wide -->
+  
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/posts.html">Posts</a></li>
+      <li><a href="/views.html">Views</a></li>
+    </ul>
   </nav>
 </aside>
-
-<!-- Dark backdrop when menu is open -->
-<div class="backdrop" id="backdrop"></div>
