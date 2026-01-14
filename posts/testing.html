@@ -1,60 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Testing – Payton St. Geme</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testing — Payton St. Geme</title>
+  <meta name="description" content="Testing the waters. Let's see if this works.">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-  <!-- Google Material Icons: menu & menu_open -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,menu_open" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Shared stylesheet -->
-  <link rel="stylesheet" href="../style.css">
-  <script src="../scripts/main.js" defer></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/global.css">
 </head>
-
 <body>
 
-  <!-- Main Centered Content -->
-  <div class="container">
-    <!-- Hamburger Menu Button -->
-    <span class="material-symbols-outlined menu-btn" id="menuBtn">menu</span>
+  <!-- Header & sidebar injected by main.js -->
+  <div data-include="components/header.html"></div>
+  <div data-include="components/sidebar.html"></div>
 
-    <!-- Logo & Title -->
-    <a href="../index.html" class="logo">
-      <img src="../assets/your-logo.png" alt="Payton St. Geme Logo">
-      <span>Payton St. Geme</span>
-    </a>
+  <main class="container">
+    <article>
+      <header class="page-header">
+        <h1>Testing</h1>
+        <time class="date" datetime="2025-10-20">October 20, 2025</time>
+      </header>
 
-  </div>
+      <p>
+        Testing the waters. Let's see if this works.
+      </p>
 
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar" id="sidebar">
-    <ul class="nav-list">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../posts.html" class="active">Posts</a></li>
-    </ul>
-  </nav>
-
-  <!-- Overlay -->
-  <div class="overlay" id="overlay"></div>
-
-  <main class="container article">
-    <h1>Testing</h1>
-    <div class="meta"><time datetime="2025-10-20">October 20, 2025</time></div>
-
-    <!-- Full post body -->
-    <p>
-      Testing the waters. Let's see if this works.
-    </p>
-    
-  <br>
-  </br>
-    <p>
-   In every instance considered, natural selection will so operate as to increase the total mass of the organic system, to increase the rate of circulation of matter through the system, and to increase the total energy flux through the system so long as there is present and unutilized residue of matter and available energy. (Lotka, 1922)  
-    </p>
+      <p>
+        In every instance considered, natural selection will so operate as to increase the total mass of the organic system, to increase the rate of circulation of matter through the system, and to increase the total energy flux through the system so long as there is present and unutilized residue of matter and available energy. (Lotka, 1922)
+      </p>
+    </article>
   </main>
 
+  <footer class="footer container">
+    <p>© 2025 Payton St. Geme</p>
+  </footer>
+
+  <script src="/js/main.js" type="module"></script>
 </body>
 </html>
