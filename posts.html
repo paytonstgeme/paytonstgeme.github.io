@@ -4,32 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Posts — Payton St. Geme</title>
-  <meta name="description" content="Nothing.">
+  <meta name="description" content="Posts by Payton St. Geme">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-  <!-- Fonts & Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;600&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu,close">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
 
-  <!-- Header & Mobile Sidebar (injected via JS) -->
+  <!-- Header & sidebar injected by main.js -->
   <div data-include="components/header.html"></div>
   <div data-include="components/sidebar.html"></div>
 
-  <!-- Main Content -->
   <main class="container">
-    <header class="page-header">
+    <section class="page-header">
       <h1>Posts</h1>
-      <p class="lede"></p>
-    </header>
+    </section>
 
-    <!-- Posts will be injected here by build_posts_index.js -->
+    <!-- Posts loaded from posts_index.json by main.js -->
     <div id="posts-grid" class="posts-grid">
-      <!-- Loading state -->
-      <p class="loading text-center">Loading posts…</p>
+      <p class="loading">Loading posts…</p>
     </div>
   </main>
 
@@ -37,8 +37,6 @@
     <p>© 2025 Payton St. Geme</p>
   </footer>
 
-  <!-- Scripts (only once, in correct order) -->
   <script src="/js/main.js" type="module"></script>
-  <!-- build_posts_index.js will run automatically from main.js if on /posts.html -->
 </body>
 </html>
