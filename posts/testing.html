@@ -16,6 +16,17 @@
   <!-- Styles -->
   <link rel="stylesheet" href="/css/global.css">
 </head>
+  <script>
+  // Debug: Check if components are loading
+  fetch('/components/header.html')
+    .then(r => {
+      console.log('Header fetch status:', r.status);
+      return r.text();
+    })
+    .then(t => console.log('Header content length:', t.length))
+    .catch(e => console.error('Header fetch error:', e));
+</script>
+  
 <body>
 
   <!-- Header & sidebar injected by main.js -->
