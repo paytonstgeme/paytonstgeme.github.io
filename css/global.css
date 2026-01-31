@@ -255,7 +255,7 @@ main {
 article {
   max-width: 740px;
   margin: var(--space-lg) auto;
-  padding: 0 var(--space-sm);
+  padding: var(--space-sm) var(--space-sm);
    border-top: 1px solid var(--border);
    border-bottom: 1px solid var(--border);
 }
