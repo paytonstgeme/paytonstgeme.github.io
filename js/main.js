@@ -1,5 +1,14 @@
 // Load header and sidebar components
 document.addEventListener('DOMContentLoaded', () => {
+  let headerLoaded = false;
+  let sidebarLoaded = false;
+
+  function tryInitMenu() {
+    if (headerLoaded && sidebarLoaded) {
+      initMenu();
+    }
+  }
+
   // Inject header
   fetch('/components/header.html')
     .then(res => res.text())
@@ -7,8 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const headerDiv = document.querySelector('[data-include*="header"]');
       if (headerDiv) {
         headerDiv.innerHTML = html;
-        initMenu();
       }
+      headerLoaded = true;
+      tryInitMenu();
     });
 
   // Inject sidebar
@@ -18,8 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const sidebarDiv = document.querySelector('[data-include*="sidebar"]');
       if (sidebarDiv) {
         sidebarDiv.innerHTML = html;
-        initMenu();
       }
+      sidebarLoaded = true;
+      tryInitMenu();
     });
 
   // Scroll header shadow
@@ -40,20 +51,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initMenu() {
-  const toggles = document.querySelectorAll('.menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.querySelector('.sidebar-overlay');
+  
+  if (!sidebar || !overlay) {
+    console.warn('Sidebar or overlay not found');
+    return;
+  }
 
-  toggles.forEach(toggle => {
-    toggle.addEventListener('click', () => {
-      sidebar?.classList.toggle('open');
-      overlay?.classList.toggle('active');
+  // Header toggle (hamburger icon)
+  const headerToggle = document.querySelector('header .menu-toggle');
+  if (headerToggle) {
+    headerToggle.addEventListener('click', () => {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
     });
+  }
+
+  // Sidebar close button
+  const sidebarClose = document.querySelector('.sidebar .menu-toggle');
+  if (sidebarClose) {
+    sidebarClose.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    });
+  }
+
+  // Overlay click to close
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
   });
 
-  overlay?.addEventListener('click', () => {
-    sidebar?.classList.remove('open');
-    overlay?.classList.remove('active');
+  // Close sidebar when clicking a link (for mobile UX)
+  const sidebarLinks = document.querySelectorAll('.sidebar a');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    });
   });
 }
 
