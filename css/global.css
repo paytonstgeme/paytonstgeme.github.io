@@ -44,18 +44,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(.8rem, 4vw, 3rem);
   font-weight: 500;
   margin-bottom: var(--space-sm);
 }
 
 h2 {
-  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-size: clamp(.4rem, 3vw, 2rem);
   margin-bottom: var(--space-sm);
 }
 
 h3 {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-size: clamp(.25rem, 3vw, 1.75rem);
   margin-bottom: var(--space-sm);
 }
 
@@ -65,7 +65,7 @@ p {
 }
 
 .lede {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.7;
   font-weight: 400;
@@ -109,7 +109,7 @@ header.scrolled {
   box-shadow: 0 1px 0 var(--border);
 }
 
-nav {
+header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -137,15 +137,15 @@ nav {
   object-fit: contain;
 }
 
-nav ul {
+header nav ul {
   display: flex;
   gap: var(--space-md);
   list-style: none;
   align-items: center;
 }
 
-nav a {
-  font-size: 0.875rem;
+header nav a {
+  font-size: 0.9rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -158,6 +158,7 @@ nav a {
   cursor: pointer;
   padding: 0.5rem;
   flex-shrink: 0;
+  color: var(--text);
 }
 
 .menu-toggle .material-icons {
@@ -165,13 +166,13 @@ nav a {
 }
 
 @media (max-width: 768px) {
-  .menu-toggle {
+  header .menu-toggle {
     display: block;
   }
-  nav ul {
+  header nav ul {
     display: none;
   }
-  nav {
+  header nav {
     padding: var(--space-sm);
   }
 }
@@ -187,7 +188,7 @@ nav a {
   box-shadow: -2px 0 16px rgba(0, 0, 0, 0.08);
   transition: right var(--transition);
   z-index: 200;
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-sm);
 }
 
 .sidebar.open {
@@ -209,18 +210,42 @@ nav a {
   pointer-events: auto;
 }
 
-.sidebar ul {
-  list-style: none;
+/* Sidebar close button */
+.sidebar .menu-toggle {
+  display: block;
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  color: var(--text);
+}
+
+/* Sidebar navigation */
+.sidebar nav {
   margin-top: var(--space-lg);
+  padding: var(--space-sm);
 }
 
-.sidebar li {
-  margin-bottom: var(--space-sm);
+.sidebar nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-.sidebar a {
+.sidebar nav li {
+  display: block;
+}
+
+.sidebar nav a {
   font-size: 1.5rem;
   font-weight: 500;
+  color: var(--text);
+  display: block;
+  padding: var(--space-xs) 0;
+}
+
+.sidebar nav a:hover {
+  opacity: 0.6;
 }
 
 /* MAIN */
@@ -237,7 +262,7 @@ main {
 }
 
 .intro h1 {
-  font-size: clamp(3rem, 8vw, 5rem);
+  font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 400;
   margin-bottom: var(--space-sm);
 }
@@ -521,5 +546,12 @@ img {
   }
   main {
     padding-top: 80px;
+  }
+}
+
+/* Fix for page headers being cut off on mobile */
+@media (max-width: 768px) {
+  .page-header {
+    padding-top: var(--space-sm);
   }
 }
