@@ -5,73 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Views — Payton St. Geme</title>
   <meta name="description" content="Photographs by Payton St. Geme">
-
-  <!-- Fonts -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
-  <!-- Styles -->
   <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
-
-  <!-- Header & sidebar injected by main.js -->
   <div data-include="components/header.html"></div>
   <div data-include="components/sidebar.html"></div>
-
   <main class="container">
     <section class="page-header">
       <h1>Views</h1>
     </section>
-
-    <!-- Responsive masonry-style grid -->
     <div class="gallery-grid" id="gallery">
-      <figure><img src="/assets/image2.jpg"          alt="Landing scene"            loading="lazy"></figure>
-      <figure><img src="/assets/2.jpeg" alt="Landing scene"            loading="lazy"></figure>
-      <figure><img src="/assets/3.png" alt="Landing scene"            loading="lazy"></figure>
-      <figure><img src="/assets/3.jpg" alt="Landing scene"            loading="lazy"></figure>
+      <figure><img src="/assets/image2.jpg" alt="Landing scene" loading="lazy"></figure>
+      <figure><img src="/assets/2.jpeg" alt="Landing scene" loading="lazy"></figure>
+      <figure><img src="/assets/3.png" alt="Landing scene" loading="lazy"></figure>
+      <figure><img src="/assets/3.jpg" alt="Landing scene" loading="lazy"></figure>
     </div>
   </main>
-
   <div class="gallery-arrows" aria-label="Gallery navigation arrows">
     <button type="button" class="gallery-arrow prev" aria-label="Previous image">
-      <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button type="button" class="gallery-arrow next" aria-label="Next image">
-      <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
       <span class="material-icons" aria-hidden="true">chevron_left</span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button type="button" class="gallery-arrow next" aria-label="Next image">
       <span class="material-icons" aria-hidden="true">chevron_right</span>
-
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
   <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lightbox-close" aria-label="Close">
-      <span class="material-icons">close</span>
-    </button>
-    <button class="lightbox-prev" aria-label="Previous">
-      <span class="material-icons">chevron_left</span>
-    </button>
-    <button class="lightbox-next" aria-label="Next">
-      <span class="material-icons">chevron_right</span>
-    </button>
+    <button class="lightbox-close" aria-label="Close"><span class="material-icons">close</span></button>
+    <button class="lightbox-prev" aria-label="Previous"><span class="material-icons">chevron_left</span></button>
+    <button class="lightbox-next" aria-label="Next"><span class="material-icons">chevron_right</span></button>
     <img id="lightbox-img" src="" alt="">
   </div>
-
   <footer class="footer container">
     <p>Payton St. Geme</p>
   </footer>
-
-  <!-- Only one script -->
   <script src="/js/main.js" type="module"></script>
 </body>
 </html>
