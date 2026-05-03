@@ -1,5 +1,3 @@
-/* MONTCLAIRE-INSPIRED DESIGN */
-
 :root {
   --bg: #ffffff;
   --text: #1a1a1a;
@@ -547,10 +545,7 @@ img {
   main {
     padding-top: 80px;
   }
-}
 
-/* Fix for page headers being cut off on mobile */
-@media (max-width: 768px) {
   .page-header {
     padding-top: var(--space-sm);
   }
