@@ -1,96 +1,38 @@
-// Load header and sidebar components
 document.addEventListener('DOMContentLoaded', () => {
-  let headerLoaded = false;
-  let sidebarLoaded = false;
+  const headerDiv = document.querySelector('[data-include*="header"]');
+  const sidebarDiv = document.querySelector('[data-include*="sidebar"]');
 
-  function tryInitMenu() {
-    if (headerLoaded && sidebarLoaded) {
-      initMenu();
-    }
-  }
-
-  // Inject header
-  fetch('/components/header.html')
-    .then(res => res.text())
-    .then(html => {
-      const headerDiv = document.querySelector('[data-include*="header"]');
-      if (headerDiv) {
-        headerDiv.innerHTML = html;
-      }
-      headerLoaded = true;
-      tryInitMenu();
-    });
-
-  // Inject sidebar
-  fetch('/components/sidebar.html')
-    .then(res => res.text())
-    .then(html => {
-      const sidebarDiv = document.querySelector('[data-include*="sidebar"]');
-      if (sidebarDiv) {
-        sidebarDiv.innerHTML = html;
-      }
-      sidebarLoaded = true;
-      tryInitMenu();
-    });
-
-  // Scroll header shadow
-  window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (header) {
-      header.classList.toggle('scrolled', window.scrollY > 0);
-    }
+  Promise.all([
+    fetch('/components/header.html').then(r => r.text()),
+    fetch('/components/sidebar.html').then(r => r.text())
+  ]).then(([headerHtml, sidebarHtml]) => {
+    if (headerDiv) headerDiv.innerHTML = headerHtml;
+    if (sidebarDiv) sidebarDiv.innerHTML = sidebarHtml;
+    initMenu();
   });
 
-  // Gallery lightbox
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (header) header.classList.toggle('scrolled', window.scrollY > 0);
+  }, { passive: true });
+
   initGallery();
-  
-  // Posts loading
-  if (window.location.pathname.includes('posts')) {
-    loadPosts();
-  }
+
+  if (window.location.pathname.includes('posts')) loadPosts();
 });
 
 function initMenu() {
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.querySelector('.sidebar-overlay');
-  
-  if (!sidebar || !overlay) {
-    console.warn('Sidebar or overlay not found');
-    return;
-  }
+  if (!sidebar || !overlay) return;
 
-  // Header toggle (hamburger icon)
-  const headerToggle = document.querySelector('header .menu-toggle');
-  if (headerToggle) {
-    headerToggle.addEventListener('click', () => {
-      sidebar.classList.add('open');
-      overlay.classList.add('active');
-    });
-  }
+  const openSidebar = () => { sidebar.classList.add('open'); overlay.classList.add('active'); };
+  const closeSidebar = () => { sidebar.classList.remove('open'); overlay.classList.remove('active'); };
 
-  // Sidebar close button
-  const sidebarClose = document.querySelector('.sidebar .menu-toggle');
-  if (sidebarClose) {
-    sidebarClose.addEventListener('click', () => {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('active');
-    });
-  }
-
-  // Overlay click to close
-  overlay.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('active');
-  });
-
-  // Close sidebar when clicking a link (for mobile UX)
-  const sidebarLinks = document.querySelectorAll('.sidebar a');
-  sidebarLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('active');
-    });
-  });
+  document.querySelector('header .menu-toggle')?.addEventListener('click', openSidebar);
+  document.querySelector('.sidebar .menu-toggle')?.addEventListener('click', closeSidebar);
+  overlay.addEventListener('click', closeSidebar);
+  document.querySelectorAll('.sidebar a').forEach(a => a.addEventListener('click', closeSidebar));
 }
 
 function initGallery() {
@@ -100,14 +42,10 @@ function initGallery() {
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const figures = Array.from(gallery.querySelectorAll('figure'));
-
   let currentIndex = 0;
 
-  figures.forEach((figure, index) => {
-    figure.addEventListener('click', () => {
-      currentIndex = index;
-      showLightbox(figure.querySelector('img'));
-    });
+  figures.forEach((fig, i) => {
+    fig.addEventListener('click', () => { currentIndex = i; showLightbox(fig.querySelector('img')); });
   });
 
   function showLightbox(img) {
@@ -116,9 +54,7 @@ function initGallery() {
     lightbox.setAttribute('aria-hidden', 'false');
   }
 
-  function closeLightbox() {
-    lightbox.setAttribute('aria-hidden', 'true');
-  }
+  function closeLightbox() { lightbox.setAttribute('aria-hidden', 'true'); }
 
   function showNext() {
     currentIndex = (currentIndex + 1) % figures.length;
@@ -136,40 +72,31 @@ function initGallery() {
   document.querySelector('.gallery-arrow.next')?.addEventListener('click', showNext);
   document.querySelector('.gallery-arrow.prev')?.addEventListener('click', showPrev);
 
-  lightbox?.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
+  lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', e => {
     if (lightbox.getAttribute('aria-hidden') === 'false') {
       if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') showNext();
-      if (e.key === 'ArrowLeft') showPrev();
+      else if (e.key === 'ArrowRight') showNext();
+      else if (e.key === 'ArrowLeft') showPrev();
     }
   });
 }
 
 function loadPosts() {
-  fetch('/posts_index.json')
-    .then(res => res.json())
-    .then(posts => {
-      const grid = document.getElementById('posts-grid');
-      if (!grid) return;
+  const grid = document.getElementById('posts-grid');
+  if (!grid) return;
 
+  fetch('/posts_index.json')
+    .then(r => r.json())
+    .then(posts => {
       grid.innerHTML = posts.map(post => `
         <article class="post-card" onclick="location.href='${post.url}'">
           <h3>${post.title}</h3>
-          <time class="date">${new Date(post.date).toLocaleDateString('en-US', { 
-            month: 'short', 
-            day: 'numeric', 
-            year: 'numeric' 
-          })}</time>
+          <time class="date">${new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
           <p>${post.desc}</p>
         </article>
       `).join('');
     })
-    .catch(() => {
-      const grid = document.getElementById('posts-grid');
-      if (grid) grid.innerHTML = '<p class="loading">No posts found</p>';
-    });
+    .catch(() => { grid.innerHTML = '<p class="loading">No posts found</p>'; });
 }
